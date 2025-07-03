@@ -108,5 +108,3 @@ und in der `functions.php` eingebunden.
 
 © **dbw media GmbH**  
 _dein Web, unsere Mission._
-# k-hle-immobilien.de
-# allesumsrad.de

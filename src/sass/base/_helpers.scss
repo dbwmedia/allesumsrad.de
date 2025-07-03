@@ -1,0 +1,57 @@
+@use "../global" as *;
+
+.valign,
+%valign {
+	&--center {
+		align-items: center;
+	}
+}
+
+.offset--top {
+	&__sm {
+		margin-top: $s-sm;
+	}
+
+	&__md {
+		margin-top: $s-md;
+	}
+}
+
+.text--narrow {
+	width: 100%;
+	max-width: 66%;
+
+	@media (max-width: 1200px) {
+		max-width: 80%;
+	}
+
+	@media (max-width: 768px) {
+		max-width: 100%;
+	}
+}
+
+.btn-container {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.stretch-link {
+	position: relative;
+
+	a {
+		&::after {
+			content: "";
+			position: absolute;
+			inset: 0;
+		}
+
+		&:is(:focus-visible)::after {
+			outline: 2px solid;
+		}
+
+		&:is(:hover, :focus) {
+			outline: none;
+		}
+	}
+}
