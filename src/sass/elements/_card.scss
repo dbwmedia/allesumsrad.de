@@ -4,7 +4,6 @@
    Basic Card Styles
 ---------------------------------------------------------- */
 .card {
-	// Base Styling
 	background: $c-white;
 	border-radius: $borderRadiusS;
 	box-shadow: $b-shadow;
@@ -13,17 +12,13 @@
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
-
-	// Smooth Transitions
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-	// Hover State
 	&:hover {
 		transform: translateY(-4px);
 		box-shadow: $b-shadow-hover;
 	}
 
-	// Card Header
 	&__header {
 		margin-bottom: $s-xs;
 
@@ -31,9 +26,8 @@
 			font-size: $f-sizeH4;
 			font-weight: $f-weightBold;
 			color: $f-colorHeading;
-			margin-bottom: calc($s-xs / 2);
-			line-height: $f-lineHeightTight;
 			margin-bottom: 0;
+			line-height: $f-lineHeightTight;
 		}
 
 		.card__subtitle {
@@ -43,7 +37,6 @@
 		}
 	}
 
-	// Card Body
 	&__body {
 		margin-bottom: $s-xs;
 
@@ -59,7 +52,6 @@
 		}
 	}
 
-	// Card Footer
 	&__footer {
 		margin-top: auto;
 		display: flex;
@@ -68,7 +60,6 @@
 		gap: $s-xs;
 	}
 
-	// Card Image (wenn vorhanden)
 	&__image {
 		width: 100%;
 		height: 200px;
@@ -77,14 +68,9 @@
 		margin-bottom: $s-xs;
 	}
 
-	/* ----------------------------------
-    Card Variations
- ---------------------------------- */
-
-	// Compact Card
 	&--compact {
 		padding: $s-xs;
-		border-radius: $borderRadiusXS;
+		border-radius: $borderRadiusM;
 
 		.card__header .card__title {
 			font-size: $f-sizeH5;
@@ -96,7 +82,6 @@
 		}
 	}
 
-	// Large Card
 	&--large {
 		padding: $s-md;
 		border-radius: $borderRadiusSM;
@@ -111,7 +96,6 @@
 		}
 	}
 
-	// Outlined Card
 	&--outlined {
 		background: transparent;
 		border: 2px solid $c-grayLight;
@@ -123,7 +107,6 @@
 		}
 	}
 
-	// Glass Card
 	&--glass {
 		background: $b-glass-bg;
 		border: 1px solid $b-glass-border;
@@ -136,7 +119,6 @@
 		}
 	}
 
-	// Primary Card
 	&--primary {
 		background: $b-primary-gradient;
 		color: $c-white;
@@ -156,9 +138,6 @@
 		}
 	}
 
-	/* ----------------------------------
-    Responsive Behavior
- ---------------------------------- */
 	@media (max-width: $tablet) {
 		padding: $s-xs;
 
@@ -175,15 +154,11 @@
 		}
 	}
 
-	/* ----------------------------------
-    Accessibility
- ---------------------------------- */
 	&:focus-within {
 		box-shadow: $b-focus-ring, $b-shadow-hover;
 		outline: none;
 	}
 
-	// Reduced Motion
 	@media (prefers-reduced-motion: reduce) {
 		transition: none;
 
@@ -194,48 +169,166 @@
 }
 
 /* ----------------------------------------------------------
-   Kühle Immobilien Brand Style - Icon Styling
+   Brand Style - Edge-to-Edge Image Cards
 ---------------------------------------------------------- */
-.card--services {
-	// App Icon Style für card__image (da du SVGs als img nutzt)
+.card--brand {
+	padding: 0;
+
 	.card__image {
-		width: 64px;
-		height: 64px;
-		border-radius: 16px; // App Icon Rundung (nicht rund!)
-		padding: 16px;
-		box-shadow: 0 6px 20px rgba(74, 124, 89, 0.25);
-		position: relative;
-		object-fit: contain; // Damit SVG nicht gestaucht wird
-		transition: all 0.3s ease;
-		background-color: $c-primary-hover;
-		svg {
-			filter: invert(1);
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		border-radius: 0;
+		margin-bottom: 0;
+		border-top-left-radius: $borderRadiusS;
+		border-top-right-radius: $borderRadiusS;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
 		}
 	}
 
-	// Hover-Effekt für die ganze Card
-	&:hover {
-		.card__image {
-			transform: scale(1.05);
-			box-shadow: 0 12px 32px rgba(74, 124, 89, 0.35);
+	.card__header,
+	.card__body,
+	.card__footer {
+		padding-left: $s-sm;
+		padding-right: $s-sm;
+	}
 
-			&::after {
-				background: linear-gradient(135deg, #3a6b47 0%, #2d5a3d 100%);
+	.card__header {
+		padding-top: $s-sm;
+		margin-bottom: $s-xs;
+	}
+
+	.card__body {
+		margin-bottom: $s-xs;
+		flex-grow: 1;
+	}
+
+	.card__footer {
+		padding-bottom: $s-sm;
+		margin-top: auto;
+	}
+
+	&.card--compact {
+		.card__image {
+			height: 150px;
+			border-top-left-radius: $borderRadiusM;
+			border-top-right-radius: $borderRadiusM;
+		}
+
+		.card__header,
+		.card__body,
+		.card__footer {
+			padding-left: $s-xs;
+			padding-right: $s-xs;
+		}
+
+		.card__header {
+			padding-top: $s-xs;
+		}
+
+		.card__footer {
+			padding-bottom: $s-xs;
+		}
+	}
+
+	&.card--large {
+		.card__image {
+			height: 250px;
+			border-top-left-radius: $borderRadiusSM;
+			border-top-right-radius: $borderRadiusSM;
+		}
+
+		.card__header,
+		.card__body,
+		.card__footer {
+			padding-left: $s-md;
+			padding-right: $s-md;
+		}
+
+		.card__header {
+			padding-top: $s-md;
+		}
+
+		.card__footer {
+			padding-bottom: $s-md;
+		}
+	}
+
+	&.card--outlined,
+	&.card--glass,
+	&.card--primary {
+		.card__image {
+			border-top-left-radius: $borderRadiusS;
+			border-top-right-radius: $borderRadiusS;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.card__image {
+			height: 180px;
+		}
+
+		.card__header,
+		.card__body,
+		.card__footer {
+			padding-left: $s-xs;
+			padding-right: $s-xs;
+		}
+
+		.card__header {
+			padding-top: $s-xs;
+		}
+
+		.card__footer {
+			padding-bottom: $s-xs;
+		}
+
+		&.card--large {
+			.card__image {
+				height: 200px;
+			}
+
+			.card__header,
+			.card__body,
+			.card__footer {
+				padding-left: $s-sm;
+				padding-right: $s-sm;
+			}
+
+			.card__header {
+				padding-top: $s-sm;
+			}
+
+			.card__footer {
+				padding-bottom: $s-sm;
 			}
 		}
 	}
 
-	/* Mobile Responsive */
-	@media (max-width: 768px) {
+	@media (max-width: $mobile) {
 		.card__image {
-			width: 56px;
-			height: 56px;
-			border-radius: 14px;
-			padding: 14px;
+			height: 160px;
+			border-top-left-radius: $borderRadiusXS;
+			border-top-right-radius: $borderRadiusXS;
+		}
 
-			&::after {
-				border-radius: 14px;
-			}
+		.card__header,
+		.card__body,
+		.card__footer {
+			padding-left: calc($s-xs * 0.75);
+			padding-right: calc($s-xs * 0.75);
+		}
+
+		.card__header {
+			padding-top: calc($s-xs * 0.75);
+		}
+
+		.card__footer {
+			padding-bottom: calc($s-xs * 0.75);
 		}
 	}
 }
@@ -246,42 +339,264 @@
 .card.contact {
 	.card__image {
 		width: 100%;
-		aspect-ratio: 1 / 1; // Sorgt für perfektes 1:1 Verhältnis
-		height: auto; // Überschreibt die Standard-height
+		aspect-ratio: 1 / 1;
+		height: auto;
 		object-fit: cover;
 		border-radius: $borderRadiusS;
 		margin-bottom: $s-xs;
 	}
 
-	// Responsive Anpassungen
 	&.card--compact {
 		.card__image {
-			aspect-ratio: 1 / 1;
-			height: auto; // Überschreibt compact height
 			border-radius: $borderRadiusXS;
 		}
 	}
 
 	&.card--large {
 		.card__image {
-			aspect-ratio: 1 / 1;
-			height: auto; // Überschreibt large height
 			border-radius: $borderRadiusSM;
 		}
 	}
 
-	/* Mobile Responsive */
 	@media (max-width: $tablet) {
 		.card__image {
+			height: auto;
+		}
+	}
+}
+
+/* ----------------------------------------------------------
+   Card Hero - Edge-to-Edge Image Card
+---------------------------------------------------------- */
+.card--hero {
+	background: $c-white;
+	border-radius: $borderRadiusS;
+	box-shadow: $b-shadow;
+	padding: 0;
+	position: relative;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+	&:hover {
+		transform: translateY(-4px);
+		box-shadow: $b-shadow-hover;
+	}
+
+	.card__image {
+		width: 100%;
+		height: 200px;
+		object-fit: cover;
+		border-radius: 0;
+		margin-bottom: 0;
+		border-top-left-radius: $borderRadiusS;
+		border-top-right-radius: $borderRadiusS;
+	}
+
+	.card__content {
+		padding: $s-xs;
+		display: flex;
+		flex-direction: column;
+		flex-grow: 1;
+	}
+
+	.card__header {
+		margin-bottom: $s-xs;
+
+		.card__title {
+			font-size: $f-sizeH4;
+			font-weight: $f-weightBold;
+			color: $f-colorHeading;
+			margin-bottom: calc($s-xs / 2);
+			line-height: $f-lineHeightTight;
+		}
+
+		.card__subtitle {
+			font-size: $f-sizeSmall;
+			color: $c-gray;
+			font-weight: $f-weightNormal;
+		}
+	}
+
+	.card__body {
+		margin-bottom: $s-xs;
+		flex-grow: 1;
+
+		p {
+			font-size: $f-sizeBody;
+			color: $f-colorText;
+			line-height: $f-lineHeightNormal;
+			margin-bottom: calc($s-xs / 2);
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.card__footer {
+		margin-top: auto;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: $s-xs;
+	}
+
+	&.card--compact {
+		.card__image {
+			height: 150px;
+			border-top-left-radius: $borderRadiusXS;
+			border-top-right-radius: $borderRadiusXS;
+		}
+
+		.card__content {
+			padding: $s-xs;
+		}
+
+		.card__header .card__title {
+			font-size: $f-sizeH5;
+		}
+	}
+
+	&.card--large {
+		.card__image {
+			height: 250px;
+			border-top-left-radius: $borderRadiusSM;
+			border-top-right-radius: $borderRadiusSM;
+		}
+
+		.card__content {
+			padding: $s-md;
+		}
+
+		.card__header .card__title {
+			font-size: $f-sizeH3;
+		}
+	}
+
+	&.card--outlined {
+		background: transparent;
+		border: 2px solid $c-grayLight;
+		box-shadow: none;
+
+		.card__image {
+			border-top-left-radius: calc($borderRadiusS - 2px);
+			border-top-right-radius: calc($borderRadiusS - 2px);
+		}
+
+		&:hover {
+			border-color: $c-primary;
+			box-shadow: $b-shadow;
+		}
+	}
+
+	&.card--glass {
+		background: $b-glass-bg;
+		border: 1px solid $b-glass-border;
+		backdrop-filter: blur(16px);
+		box-shadow: $b-shadow;
+
+		.card__image {
+			border-top-left-radius: calc($borderRadiusS - 1px);
+			border-top-right-radius: calc($borderRadiusS - 1px);
+		}
+
+		&:hover {
+			background: rgba($c-white, 0.9);
+			border-color: rgba($c-white, 0.3);
+		}
+	}
+
+	&.card--primary {
+		background: $b-primary-gradient;
+		color: $c-white;
+
+		.card__content {
+			.card__title,
+			.card__subtitle,
+			.card__body p {
+				color: $c-white;
+			}
+		}
+
+		&:hover {
+			filter: brightness(1.1);
+		}
+	}
+
+	&.card--square-image {
+		.card__image {
 			aspect-ratio: 1 / 1;
-			height: auto; // Überschreibt responsive height
+			height: auto;
+			object-fit: cover;
+		}
+
+		&.card--compact .card__image {
+			border-top-left-radius: $borderRadiusXS;
+			border-top-right-radius: $borderRadiusXS;
+		}
+
+		&.card--large .card__image {
+			border-top-left-radius: $borderRadiusSM;
+			border-top-right-radius: $borderRadiusSM;
+		}
+
+		&:not(.card--compact):not(.card--large) .card__image {
+			border-top-left-radius: $borderRadiusS;
+			border-top-right-radius: $borderRadiusS;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.card__image {
+			height: 180px;
+		}
+
+		.card__content {
+			padding: $s-xs;
 		}
 
 		&.card--large {
 			.card__image {
-				aspect-ratio: 1 / 1;
-				height: auto; // Überschreibt large responsive height
+				height: 200px;
 			}
+
+			.card__content {
+				padding: $s-sm;
+			}
+		}
+
+		&.card--square-image {
+			.card__image {
+				aspect-ratio: 1 / 1;
+				height: auto;
+			}
+		}
+	}
+
+	@media (max-width: $mobile) {
+		.card__image {
+			height: 160px;
+			border-top-left-radius: $borderRadiusXS;
+			border-top-right-radius: $borderRadiusXS;
+		}
+
+		.card__content {
+			padding: calc($s-xs * 0.75);
+		}
+	}
+
+	&:focus-within {
+		box-shadow: $b-focus-ring, $b-shadow-hover;
+		outline: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		transition: none;
+
+		&:hover {
+			transform: none;
 		}
 	}
 }

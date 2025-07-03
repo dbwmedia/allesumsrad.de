@@ -1,21 +1,20 @@
 @use "../global" as *;
 
 //--------------------------------------------------------------
-// # DBW Counter Banner - Elegantes ganzheitliches Design
+// # DBW Counter Banner - Subtle & Compact
 //--------------------------------------------------------------
-
 .dbw-counter-section {
-	padding: $s-xs 0;
+	padding: calc($s-xs / 2) 0; // Kompakter - nur 12.5px
 	background: linear-gradient(
 		135deg,
-		rgba($c-primary, 0.03) 0%,
-		rgba($c-grayBg, 1) 50%,
-		rgba($c-accent, 0.02) 100%
+		rgba($c-primary, 0.02) 0%,
+		rgba($c-grayBg, 0.8) 50%,
+		rgba($c-accent, 0.01) 100%
 	);
-	border-bottom: 1px solid rgba($c-gray, 0.08);
+	border-bottom: 1px solid rgba($c-gray, 0.05);
 	position: relative;
 
-	// Subtle overlay pattern
+	// Subtileres Overlay
 	&::before {
 		content: "";
 		position: absolute;
@@ -25,7 +24,7 @@
 		bottom: 0;
 		background: radial-gradient(
 			circle at 30% 50%,
-			rgba($c-primary, 0.05) 0%,
+			rgba($c-primary, 0.02) 0%,
 			transparent 60%
 		);
 		pointer-events: none;
@@ -36,7 +35,7 @@
 		width: $containerWidth;
 		margin: 0 auto;
 		padding: 0 $gap-s;
-		gap: $gap-xl !important; // Mehr Luft zwischen Items
+		gap: $gap-xl !important;
 		position: relative;
 		z-index: 1;
 
@@ -47,89 +46,58 @@
 
 		@media (max-width: $mobile) {
 			grid-template-columns: 1fr !important;
-			gap: $s-md !important;
+			gap: $s-sm !important;
 		}
 
 		.dbw-counter-item {
 			text-align: center;
 			position: relative;
 
-			// Elegant hover effect für das ganze Item
+			// Subtiler Hover-Effekt
 			&:hover {
-				.wp-block-outermost-icon-block .icon-container svg {
-					transform: translateY(-2px);
-					color: $c-primary !important;
-				}
-
 				.ib-counter-number {
 					color: $c-primary !important;
 				}
 			}
 		}
 
-		// Icon Styling - Clean und minimalistisch
-		.wp-block-outermost-icon-block {
-			margin-bottom: $s-sm;
-
-			.icon-container {
-				width: 48px !important;
-				height: 48px;
-				background: none !important; // Kein Background
-				border: none !important;
-				box-shadow: none !important;
-				display: flex !important;
-				align-items: center;
-				justify-content: center;
-				margin: 0 auto;
-				transition: all 0.3s ease;
-
-				svg {
-					width: 32px !important;
-					height: 32px !important;
-					color: $c-gray !important; // Subtile Farbe
-					stroke-width: 1.5 !important; // Dünnere Striche
-					transition: all 0.3s ease;
-				}
-			}
-		}
-
-		// Counter Zahlen - Mehr Prominence
+		// Counter Zahlen - Kleiner und subtiler
 		.wp-block-ideabox-counter {
 			.ib-counter {
-				margin-bottom: $s-xs;
+				margin-bottom: calc($s-xs / 3); // Weniger Abstand
 
 				.ib-counter-number,
 				.ib-counter-number-suffix {
 					font-family: $f-font !important;
-					font-size: clamp(2.5rem, 4vw, 3.2rem) !important; // Größer
-					font-weight: $f-weightExtrabold !important; // 800
+					font-size: clamp(1.4rem, 3vw, 1.8rem) !important; // Kleiner!
+					font-weight: $f-weightBold !important; // 700 statt 800
 					color: $f-colorHeading !important;
-					line-height: 1 !important;
+					line-height: 1.1 !important;
 					transition: all 0.3s ease;
 				}
 
-				// Suffix etwas dezenter
+				// Suffix noch dezenter
 				.ib-counter-number-suffix {
-					font-size: clamp(1.8rem, 3vw, 2.2rem) !important;
-					font-weight: $f-weightSemibold !important; // 600
+					font-size: clamp(1.2rem, 2.5vw, 1.5rem) !important; // Kleiner
+					font-weight: $f-weightMedium !important; // 500
 					color: $c-gray !important;
-					margin-left: 0.15em;
+					margin-left: 0.1em;
 				}
 			}
 
 			.ib-counter-title {
 				font-family: $f-font !important;
-				font-size: $f-sizeSmall !important;
+				font-size: 11px !important; // Sehr klein
 				font-weight: $f-weightMedium !important;
 				color: $c-gray !important;
 				text-transform: uppercase;
-				letter-spacing: 0.08em !important;
+				letter-spacing: 0.05em !important;
 				margin: 0 !important;
-				line-height: 1.4 !important;
+				line-height: 1.3 !important;
 			}
 		}
 
-		// Elegant separator lines zwischen Items (nur Desktop)
+		// Subtile Separator-Linien (nur Desktop)
 		@media (min-width: $phablet) {
 			.dbw-counter-item:not(:last-child)::after {
 				content: "";
@@ -138,13 +106,13 @@
 				top: 50%;
 				transform: translateY(-50%);
 				width: 1px;
-				height: 60px;
+				height: 30px; // Kürzer
 				background: linear-gradient(
 					to bottom,
 					transparent 0%,
-					rgba($c-gray, 0.2) 20%,
-					rgba($c-gray, 0.3) 50%,
-					rgba($c-gray, 0.2) 80%,
+					rgba($c-gray, 0.1) 20%,
+					rgba($c-gray, 0.15) 50%,
+					rgba($c-gray, 0.1) 80%,
 					transparent 100%
 				);
 			}
@@ -152,35 +120,107 @@
 
 		// Mobile Anpassungen
 		@media (max-width: $tablet) {
-			.dbw-counter-section {
-				padding: $s-md 0;
-			}
-
 			.dbw-counter-item {
-				padding: $s-sm 0;
-			}
-
-			.wp-block-outermost-icon-block .icon-container svg {
-				width: 28px !important;
-				height: 28px !important;
+				padding: calc($s-xs / 2) 0;
 			}
 
 			.wp-block-ideabox-counter .ib-counter {
 				.ib-counter-number,
 				.ib-counter-number-suffix {
-					font-size: clamp(2rem, 8vw, 2.5rem) !important;
+					font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
 				}
 
 				.ib-counter-number-suffix {
-					font-size: clamp(1.4rem, 6vw, 1.8rem) !important;
+					font-size: clamp(1rem, 4vw, 1.3rem) !important;
 				}
 			}
 		}
 
 		@media (max-width: $mobile) {
-			.dbw-counter-section {
-				padding: $s-sm 0;
+			padding: 0 $gap-s;
+
+			.dbw-counter-item {
+				padding: calc($s-xs / 3) 0;
+			}
+
+			.wp-block-ideabox-counter .ib-counter-title {
+				font-size: 10px !important;
 			}
 		}
+	}
+}
+
+//--------------------------------------------------------------
+// # Alternative - Noch minimaler
+//--------------------------------------------------------------
+.dbw-counter-section--minimal {
+	padding: calc($s-xs / 3) 0; // Nur 8px
+	background: rgba($c-grayBg, 0.3);
+	border-bottom: 1px solid rgba($c-gray, 0.03);
+
+	&::before {
+		display: none; // Kein Overlay
+	}
+
+	.wp-block-ideabox-counter {
+		.ib-counter {
+			.ib-counter-number,
+			.ib-counter-number-suffix {
+				font-size: clamp(1.1rem, 2.5vw, 1.4rem) !important; // Noch kleiner
+				font-weight: $f-weightSemibold !important; // 600
+			}
+
+			.ib-counter-number-suffix {
+				font-size: clamp(0.9rem, 2vw, 1.1rem) !important;
+			}
+		}
+
+		.ib-counter-title {
+			font-size: 9px !important; // Tiny
+			letter-spacing: 0.03em !important;
+		}
+	}
+}
+
+//--------------------------------------------------------------
+// # Alternative - Ultra compact
+//--------------------------------------------------------------
+.dbw-counter-section--ultra-compact {
+	padding: 8px 0; // Fixed klein
+	background: transparent;
+	border-bottom: none;
+
+	&::before {
+		display: none;
+	}
+
+	.grid {
+		gap: $gap !important;
+
+		@media (max-width: $phablet) {
+			gap: $gap-s !important;
+		}
+	}
+
+	.wp-block-ideabox-counter {
+		.ib-counter {
+			margin-bottom: 2px;
+
+			.ib-counter-number,
+			.ib-counter-number-suffix {
+				font-size: clamp(1rem, 2vw, 1.2rem) !important;
+				font-weight: $f-weightMedium !important;
+			}
+		}
+
+		.ib-counter-title {
+			font-size: 8px !important;
+			opacity: 0.8;
+		}
+	}
+
+	.dbw-counter-item:not(:last-child)::after {
+		height: 20px; // Noch kürzer
+		background: rgba($c-gray, 0.08);
 	}
 }

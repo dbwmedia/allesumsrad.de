@@ -4,23 +4,24 @@
 //--------------------------------------------------------------
 // # Base Colors
 //--------------------------------------------------------------
-$c-primary: #054b1f; // Kühle Immobilien Hauptfarbe (Dunkelgrün)
-$c-primary-hover: #076d2a; // Hellere Variante für Hover-Effekte
-$c-primaryLight: #2ec8f4;
-$c-secondary: red;
+$c-primary: #c41e3a; // Schedler Rot (Hauptfarbe aus dem Logo)
+$c-primary-hover: #a01729; // Dunkleres Rot für Hover-Effekte
+$c-primaryLight: #e85d75; // Helleres Rot für Akzente
+$c-secondary: #1a1a1a; // Tiefes Schwarz wie im Logo
 
-$c-body: #363636;
-$c-white: #fff;
-$c-black: #222222;
-$c-gray: #6a747c;
-$c-grayLight: #f2f2f2;
-$c-grayBg: #f8f8f8;
+// Neutrale Farben - professionell und automotive
+$c-body: #2c2c2c; // Dunkelgrau für bessere Lesbarkeit
+$c-white: #ffffff;
+$c-black: #1a1a1a; // Konsistent mit Secondary
+$c-gray: #6b7280; // Modernes Grau
+$c-grayLight: #f3f4f6; // Helles Grau für Hintergründe
+$c-grayBg: #f9fafb; // Sehr helles Grau für Sektionen
 
-// Additional Colors
-$c-success: #10b981;
-$c-warning: #f59e0b;
-$c-accent: #8b5cf6;
-$accent: #8b5cf6;
+// Zusätzliche Farben - passend zur Automotive-Branche
+$c-success: #059669; // Grün für Erfolg/Verfügbarkeit
+$c-warning: #d97706; // Orange für Warnungen
+$c-accent: #4f46e5; // Modernes Blau für Akzente
+$accent: #4f46e5; // Alias für Backward Compatibility
 
 //--------------------------------------------------------------
 // # Typography & Fonts
@@ -41,6 +42,10 @@ $f-colorTextLight: #e0e0e0;
 $spaceBase: 100px;
 $space: $spaceBase;
 
+$s-xxxxxs: calc($space / 16); // 6.25px
+$s-xxxxs: calc($space / 12); // 8.33px
+$s-xxxs: calc($space / 8); // 12.5px
+$s-xxs: calc($space / 6);
 $s-xs: calc($space / 4); // 25px
 $s-sm: calc($space / 2); // 50px
 $s-md: $space; // 100px
@@ -62,7 +67,7 @@ $padding-xs-default: 1.25em;
 //--------------------------------------------------------------
 
 // 🎯 BASE VALUE - Only change this one!
-$borderRadiusBase: 6px;
+$borderRadiusBase: 12px;
 
 // 🤖 AUTO-CALCULATED VARIATIONS (semantic & mathematically perfect)
 $borderRadiusXS: calc($borderRadiusBase / 2); // 8px  - Subtle rounding

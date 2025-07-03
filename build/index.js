@@ -19,6 +19,210 @@ function t(t,e,i){return Math.max(t,Math.min(e,i))}class Animate{advance(e){if(!
 
 /***/ }),
 
+/***/ "./src/js/components/buttonRipple.js":
+/*!*******************************************!*\
+  !*** ./src/js/components/buttonRipple.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Button Ripple Effect Component
+ * Optimiert für Performance und Web Standards 2025
+ */
+const Component_ButtonRipple = () => {
+  // Performance flag für reduced motion
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Cache für bessere Performance
+  const buttonCache = new WeakMap();
+  let rafId = null;
+
+  /**
+   * Hauptfunktion zum Initialisieren der Button Ripple Effekte
+   */
+  const initButtonRipples = () => {
+    // Prüfe reduced motion preference
+    if (prefersReducedMotion) {
+      console.log("🎯 Button Ripple: Disabled due to reduced motion preference");
+      return;
+    }
+
+    // Optimierter Selector für bessere Performance
+    const buttons = document.querySelectorAll("a.button--primary, a.button--black, a.button--outline, a.button--glass, a.button--accent, a.button--success, a.button--warning, a.button--dbw");
+    if (buttons.length === 0) {
+      console.log("🎯 Button Ripple: No buttons found");
+      return;
+    }
+    buttons.forEach((button, index) => {
+      // Skip excluded buttons
+      if (button.matches(".our-work, .button-icon, .gb-accordion__toggle")) {
+        return;
+      }
+      setupButtonRipple(button, index);
+    });
+    console.log(`🎯 Button Ripple: Applied ripple effect to ${buttons.length} buttons`);
+  };
+
+  /**
+   * Setup ripple effect für einzelnen Button
+   * @param {Element} button - Das Button Element
+   * @param {number} index - Button Index für Debugging
+   */
+  const setupButtonRipple = (button, index) => {
+    // Cache button data für bessere Performance
+    const buttonData = {
+      lastX: 0,
+      lastY: 0,
+      lastTime: 0
+    };
+    buttonCache.set(button, buttonData);
+
+    // Event Handler mit optimierter Performance
+    const handleMouseEnter = e => {
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Berechne maximale Distanz
+      const maxDistance = calculateMaxDistance(x, y, rect.width, rect.height);
+      const rippleSize = Math.ceil(maxDistance * 2.2);
+
+      // Update cache
+      buttonData.lastX = x;
+      buttonData.lastY = y;
+      buttonData.lastTime = Date.now();
+
+      // Batch DOM updates
+      requestAnimationFrame(() => {
+        button.style.setProperty("--ripple-x", x + "px");
+        button.style.setProperty("--ripple-y", y + "px");
+        button.style.setProperty("--ripple-size", rippleSize + "px");
+      });
+    };
+
+    // Throttled mousemove handler
+    const handleMouseMove = e => {
+      const data = buttonCache.get(button);
+      if (!data) return;
+
+      // Throttle mit 16ms (60fps)
+      const now = Date.now();
+      if (now - data.lastTime < 16) return;
+      const rect = button.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Nur updaten wenn signifikante Bewegung
+      const distance = Math.sqrt(Math.pow(x - data.lastX, 2) + Math.pow(y - data.lastY, 2));
+      if (distance < 5) return;
+      const maxDistance = calculateMaxDistance(x, y, rect.width, rect.height);
+      const rippleSize = Math.ceil(maxDistance * 2.2);
+
+      // Update cache
+      data.lastX = x;
+      data.lastY = y;
+      data.lastTime = now;
+
+      // Batch DOM updates
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        button.style.setProperty("--ripple-x", x + "px");
+        button.style.setProperty("--ripple-y", y + "px");
+        button.style.setProperty("--ripple-size", rippleSize + "px");
+      });
+    };
+
+    // Add event listeners mit passive flag für bessere Performance
+    button.addEventListener("mouseenter", handleMouseEnter, {
+      passive: true
+    });
+    button.addEventListener("mousemove", handleMouseMove, {
+      passive: true
+    });
+
+    // Optional: Touch support
+    if ("ontouchstart" in window) {
+      button.addEventListener("touchstart", handleMouseEnter, {
+        passive: true
+      });
+    }
+  };
+
+  /**
+   * Berechne maximale Distanz (optimiert mit Math.hypot)
+   */
+  const calculateMaxDistance = (x, y, width, height) => {
+    return Math.max(Math.hypot(x, y), Math.hypot(width - x, y), Math.hypot(x, height - y), Math.hypot(width - x, height - y));
+  };
+
+  /**
+   * Überprüfe ob Debug aktiv sein soll
+   */
+  const shouldDebug = () => {
+    return window.location.hostname === "localhost" || window.location.hostname.includes("dev") || window.location.search.includes("debug=true");
+  };
+
+  /**
+   * Reinitialisiere Ripple Effekte
+   */
+  const reinitialize = () => {
+    console.log("🔄 Button Ripple: Reinitializing...");
+    destroy();
+    initButtonRipples();
+  };
+
+  /**
+   * Entferne Ripple Effekte von allen Buttons
+   */
+  const destroy = () => {
+    const buttons = document.querySelectorAll('a[class*="button"]');
+    buttons.forEach(button => {
+      // CSS Properties zurücksetzen
+      button.style.removeProperty("--ripple-x");
+      button.style.removeProperty("--ripple-y");
+      button.style.removeProperty("--ripple-size");
+
+      // Clear cache
+      buttonCache.delete(button);
+    });
+
+    // Cancel any pending animations
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+    console.log("🗑️ Button Ripple: Effects removed");
+  };
+
+  /**
+   * Initialisiere bei DOM ready
+   */
+  const init = () => {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", initButtonRipples);
+    } else {
+      initButtonRipples();
+    }
+
+    // Mache Funktionen global verfügbar
+    window.ButtonRipple = {
+      reinitialize: reinitialize,
+      destroy: destroy,
+      setupButtonRipple: setupButtonRipple
+    };
+  };
+
+  // Auto-initialisiere
+  init();
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Component_ButtonRipple);
+
+/***/ }),
+
 /***/ "./src/js/components/heroParallax.js":
 /*!*******************************************!*\
   !*** ./src/js/components/heroParallax.js ***!
@@ -350,6 +554,7 @@ __webpack_require__.r(__webpack_exports__);
 /**
  * Smart Grid Component
  * Automatically assigns grid classes based on number of children
+ * + Handles spacing between consecutive grids
  */
 const Component_SmartGrid = () => {
   /**
@@ -365,7 +570,28 @@ const Component_SmartGrid = () => {
     autoGrids.forEach((grid, index) => {
       processGrid(grid, index);
     });
+
+    // Handle spacing between consecutive grids
+    handleConsecutiveGridSpacing(autoGrids);
     console.log(`🎯 Smart Grid: Processed ${autoGrids.length} grids`);
+  };
+
+  /**
+   * Add spacing between consecutive grid elements
+   * @param {NodeList} grids - All grid elements
+   */
+  const handleConsecutiveGridSpacing = grids => {
+    grids.forEach((grid, index) => {
+      // Check if this grid has a previous sibling that's also a grid
+      const prevSibling = grid.previousElementSibling;
+      if (prevSibling && prevSibling.classList.contains("grid")) {
+        // Add a class to indicate this grid follows another grid
+        grid.classList.add("grid-follows-grid");
+      } else {
+        // Remove the class if it exists but shouldn't
+        grid.classList.remove("grid-follows-grid");
+      }
+    });
   };
 
   /**
@@ -419,7 +645,6 @@ const Component_SmartGrid = () => {
     if (count === 4) return "grid-auto-4";
     if (count === 5) return "grid-auto-5";
     if (count === 6) return "grid-auto-6";
-
     // 7+ children
     return "grid-auto-many";
   };
@@ -521,6 +746,173 @@ const Component_UpdateDynamicAnchors = () => {
 
 /***/ }),
 
+/***/ "./src/js/loader.js":
+/*!**************************!*\
+  !*** ./src/js/loader.js ***!
+  \**************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/**
+ * Component Loader
+ * Lädt Components basierend auf ihrer Priorität
+ */
+class ComponentLoader {
+  constructor() {
+    this.components = [];
+    this.initialized = false;
+
+    // 🔧 DEBUG SCHALTER: true = Logs AN, false = Logs AUS
+    this.debug = true;
+  }
+
+  /**
+   * Helper für bedingte Logs
+   */
+  log(...args) {
+    if (this.debug) console.log(...args);
+  }
+  error(...args) {
+    if (this.debug) console.error(...args);
+  }
+  table(...args) {
+    if (this.debug) console.table(...args);
+  }
+
+  /**
+   * Registriere Components
+   * @param {Array} components - Array mit Component-Definitionen
+   */
+  register(components) {
+    this.components = components;
+    return this;
+  }
+
+  /**
+   * Starte das Laden der Components
+   */
+  init() {
+    if (this.initialized) return;
+    this.initialized = true;
+
+    // Gruppiere nach Priorität
+    const grouped = {
+      critical: this.components.filter(c => c.priority === "critical"),
+      high: this.components.filter(c => c.priority === "high"),
+      normal: this.components.filter(c => c.priority === "normal"),
+      low: this.components.filter(c => c.priority === "low")
+    };
+
+    // 1. Critical sofort
+    this.loadComponents(grouped.critical, "🚨 Loading critical components...");
+
+    // 2. High nach DOM ready
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        this.loadComponents(grouped.high, "⚡ Loading high priority components...");
+      });
+    } else {
+      this.loadComponents(grouped.high, "⚡ Loading high priority components...");
+    }
+
+    // 3. Normal nach window load
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        this.loadComponents(grouped.normal, "📦 Loading normal priority components...");
+      }, 100);
+    });
+
+    // 4. Low wenn Browser idle
+    if ("requestIdleCallback" in window) {
+      requestIdleCallback(() => {
+        this.loadComponents(grouped.low, "🐌 Loading low priority components...");
+      });
+    } else {
+      setTimeout(() => {
+        this.loadComponents(grouped.low, "🐌 Loading low priority components...");
+      }, 2000);
+    }
+
+    // Setup dev helpers
+    this.setupDevHelpers();
+    return this;
+  }
+
+  /**
+   * Lade eine Gruppe von Components
+   */
+  loadComponents(components, message) {
+    if (components.length === 0) return;
+    this.log(message);
+    components.forEach(component => {
+      try {
+        component.init();
+        this.log(`✅ ${component.name} initialized (${component.priority})`);
+      } catch (error) {
+        this.error(`❌ Failed to initialize ${component.name}:`, error);
+      }
+    });
+  }
+
+  /**
+   * Setup Dynamic Content Handler
+   */
+  setupDynamicContentHandler() {
+    const observer = new MutationObserver(mutations => {
+      const hasNewButtons = mutations.some(mutation => {
+        return Array.from(mutation.addedNodes).some(node => {
+          return node.nodeType === 1 && (node.matches?.('a[class*="button"]') || node.querySelector?.('a[class*="button"]'));
+        });
+      });
+      if (hasNewButtons && window.ButtonRipple?.reinitialize) {
+        window.ButtonRipple.reinitialize();
+      }
+    });
+    window.addEventListener("load", () => {
+      observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    });
+    return this;
+  }
+
+  /**
+   * Dev Helper Functions
+   */
+  setupDevHelpers() {
+    // showComponentStats immer verfügbar, aber Logs nur wenn debug = true
+    window.showComponentStats = () => {
+      this.table(this.components.map(c => ({
+        name: c.name,
+        priority: c.priority
+      })));
+    };
+
+    // Tipp nur in Dev-Umgebung
+    if (window.location.hostname === "localhost" || window.location.hostname.includes("dev")) {
+      this.log("💡 Tipp: Nutze window.showComponentStats() für Component Übersicht");
+    }
+  }
+
+  /**
+   * Debug Mode setzen
+   */
+  setDebug(enabled) {
+    this.debug = enabled;
+    return this;
+  }
+}
+
+// Export Singleton Instance
+const componentLoader = new ComponentLoader();
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (componentLoader);
+
+/***/ }),
+
 /***/ "./src/sass/_index.scss":
 /*!******************************!*\
   !*** ./src/sass/_index.scss ***!
@@ -597,12 +989,20 @@ var __webpack_exports__ = {};
   \*************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _sass_index_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../sass/_index.scss */ "./src/sass/_index.scss");
-/* harmony import */ var _components_offsetScroll__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/offsetScroll */ "./src/js/components/offsetScroll.js");
-/* harmony import */ var _components_scrollHandler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/scrollHandler */ "./src/js/components/scrollHandler.js");
-/* harmony import */ var _components_updateDynamicAnchors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/updateDynamicAnchors */ "./src/js/components/updateDynamicAnchors.js");
-/* harmony import */ var _components_smoothScroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/smoothScroll */ "./src/js/components/smoothScroll.js");
-/* harmony import */ var _components_heroParallax__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/heroParallax */ "./src/js/components/heroParallax.js");
-/* harmony import */ var _components_smartGrid__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/smartGrid */ "./src/js/components/smartGrid.js");
+/* harmony import */ var _loader__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./loader */ "./src/js/loader.js");
+/* harmony import */ var _components_offsetScroll__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/offsetScroll */ "./src/js/components/offsetScroll.js");
+/* harmony import */ var _components_scrollHandler__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/scrollHandler */ "./src/js/components/scrollHandler.js");
+/* harmony import */ var _components_updateDynamicAnchors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/updateDynamicAnchors */ "./src/js/components/updateDynamicAnchors.js");
+/* harmony import */ var _components_smoothScroll__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/smoothScroll */ "./src/js/components/smoothScroll.js");
+/* harmony import */ var _components_heroParallax__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/heroParallax */ "./src/js/components/heroParallax.js");
+/* harmony import */ var _components_smartGrid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/smartGrid */ "./src/js/components/smartGrid.js");
+/* harmony import */ var _components_buttonRipple__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/buttonRipple */ "./src/js/components/buttonRipple.js");
+
+
+// Component Loader
+
+
+// Component Imports
 
 
 
@@ -610,12 +1010,51 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_components_scrollHandler__WEBPACK_IMPORTED_MODULE_2__["default"])();
-(0,_components_updateDynamicAnchors__WEBPACK_IMPORTED_MODULE_3__["default"])();
-(0,_components_offsetScroll__WEBPACK_IMPORTED_MODULE_1__["default"])();
-(0,_components_smoothScroll__WEBPACK_IMPORTED_MODULE_4__["default"])();
-(0,_components_heroParallax__WEBPACK_IMPORTED_MODULE_5__["default"])();
-(0,_components_smartGrid__WEBPACK_IMPORTED_MODULE_6__["default"])();
+
+/**
+ * Component Registry
+ * Hier alle Components definieren mit ihrer Priorität
+ */
+const components = [
+// Critical - Sofort laden
+{
+  name: "ScrollHandler",
+  init: _components_scrollHandler__WEBPACK_IMPORTED_MODULE_3__["default"],
+  priority: "critical"
+}, {
+  name: "SmoothScroll",
+  init: _components_smoothScroll__WEBPACK_IMPORTED_MODULE_5__["default"],
+  priority: "critical"
+}, {
+  name: "ButtonRipple",
+  init: _components_buttonRipple__WEBPACK_IMPORTED_MODULE_8__["default"],
+  priority: "critical"
+},
+// Normal - Nach Page Load
+{
+  name: "OffsetScroll",
+  init: _components_offsetScroll__WEBPACK_IMPORTED_MODULE_2__["default"],
+  priority: "normal"
+}, {
+  name: "UpdateDynamicAnchors",
+  init: _components_updateDynamicAnchors__WEBPACK_IMPORTED_MODULE_4__["default"],
+  priority: "normal"
+},
+// Low - Wenn Browser Zeit hat
+{
+  name: "Parallax",
+  init: _components_heroParallax__WEBPACK_IMPORTED_MODULE_6__["default"],
+  priority: "low"
+}, {
+  name: "SmartGrid",
+  init: _components_smartGrid__WEBPACK_IMPORTED_MODULE_7__["default"],
+  priority: "low"
+}];
+
+/**
+ * Initialize App
+ */
+_loader__WEBPACK_IMPORTED_MODULE_1__["default"].register(components).init().setupDynamicContentHandler();
 })();
 
 /******/ })()

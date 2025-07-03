@@ -1,17 +1,17 @@
 # dbw base theme
 
-Ein modernes, modulares WordPress-Theme für professionelle Webentwicklung von **dbw media**.
+Ein modernes, performanceoptimiertes WordPress-Theme mit modularer Komponenten-Architektur von **dbw media**.
 
 ---
 
 ## 🔍 Übersicht
 
-**dbw base** ist unser hauseigenes Theme-Framework, das für folgende Prinzipien entwickelt wurde:
+**dbw base** ist unser hauseigenes Theme-Framework, das nach folgenden Prinzipien entwickelt wurde:
 
-- Modulare Komponenten-Architektur
-- Performance-Optimierung durch Vanilla JS
-- Wiederverwendbare, wartbare Codestruktur
-- Moderne Build-Prozesse mit npm
+- **Performance First**: Priority-basiertes Component Loading
+- **Modulare Architektur**: Wiederverwendbare Vanilla JS Komponenten
+- **Modern Standards 2025**: Barrierefreiheit, GPU-Acceleration, Touch-Optimierung
+- **Developer Experience**: Klare Struktur, ausführliche Dokumentation
 
 ---
 
@@ -24,87 +24,134 @@ npm install
 
 # Entwicklungsserver starten
 npm start
+
+# Production Build
+npm run build
 ```
 
 ---
 
 ## 💻 Entwicklungs-Workflow
 
+### Component System
+
+Unser Theme nutzt ein **Priority-basiertes Loading System** für optimale Performance:
+
+- **Critical**: Sofort beim Seitenaufruf (Navigation, Scroll-Verhalten)
+- **High**: Nach DOM Ready (wichtige Interaktionen)
+- **Normal**: Nach Page Load (Forms, Tooltips)
+- **Low**: Wenn Browser idle (Animationen, Social Feeds)
+
+📚 **[Ausführliche Component-Dokumentation →](src/js/components/README.md)**
+
 ### SCSS-Struktur
 
-Wir verwenden die [7-1 Pattern Architektur](https://sass-guidelin.es/#architecture) für eine saubere SCSS-Organisation:
+Wir nutzen die [7-1 Pattern Architektur](https://sass-guidelin.es/#architecture):
 
 - `base/` – Reset, Typography, Variables
-- `components/` – UI-Komponenten
+- `components/` – UI-Komponenten (Buttons, Cards, etc.)
 - `layout/` – Gridsysteme & Layouts
-- `pages/` – Seitenspezifische Styles
-- `themes/` – Theme-Varianten (optional)
-- `abstracts/` – Mixins, Funktionen, Variablen
-- `vendors/` – Externe Bibliotheken
-- `utils/` – zentrale Variablen & Mixins
+- `abstracts/` – Mixins, Funktionen, globale Variablen
 
-📌 **Hinweis:** In `src/sass/utils/_variables.scss` muss die Variable  
-`$themePath:` auf die richtige URL des Themes gesetzt werden – wichtig für z. B. Hintergrundbilder.
+📌 **Wichtig:** In `src/sass/utils/_variables.scss` die Variable `$themePath:` auf die korrekte Theme-URL setzen.
 
 ---
 
 ## 🔌 Neue JS-Komponenten hinzufügen
 
-Alle Komponenten sind in Vanilla JS geschrieben und modular aufgebaut. Sie befinden sich unter `src/js/components/`.
+**Kurzanleitung** (Details in der [Component-Dokumentation](/src/js/readme.md)):
 
-Beispiel für eine neue Komponente `header.js`:
+1. **Component erstellen** in `src/js/components/`:
 
 ```javascript
-const Component_Header = () => {
-	// Dein JS Code hier
+const Component_MeinFeature = () => {
+	console.log("Feature loaded!");
 };
-
-export default Component_Header;
+export default Component_MeinFeature;
 ```
 
-Dann in `app.js` oder `index.js` importieren und ausführen:
+2. **In index.js importieren**:
 
 ```javascript
-import Component_Header from "./components/header.js";
-
-Component_Header();
+import Component_MeinFeature from "./components/meinFeature";
 ```
+
+3. **Zur Registry hinzufügen**:
+
+```javascript
+{ name: 'MeinFeature', init: Component_MeinFeature, priority: 'normal' },
+```
+
+---
+
+## 🎯 Performance Features
+
+- **Lazy Loading**: Komponenten laden nur wenn nötig
+- **GPU Acceleration**: Smooth 60fps Animationen
+- **Memory Management**: Automatisches Cleanup mit WeakMaps
+- **Touch Optimized**: Angepasste Event-Handler für Mobile
+- **Reduced Motion**: Respektiert Nutzer-Präferenzen
 
 ---
 
 ## 🔧 Verfügbare npm-Befehle
 
 ```bash
-# Entwicklungsserver mit Hot Reloading
-npm start
-
-# Produktions-Build erstellen
-npm run build
-
+npm start          # Entwicklungsserver mit Hot Reloading
+npm run build      # Produktions-Build erstellen
+npm run lint       # Code-Qualität prüfen
 ```
 
 ---
 
-### Custom Post Types registrieren
+## 📁 Projekt-Struktur
 
-Neue Custom Post Types werden unter `includes/post-types/` als eigene Dateien angelegt  
-und in der `functions.php` eingebunden.
+```
+dbw-base/
+├── src/
+│   ├── js/
+│   │   ├── components/     # Alle JS-Komponenten
+│   │   ├── componentLoader.js
+│   │   └── index.js
+│   └── sass/
+│       ├── base/           # Grundstyles
+│       ├── components/     # UI-Komponenten
+│       └── utils/          # Variablen & Mixins
+├── includes/               # PHP-Module
+├── functions.php          # Theme-Setup
+└── style.css             # Theme-Info
+```
 
 ---
 
 ## 📝 Coding Standards
 
-- **PHP:** PSR-12 und WordPress Coding Standards
-- **JavaScript:** ESLint mit Airbnb-Konfiguration
-- **SCSS:** BEM-Methodologie für Klassennamen
+- **JavaScript**: ES6+, Vanilla JS, keine jQuery-Abhängigkeit
+- **SCSS**: BEM-Methodologie, Mobile-First
+- **PHP**: PSR-12 und WordPress Standards
+- **Performance**: Core Web Vitals optimiert
 
 ---
 
-## 📚 Ressourcen
+## 🛠️ Development Tools
 
+```javascript
+// Component-Status anzeigen (nur in Dev)
+window.showComponentStats();
+
+// Button Ripple neu initialisieren
+window.ButtonRipple.reinitialize();
+```
+
+---
+
+## 📚 Weitere Ressourcen
+
+- [Component System Guide](src/js/components/README.md)
 - [Changelog](CHANGELOG.md)
+- [SCSS Variables Guide](src/sass/utils/_variables.scss)
 
 ---
 
-© **dbw media GmbH**  
-_dein Web, unsere Mission._
+© **dbw media**  
+_Dein Web, unsere Mission._

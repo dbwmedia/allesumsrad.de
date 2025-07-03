@@ -1,6 +1,7 @@
 /**
  * Smart Grid Component
  * Automatically assigns grid classes based on number of children
+ * + Handles spacing between consecutive grids
  */
 const Component_SmartGrid = () => {
 	/**
@@ -9,7 +10,6 @@ const Component_SmartGrid = () => {
 	const initSmartGrids = () => {
 		// Only target grids with .auto class for automatic behavior
 		const autoGrids = document.querySelectorAll(".grid.auto");
-
 		if (autoGrids.length === 0) {
 			console.log("🎯 Smart Grid: No .grid.auto elements found");
 			return;
@@ -19,7 +19,29 @@ const Component_SmartGrid = () => {
 			processGrid(grid, index);
 		});
 
+		// Handle spacing between consecutive grids
+		handleConsecutiveGridSpacing(autoGrids);
+
 		console.log(`🎯 Smart Grid: Processed ${autoGrids.length} grids`);
+	};
+
+	/**
+	 * Add spacing between consecutive grid elements
+	 * @param {NodeList} grids - All grid elements
+	 */
+	const handleConsecutiveGridSpacing = (grids) => {
+		grids.forEach((grid, index) => {
+			// Check if this grid has a previous sibling that's also a grid
+			const prevSibling = grid.previousElementSibling;
+
+			if (prevSibling && prevSibling.classList.contains("grid")) {
+				// Add a class to indicate this grid follows another grid
+				grid.classList.add("grid-follows-grid");
+			} else {
+				// Remove the class if it exists but shouldn't
+				grid.classList.remove("grid-follows-grid");
+			}
+		});
 	};
 
 	/**
@@ -70,7 +92,6 @@ const Component_SmartGrid = () => {
 			"grid-auto-6",
 			"grid-auto-many",
 		];
-
 		autoClasses.forEach((className) => {
 			grid.classList.remove(className);
 		});
@@ -89,7 +110,6 @@ const Component_SmartGrid = () => {
 		if (count === 4) return "grid-auto-4";
 		if (count === 5) return "grid-auto-5";
 		if (count === 6) return "grid-auto-6";
-
 		// 7+ children
 		return "grid-auto-many";
 	};

@@ -1,0 +1,343 @@
+@use "../global" as *;
+
+//--------------------------------------------------------------
+// # DBW Benefits Banner - Horizontal Banner 2025
+//--------------------------------------------------------------
+.dbw-benefits-banner {
+	background: linear-gradient(135deg, $c-primary 0%, $c-primary-hover 100%);
+	padding: $s-sm 0;
+	position: relative;
+	overflow: hidden;
+
+	// Modern gradient overlay
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: linear-gradient(
+			90deg,
+			rgba($c-accent, 0.1) 0%,
+			transparent 50%,
+			rgba($c-primaryLight, 0.1) 100%
+		);
+		pointer-events: none;
+	}
+
+	// Grid Layout - Horizontal Banner
+	.grid {
+		display: grid !important;
+		grid-template-columns: repeat(4, 1fr);
+		gap: 0; // No gap for banner look
+		max-width: $containerMaxWidth;
+		margin: 0 auto;
+		padding: 0 $containerPad;
+		position: relative;
+		z-index: 1;
+
+		@include mq($until: $laptop) {
+			padding: 0 3%;
+		}
+
+		@include mq($until: $phablet) {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		@include mq($until: $mobile) {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	// Individual Benefit Item - Banner Style
+	.dbw-benefits-item {
+		padding: $s-xs $s-sm;
+		text-align: center;
+		color: $c-white;
+		position: relative;
+		transition: $t-transition;
+
+		// Divider between items
+		&:not(:last-child)::after {
+			content: "";
+			position: absolute;
+			right: 0;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1px;
+			height: 60%;
+			background: rgba($c-white, 0.2);
+		}
+
+		&:hover {
+			background: rgba($c-white, 0.1);
+			transform: translateY(-2px);
+		}
+
+		// Icon Styles - Modern 2025
+		.wp-block-outermost-icon-block {
+			margin-bottom: 8px;
+
+			.icon-container {
+				margin: 0 auto;
+				background: rgba($c-white, 0.15);
+				border-radius: $radius-pill;
+				padding: 8px;
+				backdrop-filter: blur(10px);
+				border: 1px solid rgba($c-white, 0.2);
+				transition: $t-transition;
+
+				svg {
+					color: $c-white;
+					width: 20px;
+					height: 20px;
+					stroke-width: 2;
+				}
+			}
+		}
+
+		&:hover .wp-block-outermost-icon-block .icon-container {
+			background: rgba($c-white, 0.25);
+			border-color: rgba($c-white, 0.3);
+			transform: scale(1.1);
+		}
+
+		// Text Styles - Clean Banner Text
+		p {
+			color: $c-white;
+			font-size: $f-sizeSmall;
+			line-height: $f-lineHeightSnug;
+			margin: 0;
+
+			strong {
+				color: $c-white;
+				font-weight: $f-weightSemibold;
+				display: block;
+				margin-bottom: 2px;
+				font-size: $f-sizeBody;
+			}
+		}
+
+		// Mobile Optimization
+		@include mq($until: $phablet) {
+			padding: $s-xs;
+
+			&:not(:last-child)::after {
+				display: none;
+			}
+
+			// Add bottom border for mobile
+			&:not(:last-child) {
+				border-bottom: 1px solid rgba($c-white, 0.2);
+			}
+		}
+
+		@include mq($until: $mobile) {
+			padding: $s-xs $s-sm;
+
+			p {
+				font-size: $f-sizeSmall;
+
+				strong {
+					font-size: $f-sizeBody;
+				}
+			}
+		}
+	}
+}
+
+//--------------------------------------------------------------
+// # Modern 2025 Variations
+//--------------------------------------------------------------
+
+// Dark Modern Banner
+.dbw-benefits-banner--dark {
+	background: linear-gradient(135deg, $c-black 0%, darken($c-black, 5%) 100%);
+
+	&::before {
+		background: linear-gradient(
+			90deg,
+			rgba($c-gray, 0.1) 0%,
+			transparent 50%,
+			rgba($c-white, 0.05) 100%
+		);
+	}
+}
+
+// Glass Modern Banner
+.dbw-benefits-banner--glass {
+	background: rgba($c-white, 0.1);
+	backdrop-filter: blur(20px);
+	border-top: 1px solid rgba($c-white, 0.1);
+	border-bottom: 1px solid rgba($c-white, 0.1);
+
+	.dbw-benefits-item {
+		color: $c-body;
+
+		&:hover {
+			background: rgba($c-primary, 0.05);
+		}
+
+		&:not(:last-child)::after {
+			background: rgba($c-gray, 0.2);
+		}
+
+		.wp-block-outermost-icon-block .icon-container {
+			background: rgba($c-primary, 0.1);
+			border-color: rgba($c-primary, 0.2);
+
+			svg {
+				color: $c-primary;
+			}
+		}
+
+		p {
+			color: $c-body;
+
+			strong {
+				color: $f-colorHeading;
+			}
+		}
+	}
+}
+
+// Accent Modern Banner
+.dbw-benefits-banner--accent {
+	background: $b-accent-gradient;
+
+	&::before {
+		background: linear-gradient(
+			90deg,
+			rgba($c-success, 0.1) 0%,
+			transparent 50%,
+			rgba($c-warning, 0.1) 100%
+		);
+	}
+}
+
+// Compact Modern Banner
+.dbw-benefits-banner--compact {
+	padding: $s-xs 0;
+
+	.dbw-benefits-item {
+		padding: calc($s-xs / 2) $s-sm;
+
+		.wp-block-outermost-icon-block {
+			margin-bottom: 4px;
+
+			.icon-container {
+				padding: 6px;
+
+				svg {
+					width: 16px;
+					height: 16px;
+				}
+			}
+		}
+
+		p {
+			font-size: 12px;
+
+			strong {
+				font-size: $f-sizeSmall;
+				margin-bottom: 1px;
+			}
+		}
+	}
+}
+
+// Large Modern Banner
+.dbw-benefits-banner--large {
+	padding: $s-md 0;
+
+	.dbw-benefits-item {
+		padding: $s-sm $s-md;
+
+		.wp-block-outermost-icon-block {
+			margin-bottom: 12px;
+
+			.icon-container {
+				padding: 12px;
+
+				svg {
+					width: 24px;
+					height: 24px;
+				}
+			}
+		}
+
+		p {
+			font-size: $f-sizeBody;
+
+			strong {
+				font-size: $f-sizeLarge;
+				margin-bottom: 4px;
+			}
+		}
+	}
+}
+
+//--------------------------------------------------------------
+// # Special 2025 Effects
+//--------------------------------------------------------------
+
+// Animated Gradient Banner
+.dbw-benefits-banner--animated {
+	background: linear-gradient(
+		270deg,
+		$c-primary,
+		$c-accent,
+		$c-primaryLight,
+		$c-primary
+	);
+	background-size: 400% 400%;
+	animation: gradientShift 8s ease infinite;
+
+	@keyframes gradientShift {
+		0% {
+			background-position: 0% 50%;
+		}
+		50% {
+			background-position: 100% 50%;
+		}
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+}
+
+// Minimal Clean Banner
+.dbw-benefits-banner--minimal {
+	background: $c-grayBg;
+	padding: $s-sm 0;
+
+	&::before {
+		display: none;
+	}
+
+	.dbw-benefits-item {
+		color: $c-body;
+
+		&:hover {
+			background: rgba($c-primary, 0.05);
+		}
+
+		.wp-block-outermost-icon-block .icon-container {
+			background: rgba($c-primary, 0.1);
+			border-color: rgba($c-primary, 0.2);
+
+			svg {
+				color: $c-primary;
+			}
+		}
+
+		p {
+			color: $c-body;
+
+			strong {
+				color: $f-colorHeading;
+			}
+		}
+	}
+}
