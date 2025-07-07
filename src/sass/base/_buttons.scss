@@ -16,7 +16,6 @@
 	@media (prefers-reduced-motion: reduce) {
 		transition: none !important;
 		animation: none !important;
-
 		&::before,
 		&::after {
 			transition: none !important;
@@ -100,7 +99,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 	& > * {
 		position: relative;
 		z-index: 2;
-		pointer-events: none; // Prevent event bubbling issues
+		pointer-events: none;
 	}
 
 	// Focus-visible for better accessibility
@@ -124,7 +123,6 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 		&:hover::before {
 			display: none;
 		}
-
 		// Larger touch targets
 		min-height: 44px;
 		min-width: 44px;
@@ -185,13 +183,12 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 		}
 	}
 
-	// Outline button with better contrast
+	// DEFAULT: Outline button for light website backgrounds (dark text & border)
 	&.button--outline {
-		background: rgba($c-white, 0.85);
-		border: $b-borderWidth $b-borderStyle $c-body;
-		color: $c-body;
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px); // Safari support
+		background: transparent;
+		border: 2px solid $c-black;
+		color: $c-black;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 
 		&:hover {
 			background: $c-black;
@@ -200,18 +197,39 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 			box-shadow: $b-shadow-hover;
 			text-decoration: none;
 		}
+	}
 
-		// Dark mode adjustments
-		@media (prefers-color-scheme: dark) {
-			background: rgba($c-black, 0.3);
-			border-color: rgba($c-white, 0.3);
-			color: rgba($c-white, 0.9);
+	// VARIANT: Outline button for dark website backgrounds (light text & border)
+	&.button--outline-light {
+		background: transparent;
+		border: 2px solid $c-white;
+		color: $c-white;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 
-			&:hover {
-				background: rgba($c-white, 0.15);
-				border-color: rgba($c-white, 0.5);
-				color: $c-white;
-			}
+		&:hover {
+			background: $c-white;
+			color: $c-black;
+			border-color: $c-white;
+			box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+			text-decoration: none;
+		}
+	}
+
+	// VARIANT: Outline button for dark website backgrounds with backdrop (readable on complex backgrounds)
+	&.button--outline-backdrop {
+		background: rgba($c-white, 0.1);
+		border: 2px solid $c-white;
+		color: $c-white;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+		backdrop-filter: blur(8px);
+		-webkit-backdrop-filter: blur(8px);
+
+		&:hover {
+			background: $c-white;
+			color: $c-black;
+			border-color: $c-white;
+			box-shadow: $b-shadow-hover;
+			text-decoration: none;
 		}
 	}
 
@@ -278,6 +296,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 	/* ----------------------------------
 		Size Variations
 	---------------------------------- */
+
 	&.button--small {
 		padding: $b-padding-small;
 		font-size: $f-sizeSmall;
@@ -296,6 +315,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 	/* ----------------------------------
 		Icon Support
 	---------------------------------- */
+
 	svg {
 		width: 1.2em;
 		height: 1.2em;
@@ -307,7 +327,6 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 		svg {
 			margin-left: 4px;
 		}
-
 		&:hover svg {
 			transform: translateX(3px);
 		}
@@ -315,11 +334,9 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 
 	&.button--icon-left {
 		flex-direction: row-reverse;
-
 		svg {
 			margin-right: 4px;
 		}
-
 		&:hover svg {
 			transform: translateX(-3px);
 		}
@@ -328,6 +345,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 	/* ----------------------------------
 		Loading State
 	---------------------------------- */
+
 	&.is-loading {
 		color: transparent;
 		pointer-events: none;
@@ -352,6 +370,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 /* ----------------------------------
 	Animations
 ---------------------------------- */
+
 @keyframes button-spinner {
 	to {
 		transform: rotate(360deg);
@@ -361,11 +380,11 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 /* ----------------------------------
 	Print Styles
 ---------------------------------- */
+
 @media print {
 	a[class*="button"] {
 		box-shadow: none !important;
 		text-decoration: underline !important;
-
 		&::before {
 			display: none !important;
 		}

@@ -69,7 +69,7 @@
 	}
 
 	&--compact {
-		padding: $s-xs;
+		padding: $s-xxs;
 		border-radius: $borderRadiusM;
 
 		.card__header .card__title {
@@ -78,7 +78,7 @@
 
 		.card__image {
 			height: 150px;
-			border-radius: $borderRadiusXS;
+			border-radius: $borderRadiusM - $s-xxs;
 		}
 	}
 
@@ -214,7 +214,6 @@
 
 	&.card--compact {
 		.card__image {
-			height: 150px;
 			border-top-left-radius: $borderRadiusM;
 			border-top-right-radius: $borderRadiusM;
 		}
@@ -348,7 +347,7 @@
 
 	&.card--compact {
 		.card__image {
-			border-radius: $borderRadiusXS;
+			border-radius: 10px 10px 0 0;
 		}
 	}
 
@@ -445,7 +444,6 @@
 
 	&.card--compact {
 		.card__image {
-			height: 150px;
 			border-top-left-radius: $borderRadiusXS;
 			border-top-right-radius: $borderRadiusXS;
 		}
@@ -527,7 +525,7 @@
 
 	&.card--square-image {
 		.card__image {
-			aspect-ratio: 1 / 1;
+			aspect-ratio: 1.5 / 1;
 			height: auto;
 			object-fit: cover;
 		}

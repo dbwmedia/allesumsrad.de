@@ -52,9 +52,9 @@ $s-md: $space; // 100px
 $s-lg: calc($space + ($space / 2)); // 150px
 $s-xl: calc($space * 2); // 200px
 
-$gap-s: 20px;
-$gap: 40px;
-$gap-xl: 60px;
+$gap-s: 16px;
+$gap: 32px;
+$gap-xl: 48px;
 
 // Padding System (keeping your existing)
 $padding-large-default: 2em;
@@ -140,8 +140,8 @@ $b-glass-border: rgba($c-white, 0.2);
 // # Smart Typo System
 //--------------------------------------------------------------
 // Smart Typography Scale (calculated from $f-sizeBody)
-$f-scale-small: 0.889; // 16px from 18px base
-$f-scale-large: 1.111; // 20px from 18px base
+$f-scale-small: 0.75; // 16px from 18px base
+$f-scale-large: 1.25; // 20px from 18px base
 $f-scale-h6: 1.111; // 20px
 $f-scale-h5: 1.333; // 24px
 $f-scale-h4: 1.556; // 28px
@@ -210,7 +210,7 @@ $wide: 1440px; // xxl
 // # Container
 //--------------------------------------------------------------
 $containerWidth: 80%;
-$containerMaxWidth: 1200px;
+$containerMaxWidth: 1140px;
 $containerPad: 10%;
 
 //--------------------------------------------------------------

@@ -21,6 +21,11 @@
 	width: 100%;
 	max-width: 66%;
 
+	> * {
+		margin-bottom: 0;
+		padding-bottom: $gap-s;
+	}
+
 	@media (max-width: 1200px) {
 		max-width: 80%;
 	}
@@ -54,4 +59,8 @@
 			outline: none;
 		}
 	}
+}
+
+.display-none {
+	display: none !important;
 }

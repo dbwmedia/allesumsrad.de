@@ -9,9 +9,9 @@
 //==============================================================
 
 // Base Grid Container
-#main .grid {
+div.grid {
 	display: grid !important;
-	gap: $gap-xl;
+	gap: $gap-s;
 }
 
 //--------------------------------------------------------------
@@ -84,15 +84,15 @@
 }
 
 // 6+ Children - Auto-Fit Many Items
-#main .grid-auto-6,
-#main .grid-auto-many {
-	grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+#main .grid-auto-6 {
+	grid-template-columns: repeat(3, 1fr);
+	gap: $gap-s;
 
-	@include mq($until: $tablet) {
-		grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+	@include mq($until: $laptop) {
+		grid-template-columns: repeat(2, 1fr);
 	}
 
-	@include mq($until: $mobile) {
+	@include mq($until: $tablet) {
 		grid-template-columns: 1fr;
 	}
 }
