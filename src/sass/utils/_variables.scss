@@ -26,7 +26,10 @@ $accent: #4f46e5; // Alias für Backward Compatibility
 //--------------------------------------------------------------
 // # Typography & Fonts
 //--------------------------------------------------------------
-$f-font: "Inter", Helvetica, Arial, sans-serif;
+$f-font: var(--gp-font--inter), Helvetica, Arial, sans-serif;
+$f-font-headline: var(--gp-font--teko), "Arial Narrow", "Roboto Condensed",
+	sans-serif;
+
 $f-weight: 500;
 $f-sizeBody: 16px;
 

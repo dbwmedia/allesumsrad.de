@@ -6,6 +6,7 @@
 
 .dbw-text-medien {
 	// Grid Layout (GenerateBlocks Grid)
+	z-index: 2;
 	.grid {
 		gap: $gap-xl;
 		align-items: center;
@@ -237,6 +238,28 @@
 				box-shadow: $b-shadow;
 				transform: scale(1.01);
 			}
+		}
+	}
+}
+
+.dbw-section--sixty-forty {
+	.grid {
+		align-items: start;
+		grid-template-columns: 3fr 2fr;
+
+		@include mq($until: $tablet) {
+			grid-template-columns: 1fr !important;
+		}
+	}
+
+	.text {
+		display: flex;
+		flex-direction: column;
+		gap: $gap-s;
+
+		h2,
+		h3 {
+			margin-bottom: 0;
 		}
 	}
 }

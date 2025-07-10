@@ -1,0 +1,38 @@
+@use "../global" as *;
+
+.aktion {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 0;
+	height: 0;
+	border-top: 110px solid #ea2b1f; // Noch größer: 90px → 110px
+	border-left: 110px solid transparent; // Noch größer: 90px → 110px
+	z-index: 100;
+
+	&::after {
+		content: "Aktion";
+		position: absolute;
+		top: -86px; // Angepasst für größere Badge
+		right: 5px; // Angepasst für größere Badge
+		transform: rotate(45deg);
+		color: white;
+		font-size: 16px; // Größer: 14px → 16px
+		font-weight: bold;
+		white-space: nowrap;
+		pointer-events: none;
+		z-index: 101;
+	}
+
+	// Mobile: zurück zur ursprünglichen Größe
+	@include mq($until: $phablet) {
+		border-top: 90px solid #ea2b1f;
+		border-left: 90px solid transparent;
+
+		&::after {
+			top: -70px;
+			right: 5px;
+			font-size: 14px;
+		}
+	}
+}

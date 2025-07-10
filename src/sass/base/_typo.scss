@@ -1,7 +1,7 @@
 @use "../global" as *;
 
 //--------------------------------------------------------------
-// # Typography System
+// # Base Typography
 //--------------------------------------------------------------
 
 body {
@@ -12,7 +12,7 @@ body {
 	letter-spacing: $f-letterSpacingNormal;
 	font-weight: $f-weightBody;
 
-	// 2025 font rendering optimizations
+	// Rendering optimiert
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: optimizeLegibility;
@@ -23,7 +23,7 @@ body {
 		"calt" 1;
 }
 
-// Consistent Font Family
+// Interaktive Elemente nutzen Body-Font
 body,
 button,
 input,
@@ -32,22 +32,22 @@ textarea {
 	font-family: $f-font;
 }
 
-// Modern Paragraph Styling
+//--------------------------------------------------------------
+// # Paragraphen
+//--------------------------------------------------------------
+
 p {
 	margin-bottom: $f-marginP;
 	font-size: $f-sizeBody;
 	line-height: $f-lineHeightNormal;
 	letter-spacing: $f-letterSpacingNormal;
 	color: $f-colorText;
-
-	// Modern text balancing for better readability
 	text-wrap: pretty;
 
 	&:last-child {
 		margin-bottom: 0;
 	}
 
-	// Text size variations
 	&.text-small {
 		font-size: $f-sizeSmall;
 		line-height: $f-lineHeightSnug;
@@ -59,7 +59,10 @@ p {
 	}
 }
 
-// 2025 Modern Link Styles
+//--------------------------------------------------------------
+// # Links
+//--------------------------------------------------------------
+
 a {
 	color: inherit;
 	text-decoration: underline;
@@ -85,7 +88,7 @@ a {
 	}
 }
 
-// Interactive Elements Transitions
+// Transitions für interaktive Elemente
 a,
 a:hover,
 a svg path,
@@ -97,149 +100,197 @@ input[type="button"] {
 	cursor: pointer;
 }
 
-// Ultra-Modern Heading System
+//--------------------------------------------------------------
+// # Headings (h1–h6)
+//--------------------------------------------------------------
+
+h1,
+%h1,
+h2,
+%h2,
+h3,
+%h3,
+h4,
+%h4,
+h5,
+%h5,
+h6,
+%h6 {
+	font-family: $f-font-headline;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: $f-colorHeading;
+}
+
+// h1
 h1,
 %h1 {
 	font-size: clamp($f-sizeH1Min, 8vmin, $f-sizeH1Max);
 	font-weight: $f-weightH1;
 	letter-spacing: $f-letterSpacingTight;
 	line-height: $f-lineHeightTight;
-	color: $f-colorHeading;
 	margin-bottom: $f-marginHLarge;
 	text-align: left;
+	text-wrap: balance;
 
-	// Advanced font features for premium look
 	font-feature-settings:
 		"kern" 1,
 		"liga" 1,
 		"calt" 1,
 		"ss01" 1;
-	text-wrap: balance;
 }
 
+// Entfernt margin-bottom der h1, wenn direkt vor einer .subheadline-h2
+@supports (selector(:has(*))) {
+	h1:has(+ h2.subheadline),
+	%h1:has(+ h2.subheadline) {
+		margin-bottom: 0;
+	}
+}
+
+// h2 & Modifier .subheadline
 h2,
 %h2,
 .h2 {
 	font-size: clamp($f-sizeH2, 5vmin, calc($f-sizeH2 * 1.2));
-	color: $f-colorHeading;
 	font-weight: $f-weightH2;
 	letter-spacing: $f-letterSpacingTight;
 	line-height: $f-lineHeightSnug;
-	margin-bottom: $f-marginHMedium;
+	margin-bottom: $f-marginHSmall;
+	text-wrap: balance;
+	color: $f-colorHeading;
+	font-family: $f-font-headline;
+	text-transform: uppercase;
 
 	font-feature-settings:
 		"kern" 1,
 		"liga" 1,
 		"calt" 1;
-	text-wrap: balance;
 
-	// Enhanced Highlight System
-	&--highlighted {
-		mark.gb-highlight {
-			position: relative;
-			line-height: 1.3;
-			background: transparent;
-			color: inherit;
-			padding: 0;
+	// Subheadline – typografisch zwischen H1 und H2
+	&.subheadline {
+		font-size: clamp(
+			calc($f-sizeH1Min * 0.8),
+			6.5vmin,
+			calc($f-sizeH1Max * 0.8)
+		);
+		font-weight: $f-weightH1;
+		line-height: $f-lineHeightTight;
+		letter-spacing: $f-letterSpacingTight;
+		margin-bottom: $f-marginHSmall;
 
-			&::after {
-				content: "";
-				position: absolute;
-				bottom: 0.1em;
-				left: -0.05em;
-				right: -0.05em;
-				height: 0.15em;
-				border-radius: 0.075em;
-				z-index: -1;
-				opacity: 0.8;
-			}
+		// Wenn direkt danach h1 kommt → kein margin-top
+		& + h1 {
+			margin-top: 0;
 		}
+	}
+	&.no-margin-bottom {
+		margin-bottom: 0;
+	}
+}
 
-		&__primary {
-			mark.gb-highlight {
-				&::after {
-					background: linear-gradient(
-						90deg,
-						$c-primary,
-						lighten($c-primary, 15%)
-					);
-				}
-			}
+// Weniger Abstand, wenn direkt ein <p> nach <h2> folgt
+h2 + p,
+%h2 + p,
+.h2 + p {
+	// margin-top: $s-xxxs; // z. B. 25px – deutlich kleiner als Standard
+}
+
+// Highlight-Varianten
+.h2--highlighted {
+	mark.gb-highlight {
+		position: relative;
+		line-height: 1.3;
+		background: transparent;
+		color: inherit;
+		padding: 0;
+
+		&::after {
+			content: "";
+			position: absolute;
+			bottom: 0.1em;
+			left: -0.05em;
+			right: -0.05em;
+			height: 0.15em;
+			border-radius: 0.075em;
+			z-index: -1;
+			opacity: 0.8;
 		}
+	}
 
-		&__white {
-			mark.gb-highlight {
-				&::after {
-					background: $c-white;
-				}
-			}
-		}
+	&__primary mark.gb-highlight::after {
+		background: linear-gradient(90deg, $c-primary, lighten($c-primary, 15%));
+	}
 
-		&__body {
-			mark.gb-highlight {
-				&::after {
-					background: $f-colorText;
-				}
-			}
-		}
+	&__white mark.gb-highlight::after {
+		background: $c-white;
+	}
 
-		&__centered {
-			text-align: center;
-			margin-bottom: $f-marginHSmall;
+	&__body mark.gb-highlight::after {
+		background: $f-colorText;
+	}
 
-			mark.gb-highlight {
-				&::after {
-					left: 50%;
-					transform: translateX(-50%);
-				}
-			}
+	&__centered {
+		text-align: center;
+		margin-bottom: $f-marginHSmall;
+
+		mark.gb-highlight::after {
+			left: 50%;
+			transform: translateX(-50%);
 		}
 	}
 }
 
+// h3
 h3,
 %h3 {
 	font-size: clamp($f-sizeH3, 5vmin, calc($f-sizeH3 * 1.1));
 	line-height: $f-lineHeightSnug;
 	font-weight: $f-weightH3;
-	color: $f-colorHeading;
 	letter-spacing: $f-letterSpacingTight;
 	margin-bottom: $f-marginHMedium;
 	text-wrap: balance;
+	&.no-margin-bottom {
+		margin-bottom: 0;
+	}
 }
 
+// h4
 h4,
 %h4 {
 	font-size: clamp($f-sizeH4, 5vmin, $f-sizeH4);
 	line-height: $f-lineHeightSnug;
 	font-weight: $f-weightH4;
-	color: $f-colorHeading;
 	letter-spacing: $f-letterSpacingNormal;
 	margin-bottom: $f-marginHSmall;
 }
 
+// h5
 h5,
 %h5 {
 	font-size: $f-sizeH5;
 	line-height: $f-lineHeightSnug;
 	font-weight: $f-weightH5;
-	color: $f-colorHeading;
 	letter-spacing: $f-letterSpacingNormal;
 	margin-bottom: $f-marginHSmall;
 }
 
+// h6
 h6,
 %h6 {
 	font-size: $f-sizeH6;
 	line-height: $f-lineHeightSnug;
 	font-weight: $f-weightH6;
-	color: $f-colorHeading;
 	text-transform: uppercase;
 	letter-spacing: $f-letterSpacingWide;
 	margin-bottom: $f-marginHSmall;
 }
 
-// Modern Text Utilities
+//--------------------------------------------------------------
+// # Utilities
+//--------------------------------------------------------------
+
 .text-highlight {
 	color: $c-primary;
 	font-weight: $f-weightSemibold;
@@ -273,7 +324,6 @@ h6,
 	text-wrap: pretty;
 }
 
-// Legacy Support
 mark,
 .gb-highlight {
 	color: inherit;
@@ -284,14 +334,50 @@ mark,
 	color: $c-primary;
 	font-weight: $f-weightSemibold;
 }
+.highlight-label {
+	// display: inline-block;
+	font-family: $f-font;
+	font-size: $f-sizeSmall;
+	font-weight: $f-weightSemibold;
+	text-transform: uppercase;
+	letter-spacing: $f-letterSpacingWide;
+	background: $b-primary-gradient;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	text-fill-color: transparent;
+	line-height: 1.4;
+
+	// Optional: leichtes Glow oder Schatten für Lesbarkeit
+	text-shadow: 0 1px 1px rgba($c-black, 0.15);
+
+	// Responsive Feintuning
+	@media (max-width: $mobile) {
+		font-size: $f-sizeSmall;
+	}
+}
+
+.highlight-badge {
+	display: inline-block;
+	padding: 0.25em 1em;
+	border-radius: 999px;
+	font-family: $f-font;
+	font-size: 14px !important;
+	font-weight: $f-weightBold;
+	text-transform: uppercase;
+	letter-spacing: $f-letterSpacingWide;
+	color: $c-white;
+	background: $b-primary-gradient;
+	white-space: nowrap;
+}
 
 //--------------------------------------------------------------
-// # Responsive Typography (Smart Scaling)
+// # Responsive Typography
 //--------------------------------------------------------------
 
 @media (max-width: $tablet) {
 	body {
-		font-size: calc($f-sizeBody * 0.94); // 17px
+		font-size: calc($f-sizeBody * 0.94);
 	}
 
 	h1,
@@ -308,22 +394,21 @@ mark,
 
 @media (max-width: $mobile) {
 	body {
-		font-size: calc($f-sizeBody * 0.89); // 16px
-		line-height: $f-lineHeightRelaxed; // More breathing room on mobile
+		font-size: calc($f-sizeBody * 0.89);
+		line-height: $f-lineHeightRelaxed;
 	}
 
 	p {
 		margin-bottom: calc($f-marginP * 1.2);
 	}
 
-	// Optimize touch targets
 	a {
 		text-underline-offset: 0.2em;
 	}
 }
 
 //--------------------------------------------------------------
-// # Print Optimizations
+// # Print
 //--------------------------------------------------------------
 
 @media print {
