@@ -11,7 +11,7 @@
 // Base Grid Container
 div.grid {
 	display: grid !important;
-	gap: $gap-s;
+	gap: $gap;
 }
 
 //--------------------------------------------------------------
@@ -40,7 +40,7 @@ div.grid {
 // 3 Children - Three Columns
 #main .grid-auto-3 {
 	grid-template-columns: repeat(3, 1fr);
-	gap: $gap-s;
+	gap: $gap;
 
 	@include mq($until: $laptop) {
 		grid-template-columns: repeat(2, 1fr);
@@ -54,7 +54,7 @@ div.grid {
 // 4 Children - Four Columns
 #main .grid-auto-4 {
 	grid-template-columns: repeat(4, 1fr);
-	gap: $gap-s;
+	gap: $gap;
 
 	@include mq($until: $laptop) {
 		grid-template-columns: repeat(2, 1fr);
@@ -68,7 +68,7 @@ div.grid {
 // 5 Children - Five Columns
 #main .grid-auto-5 {
 	grid-template-columns: repeat(5, 1fr);
-	gap: $gap-s;
+	gap: $gap;
 
 	@include mq($until: $laptop) {
 		grid-template-columns: repeat(3, 1fr);
@@ -86,7 +86,7 @@ div.grid {
 // 6+ Children - Auto-Fit Many Items
 #main .grid-auto-6 {
 	grid-template-columns: repeat(3, 1fr);
-	gap: $gap-s;
+	gap: $gap;
 
 	@include mq($until: $laptop) {
 		grid-template-columns: repeat(2, 1fr);

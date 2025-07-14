@@ -64,3 +64,9 @@
 .display-none {
 	display: none !important;
 }
+
+img {
+	&.width-border {
+		border-radius: $borderRadiusBase;
+	}
+}

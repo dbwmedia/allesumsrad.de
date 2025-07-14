@@ -1,0 +1,22 @@
+@use "../global" as *;
+
+.dbw-faq {
+	.map-wrapper {
+		position: relative;
+
+		a[class*="button"] {
+			position: absolute !important;
+			bottom: 5%;
+			right: 2.5%;
+		}
+	}
+
+	@media (max-width: $tablet) {
+		.map-wrapper {
+			img {
+				object-fit: cover;
+				aspect-ratio: 1;
+			}
+		}
+	}
+}

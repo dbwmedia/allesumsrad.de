@@ -40,18 +40,17 @@
 		min-height: 60px;
 
 		&:hover {
-			background: rgba($c-primary, 0.02);
+			background: transparent;
 		}
 
 		&:focus {
 			outline: none;
-			background: rgba($c-primary, 0.05);
+			background: transparent;
 		}
 
 		// Active state
 		&[aria-expanded="true"] {
-			background: rgba($c-primary, 0.05);
-			border-bottom: 1px solid rgba($c-gray, 0.1);
+			background: transparent;
 		}
 
 		// Typography for title
@@ -229,12 +228,12 @@
 		}
 
 		.gb-accordion__toggle-icon {
-			background: rgba($c-white, 0.1);
+			background: transparent;
 			color: $c-white;
 		}
 
 		.gb-accordion__toggle[aria-expanded="true"] .gb-accordion__toggle-icon {
-			background: $c-primary;
+			background: transparent;
 			color: $c-white;
 		}
 
@@ -276,7 +275,7 @@
 			padding: 0 $gap-s $gap-s;
 
 			p {
-				font-size: $f-sizeSmall;
+				font-size: $f-sizeBody;
 			}
 		}
 	}

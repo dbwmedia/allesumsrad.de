@@ -901,6 +901,10 @@ mark,
   display: none !important;
 }
 
+img.width-border {
+  border-radius: 12px;
+}
+
 #page {
   position: relative;
   overflow: unset;
@@ -1208,7 +1212,6 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle):act
 }
 @media (max-width: 480px) {
   a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
-    width: 100%;
     padding: 16px 20px;
   }
 }
@@ -2423,7 +2426,7 @@ form.invalid .wpcf7-response-output::before {
 
 div.grid {
   display: grid !important;
-  gap: 16px;
+  gap: 32px;
 }
 
 #main .grid-auto-1 {
@@ -2445,7 +2448,7 @@ div.grid {
 
 #main .grid-auto-3 {
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 32px;
 }
 @media (max-width: 1200px) {
   #main .grid-auto-3 {
@@ -2460,7 +2463,7 @@ div.grid {
 
 #main .grid-auto-4 {
   grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  gap: 32px;
 }
 @media (max-width: 1200px) {
   #main .grid-auto-4 {
@@ -2475,7 +2478,7 @@ div.grid {
 
 #main .grid-auto-5 {
   grid-template-columns: repeat(5, 1fr);
-  gap: 16px;
+  gap: 32px;
 }
 @media (max-width: 1200px) {
   #main .grid-auto-5 {
@@ -2495,7 +2498,7 @@ div.grid {
 
 #main .grid-auto-6 {
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 32px;
 }
 @media (max-width: 1200px) {
   #main .grid-auto-6 {
@@ -3713,15 +3716,14 @@ section--content__centered *,
   min-height: 60px;
 }
 #main .dbw-accordion .gb-accordion__toggle:hover {
-  background: rgba(196, 30, 58, 0.02);
+  background: transparent;
 }
 #main .dbw-accordion .gb-accordion__toggle:focus {
   outline: none;
-  background: rgba(196, 30, 58, 0.05);
+  background: transparent;
 }
 #main .dbw-accordion .gb-accordion__toggle[aria-expanded=true] {
-  background: rgba(196, 30, 58, 0.05);
-  border-bottom: 1px solid rgba(107, 114, 128, 0.1);
+  background: transparent;
 }
 #main .dbw-accordion .gb-accordion__toggle .gb-text {
   font-size: 23.994px;
@@ -3855,11 +3857,11 @@ section--content__centered *,
   color: #f0f0f0;
 }
 #main .dbw-accordion.dbw-accordion--dark .gb-accordion__toggle-icon {
-  background: rgba(255, 255, 255, 0.1);
+  background: transparent;
   color: #ffffff;
 }
 #main .dbw-accordion.dbw-accordion--dark .gb-accordion__toggle[aria-expanded=true] .gb-accordion__toggle-icon {
-  background: #c41e3a;
+  background: transparent;
   color: #ffffff;
 }
 #main .dbw-accordion.dbw-accordion--dark .gb-accordion__toggle[aria-expanded=true] + .gb-accordion__content {
@@ -3890,7 +3892,7 @@ section--content__centered *,
   padding: 0 16px 16px;
 }
 #main .dbw-accordion.dbw-accordion--compact .gb-accordion__toggle[aria-expanded=true] + .gb-accordion__content p {
-  font-size: 13.5px;
+  font-size: 18px;
 }
 #main .dbw-accordion.dbw-accordion--minimal .gb-accordion__item {
   background: transparent;
@@ -4460,6 +4462,22 @@ section--content__centered *,
     top: -70px;
     right: 5px;
     font-size: 14px;
+  }
+}
+
+.dbw-faq .map-wrapper {
+  position: relative;
+}
+.dbw-faq .map-wrapper a[class*=button] {
+  position: absolute !important;
+  bottom: 5%;
+  right: 2.5%;
+}
+@media (max-width: 768px) {
+  .dbw-faq .map-wrapper img {
+    -o-object-fit: cover;
+       object-fit: cover;
+    aspect-ratio: 1;
   }
 }
 
