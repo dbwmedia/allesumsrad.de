@@ -21,7 +21,7 @@
 	width: 100%;
 	max-width: 66%;
 
-	> * {
+	> *:not(h2):not(.highlight-label) {
 		margin-bottom: 0;
 		padding-bottom: $gap-s;
 	}

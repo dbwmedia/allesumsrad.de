@@ -69,7 +69,7 @@
 	}
 
 	&--compact {
-		padding: $s-xxs;
+		padding: $s-xs;
 		border-radius: $borderRadiusM;
 
 		.card__header .card__title {
@@ -125,7 +125,11 @@
 
 		.card__title,
 		.card__subtitle,
-		.card__body p {
+		.card__body p,
+		h2,
+		h3,
+		h4,
+		p {
 			color: $c-white;
 		}
 

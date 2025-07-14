@@ -60,44 +60,54 @@ p {
 }
 
 //--------------------------------------------------------------
-// # Links
+// # Links - Modern 2025 Edition
 //--------------------------------------------------------------
 
 a {
-	color: inherit;
-	text-decoration: underline;
-	text-decoration-thickness: 1px;
-	text-underline-offset: 0.15em;
-	text-decoration-color: rgba($f-colorText, 0.4);
-	transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+	color: $c-primary;
+	text-decoration: none;
 	font-size: $f-sizeBody;
+	position: relative;
+	display: inline-block;
+	transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+	cursor: pointer;
+
+	// Animated underline
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: -2px;
+		left: 0;
+		width: 0;
+		height: 2px;
+		background: linear-gradient(90deg, $c-primary, $c-secondary);
+		transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+		border-radius: 1px;
+	}
 
 	&:hover {
-		color: $c-secondary;
-		text-decoration-color: $c-secondary;
-		text-decoration-thickness: 2px;
-		text-underline-offset: 0.2em;
-		opacity: 0.9;
+		color: $c-primary-hover;
+		transform: translateY(-1px);
+
+		&::after {
+			width: 100%;
+		}
+	}
+
+	&:active {
+		transform: translateY(0);
+		transition: transform 0.1s ease;
 	}
 
 	&:focus-visible {
 		outline: 2px solid $c-primary;
-		outline-offset: 2px;
-		border-radius: 3px;
-		text-decoration: none;
-	}
-}
+		outline-offset: 3px;
+		border-radius: 4px;
 
-// Transitions für interaktive Elemente
-a,
-a:hover,
-a svg path,
-button,
-button:hover,
-input[type="button"] {
-	transition: $t-transition;
-	text-decoration: none;
-	cursor: pointer;
+		&::after {
+			width: 100%;
+		}
+	}
 }
 
 //--------------------------------------------------------------
