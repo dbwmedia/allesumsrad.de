@@ -89,6 +89,8 @@
 	&.has-bg-image {
 		&::before {
 			background: rgba($c-black, 0.6); // Stärkeres Overlay bei Bildern
+			backdrop-filter: blur(2px);
+			-webkit-backdrop-filter: blur(2px);
 		}
 	}
 }
@@ -111,15 +113,15 @@
 
 	// Mobile Optimierungen
 	@media (max-width: $tablet) {
-		min-height: 80vh;
-		padding-top: 80px; // Platz für Header
+		padding-top: 80px;
 
 		.dbw-hero-content {
-			padding: 0 $s-sm;
+			// padding: 0 $s-sm;
 		}
 
 		h1 {
-			font-size: clamp(2rem, 6vw, 3rem);
+			font-size: clamp(2.6rem, 6vw, 3rem);
+			margin-bottom: $s-xxs;
 		}
 	}
 }

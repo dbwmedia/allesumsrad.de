@@ -67,7 +67,8 @@
 //--------------------------------------------------------------
 .site-header {
 	position: fixed;
-	top: 50px; // Platz für Top Bar
+	// top: 50px; // Platz für Top Bar
+	top: 0px;
 	right: 0;
 	left: 0;
 	z-index: 999;
@@ -87,6 +88,17 @@
 	// Responsive: Top Bar ausgeblendet = Header nach oben
 	@include mq($until: $tablet) {
 		top: 0;
+	}
+
+	@include mq($until: $mobile) {
+		top: 0;
+		padding: 0 3%;
+
+		.inside-header {
+			button.menu-toggle {
+				padding: 10px $s-xs;
+			}
+		}
 	}
 
 	// Header inner container
@@ -118,13 +130,32 @@
 	}
 
 	//--------------------------------------------------------------
-	// # Logo
+	// # Logo mit dynamischem Wechsel
 	//--------------------------------------------------------------
 	.site-logo {
+		position: relative;
+
 		img {
 			max-height: 40px; // Consistent logo size
 			width: auto;
 			transition: $t-transition;
+		}
+
+		// Weißes Logo als Overlay (Standard-Zustand)
+		&::before {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url("#{$imagesPath}Reifenservice-Schedler-Logo-Weiss.png")
+				no-repeat;
+			background-size: contain;
+			background-position: left center;
+			transition: opacity $t-transition;
+			z-index: 1;
+			opacity: 1;
 		}
 	}
 
@@ -177,7 +208,15 @@
 	.menu-buttons {
 		padding-left: $gap;
 		@include mq($until: $phablet) {
-			display: none;
+			a:first-child {
+				display: none !important;
+			}
+		}
+
+		@include mq($until: 867px) {
+			a:nth-child(2) {
+				display: none !important;
+			}
 		}
 
 		.gb-button {
@@ -230,9 +269,15 @@
 			}
 		}
 
-		.site-logo img {
-			// Optional: Smaller logo when scrolled
-			max-height: 35px;
+		// Logo-Wechsel: Weißes Logo ausblenden, dunkles Logo sichtbar machen
+		.site-logo {
+			&::before {
+				opacity: 0; // Weißes Logo ausblenden
+			}
+
+			img {
+				max-height: 35px; // Optional: Smaller logo when scrolled
+			}
 		}
 
 		.main-navigation ul li a {
@@ -290,8 +335,8 @@
 	background: $c-white;
 	box-shadow: 0 5px 30px rgba($c-black, 0.15);
 	color: $c-body;
-	padding: $s-lg $gap 0;
-	min-width: 90vw;
+	padding: $s-xs $gap 0;
+	min-width: 100vw;
 	border-radius: 0 0 0 $radius-enhanced;
 
 	.slideout-exit {
@@ -322,7 +367,7 @@
 		margin-bottom: $gap-s;
 
 		ul {
-			padding: 0 0 0 $gap-s;
+			padding: 0;
 		}
 	}
 
@@ -334,7 +379,7 @@
 		}
 
 		a {
-			padding: $gap-s 0;
+			padding: $s-xxxxs 0;
 			color: $c-body;
 			font-size: $f-sizeH5;
 			font-weight: $f-weightMedium;
@@ -351,6 +396,13 @@
 
 	.gb-button.project {
 		color: $c-body;
+	}
+
+	.menu-buttons {
+		a.button--primary {
+			display: flex;
+			margin-top: $s-xxxxs !important;
+		}
 	}
 }
 
@@ -393,7 +445,7 @@ nav.offside--right {
 // Skip to content link (add to your HTML)
 .skip-link {
 	position: absolute;
-	top: -40px;
+	top: -5px;
 	left: 6px;
 	background: $c-primary;
 	color: $c-white;

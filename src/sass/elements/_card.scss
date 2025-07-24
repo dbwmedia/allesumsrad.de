@@ -1,6 +1,50 @@
 @use "../global" as *;
 
 /* ----------------------------------------------------------
+   Grid System für gleiche Höhen
+---------------------------------------------------------- */
+.gb-element-85f47459.grid.auto.grid-auto-6 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: $s-sm;
+
+	@media (min-width: $tablet) {
+		grid-template-columns: repeat(3, 1fr);
+		gap: $s-md;
+	}
+
+	@media (max-width: $mobile) {
+		grid-template-columns: 1fr;
+		gap: $s-xs;
+	}
+
+	// Standard: Gleiche Höhen aktiviert
+	&:not(.grid--natural-height) {
+		align-items: stretch; // Wichtig für gleiche Höhen
+
+		// Alle direkten div-Container
+		> div {
+			display: flex;
+			height: 100%;
+		}
+	}
+
+	// Option für natürliche Höhen (selektiv deaktivieren)
+	&.grid--natural-height {
+		align-items: start; // Cards haben ihre natürliche Höhe
+
+		> div {
+			display: block; // Normale Block-Darstellung
+			height: auto;
+		}
+
+		.card {
+			height: auto !important; // Überschreibt die Equal-Height Regel
+		}
+	}
+}
+
+/* ----------------------------------------------------------
    Basic Card Styles
 ---------------------------------------------------------- */
 .card {
@@ -14,6 +58,26 @@
 	flex-direction: column;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
+	// Standard: Equal Height aktiviert
+	&:not(.card--natural-height) {
+		height: 100%; // Wichtig für gleiche Höhen
+		width: 100%;
+	}
+
+	// Option für natürliche Höhe (selektiv deaktivieren)
+	&.card--natural-height {
+		height: auto !important;
+		width: auto;
+
+		.card__body {
+			flex-grow: 0 !important; // Deaktiviert das Stretching
+		}
+
+		.card__footer {
+			margin-top: $s-xs !important; // Normale Abstände statt auto
+		}
+	}
+
 	&:hover {
 		transform: translateY(-4px);
 		box-shadow: $b-shadow-hover;
@@ -21,6 +85,7 @@
 
 	&__header {
 		margin-bottom: $s-xs;
+		flex-shrink: 0; // Header behält seine Größe
 
 		.card__title {
 			font-size: $f-sizeH4;
@@ -39,6 +104,10 @@
 
 	&__body {
 		margin-bottom: $s-xs;
+		flex-grow: 1; // Nimmt verfügbaren Platz ein
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 
 		p {
 			font-size: $f-sizeBody;
@@ -53,7 +122,8 @@
 	}
 
 	&__footer {
-		margin-top: auto;
+		margin-top: auto; // Drückt Footer nach unten
+		flex-shrink: 0; // Footer behält seine Größe
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -66,6 +136,7 @@
 		object-fit: cover;
 		border-radius: $borderRadiusS;
 		margin-bottom: $s-xs;
+		flex-shrink: 0; // Bild behält seine Größe
 	}
 
 	&--compact {
@@ -173,6 +244,65 @@
 }
 
 /* ----------------------------------------------------------
+   Utility Classes für selektive Kontrolle
+---------------------------------------------------------- */
+
+// Grid-Level: Komplettes Grid auf natürliche Höhen umstellen
+.grid--natural-height {
+	.card {
+		height: auto !important;
+
+		.card__body {
+			flex-grow: 0 !important;
+		}
+
+		.card__footer {
+			margin-top: $s-xs !important;
+		}
+	}
+}
+
+// Card-Level: Einzelne Cards auf natürliche Höhe umstellen
+.card--natural-height {
+	height: auto !important;
+
+	.card__body {
+		flex-grow: 0 !important;
+	}
+
+	.card__footer {
+		margin-top: $s-xs !important;
+	}
+
+	&.card--hero {
+		.card__content {
+			height: auto !important;
+		}
+	}
+}
+
+/* ----------------------------------------------------------
+   Debugging Helper (optional)
+---------------------------------------------------------- */
+.debug-equal-height {
+	.card {
+		border: 2px dashed red !important;
+
+		.card__header {
+			background: rgba(255, 0, 0, 0.1) !important;
+		}
+
+		.card__body {
+			background: rgba(0, 255, 0, 0.1) !important;
+		}
+
+		.card__footer {
+			background: rgba(0, 0, 255, 0.1) !important;
+		}
+	}
+}
+
+/* ----------------------------------------------------------
    Brand Style - Edge-to-Edge Image Cards
 ---------------------------------------------------------- */
 .card--brand {
@@ -186,6 +316,7 @@
 		margin-bottom: 0;
 		border-top-left-radius: $borderRadiusS;
 		border-top-right-radius: $borderRadiusS;
+		flex-shrink: 0;
 
 		img {
 			width: 100%;
@@ -204,6 +335,7 @@
 	.card__header {
 		padding-top: $s-sm;
 		margin-bottom: $s-xs;
+		flex-shrink: 0;
 	}
 
 	.card__body {
@@ -214,6 +346,7 @@
 	.card__footer {
 		padding-bottom: $s-sm;
 		margin-top: auto;
+		flex-shrink: 0;
 	}
 
 	&.card--compact {
@@ -347,6 +480,7 @@
 		object-fit: cover;
 		border-radius: $borderRadiusS;
 		margin-bottom: $s-xs;
+		flex-shrink: 0;
 	}
 
 	&.card--compact {
@@ -369,7 +503,7 @@
 }
 
 /* ----------------------------------------------------------
-   Card Hero - Edge-to-Edge Image Card
+   Card Hero - Edge-to-Edge Image Card (Optimiert für gleiche Höhen)
 ---------------------------------------------------------- */
 .card--hero {
 	background: $c-white;
@@ -381,6 +515,30 @@
 	display: flex;
 	flex-direction: column;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+	// Standard: Equal Height aktiviert
+	&:not(.card--natural-height) {
+		height: 100%; // Wichtig für gleiche Höhen
+		width: 100%;
+	}
+
+	// Option für natürliche Höhe (selektiv deaktivieren)
+	&.card--natural-height {
+		height: auto !important;
+		width: auto;
+
+		.card__content {
+			height: auto !important;
+		}
+
+		.card__body {
+			flex-grow: 0 !important; // Deaktiviert das Stretching
+		}
+
+		.card__footer {
+			margin-top: $s-xs !important; // Normale Abstände statt auto
+		}
+	}
 
 	&:hover {
 		transform: translateY(-4px);
@@ -395,6 +553,7 @@
 		margin-bottom: 0;
 		border-top-left-radius: $borderRadiusS;
 		border-top-right-radius: $borderRadiusS;
+		flex-shrink: 0; // Bild behält seine Größe
 	}
 
 	.card__content {
@@ -402,10 +561,12 @@
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
+		height: 100%;
 	}
 
 	.card__header {
 		margin-bottom: $s-xs;
+		flex-shrink: 0; // Header behält seine Größe
 
 		.card__title {
 			font-size: $f-sizeH4;
@@ -424,7 +585,10 @@
 
 	.card__body {
 		margin-bottom: $s-xs;
-		flex-grow: 1;
+		flex-grow: 1; // Nimmt verfügbaren Platz ein
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
 
 		p {
 			font-size: $f-sizeBody;
@@ -439,7 +603,8 @@
 	}
 
 	.card__footer {
-		margin-top: auto;
+		margin-top: auto; // Drückt Footer nach unten
+		flex-shrink: 0; // Footer behält seine Größe
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

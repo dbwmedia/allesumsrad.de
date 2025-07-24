@@ -28,12 +28,16 @@
 
 	@include mq($until: $mobile) {
 		.footer-wrapper {
+			text-align: center;
 			.logo {
 				display: none;
 			}
 			.box {
 				flex-direction: column;
 				gap: 20px;
+			}
+			.button-wrapper {
+				justify-content: center;
 			}
 		}
 	}

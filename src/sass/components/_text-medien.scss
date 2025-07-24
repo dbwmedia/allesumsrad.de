@@ -15,7 +15,7 @@
 		@include mq($until: $phablet) {
 			grid-template-columns: 1fr !important;
 			gap: $gap;
-			text-align: center;
+			// text-align: center;
 
 			.medien {
 				order: -1;
@@ -27,7 +27,7 @@
 	.text {
 		display: flex;
 		flex-direction: column;
-		gap: $gap-s;
+		gap: $s-xxxs;
 		> div {
 			margin-bottom: 0;
 		}

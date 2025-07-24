@@ -80,7 +80,7 @@ Everything else auto-calculates!
   opacity: 0.7;
 }
 .wp-core-ui.login #login h1 a {
-  background-image: url(https://example.de/wp-content/themes/dbw-base/assets/img/logo.svg);
+  background-image: url(https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/img/logo.svg);
   width: 80%;
   max-height: 120px;
   background-size: contain;
@@ -203,7 +203,7 @@ Everything else auto-calculates!
 /* FONTS */
 @font-face {
   font-family: "slick";
-  src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/slick.woff");
+  src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/slick.woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -442,70 +442,70 @@ Everything else auto-calculates!
 	font-family: $f-font;
 	font-weight: 400;
 	font-style: normal;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Regular.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Regular.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 400;
 	font-style: italic;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Regular_Italic.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Regular_Italic.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 300;
 	font-style: normal;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Light.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Light.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 300;
 	font-style: italic;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Light_Italic.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Light_Italic.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 500;
 	font-style: normal;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Medium.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Medium.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 500;
 	font-style: italic;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Medium_Italic.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Medium_Italic.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 700;
 	font-style: normal;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Bold.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Bold.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 700;
 	font-style: italic;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Bold_Italic.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Bold_Italic.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 100;
 	font-style: normal;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Thin.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Thin.otf") format("opentype");
 }
 
 @font-face {
 	font-family: $f-font;
 	font-weight: 100;
 	font-style: italic;
-	src: url("https://example.de/wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Thin_Italic.otf") format("opentype");
+	src: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/fonts/new-zen/New_Zen_Thin_Italic.otf") format("opentype");
 }
 
 
@@ -801,6 +801,12 @@ mark,
   background: linear-gradient(-135deg, #c41e3a 0%, rgb(222.7168141593, 44.0831858407, 74.214159292) 50%, rgb(225.4247787611, 61.7752212389, 89.3787610619) 100%);
   white-space: nowrap;
 }
+@media (max-width: 576px) {
+  .highlight-badge {
+    padding: 0.125em 0.5em;
+    font-size: 13.5px;
+  }
+}
 
 @media (max-width: 768px) {
   body {
@@ -880,11 +886,21 @@ mark,
   width: 66%;
   margin: 0 auto;
 }
+@media (max-width: 768px) {
+  .text--narrow-center {
+    width: 100%;
+  }
+}
 
 .btn-container {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
+}
+@media (max-width: 576px) {
+  .btn-container {
+    gap: 10px;
+  }
 }
 
 .stretch-link {
@@ -1215,9 +1231,10 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle):act
     font-size: 16px;
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
-    padding: 16px 20px;
+    padding: 8px 16px;
+    min-height: 40px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -1492,7 +1509,7 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
 
 .site-header {
   position: fixed;
-  top: 50px;
+  top: 0px;
   left: 0;
   right: 0;
   z-index: 999;
@@ -1510,6 +1527,15 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
 @media (max-width: 768px) {
   .site-header {
     top: 0;
+  }
+}
+@media (max-width: 576px) {
+  .site-header {
+    top: 0;
+    padding: 0 3%;
+  }
+  .site-header .inside-header button.menu-toggle {
+    padding: 10px 25px;
   }
 }
 .site-header .inside-header {
@@ -1535,10 +1561,27 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
   fill: currentColor;
   transition: 0.3s ease all;
 }
+.site-header .site-logo {
+  position: relative;
+}
 .site-header .site-logo img {
   max-height: 40px;
   width: auto;
   transition: 0.3s ease all;
+}
+.site-header .site-logo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: url("https://allesumsrad.dbw-development.de//wp-content/themes/dbw-base/assets/img/Reifenservice-Schedler-Logo-Weiss.png") no-repeat;
+  background-size: contain;
+  background-position: right center;
+  transition: opacity 0.3s ease all;
+  z-index: 1;
+  opacity: 1;
 }
 .site-header .main-navigation {
   background-color: transparent;
@@ -1576,8 +1619,13 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
   padding-right: 32px;
 }
 @media (max-width: 992px) {
-  .site-header .menu-buttons {
-    display: none;
+  .site-header .menu-buttons a:first-child {
+    display: none !important;
+  }
+}
+@media (max-width: 867px) {
+  .site-header .menu-buttons a:nth-child(2) {
+    display: none !important;
   }
 }
 .site-header .menu-buttons .gb-button {
@@ -1621,6 +1669,9 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
 .site-header.scroll .inside-header .menu-toggle:hover {
   background-color: rgba(26, 26, 26, 0.05);
 }
+.site-header.scroll .site-logo::before {
+  opacity: 0;
+}
 .site-header.scroll .site-logo img {
   max-height: 35px;
 }
@@ -1663,8 +1714,8 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
   background: #ffffff;
   box-shadow: 0 5px 30px rgba(26, 26, 26, 0.15);
   color: #2c2c2c;
-  padding: 150px 32px 0;
-  min-width: 90vw;
+  padding: 25px 32px 0;
+  min-width: 100vw;
   border-radius: 0 0 18px 0;
 }
 #generate-slideout-menu .slideout-exit {
@@ -1688,7 +1739,7 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
   margin-bottom: 16px;
 }
 #generate-slideout-menu .main-nav ul {
-  padding: 0 16px 0 0;
+  padding: 0;
 }
 #generate-slideout-menu .menu-item {
   border-top: 1px solid #f3f4f6;
@@ -1697,7 +1748,7 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
   border-bottom: 1px solid #f3f4f6;
 }
 #generate-slideout-menu .menu-item a {
-  padding: 16px 0;
+  padding: 8.3333333333px 0;
   color: #2c2c2c;
   font-size: 23.994px;
   font-weight: 500;
@@ -1711,6 +1762,10 @@ a[class*=button]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).is-
 }
 #generate-slideout-menu .gb-button.project {
   color: #2c2c2c;
+}
+#generate-slideout-menu .menu-buttons a.button--primary {
+  display: flex;
+  margin-top: 8.3333333333px !important;
 }
 
 .offside-js--interact .offside,
@@ -1746,7 +1801,7 @@ nav.offside--right.is-open:not(.slideout-transition) {
 
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -5px;
   right: 6px;
   background: #c41e3a;
   color: #ffffff;
@@ -1781,12 +1836,18 @@ nav.offside--right.is-open:not(.slideout-transition) {
   width: 1.75em;
 }
 @media (max-width: 576px) {
+  .site-footer .footer-wrapper {
+    text-align: center;
+  }
   .site-footer .footer-wrapper .logo {
     display: none;
   }
   .site-footer .footer-wrapper .box {
     flex-direction: column;
     gap: 20px;
+  }
+  .site-footer .footer-wrapper .button-wrapper {
+    justify-content: center;
   }
 }
 
@@ -3175,7 +3236,6 @@ section--content__centered *,
   .dbw-text-medien .grid {
     grid-template-columns: 1fr !important;
     gap: 32px;
-    text-align: center;
   }
   .dbw-text-medien .grid .medien {
     order: -1;
@@ -3184,7 +3244,7 @@ section--content__centered *,
 .dbw-text-medien .text {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12.5px;
 }
 .dbw-text-medien .text > div {
   margin-bottom: 0;
@@ -3686,9 +3746,6 @@ section--content__centered *,
   padding: 2em;
 }
 
-#main .dbw-accordion {
-  padding: 100px 0;
-}
 #main .dbw-accordion .gb-accordion {
   display: flex;
   flex-direction: column;
@@ -3819,9 +3876,6 @@ section--content__centered *,
   text-decoration: underline;
 }
 @media (max-width: 768px) {
-  #main .dbw-accordion {
-    padding: 50px 0;
-  }
   #main .dbw-accordion .gb-accordion {
     gap: 15px;
   }
@@ -3962,20 +4016,24 @@ section--content__centered *,
   width: 80%;
   margin: 0 auto;
   padding: 0 16px;
-  gap: 48px !important;
+  gap: 48px;
   position: relative;
   z-index: 1;
 }
 @media (max-width: 992px) {
   .dbw-counter-section .grid {
-    gap: 32px !important;
-    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 32px;
   }
 }
 @media (max-width: 576px) {
   .dbw-counter-section .grid {
-    grid-template-columns: 1fr !important;
-    gap: 50px !important;
+    gap: 0;
+  }
+  .dbw-counter-section .grid .dbw-counter-item {
+    padding: 0 !important;
+  }
+  .dbw-counter-section .grid .dbw-counter-item .ib-counter {
+    font-size: 22px !important;
   }
 }
 .dbw-counter-section .grid .dbw-counter-item {
@@ -4566,6 +4624,8 @@ section--content__centered *,
 }
 .has-bg-image.dbw-hero-compact::before, .has-bg-image.dbw-hero-half::before, .has-bg-image.dbw-hero-full::before {
   background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
 }
 
 .dbw-hero-full {
@@ -4581,14 +4641,11 @@ section--content__centered *,
 }
 @media (max-width: 768px) {
   .dbw-hero-full {
-    min-height: 80vh;
     padding-top: 80px;
   }
-  .dbw-hero-full .dbw-hero-content {
-    padding: 0 50px;
-  }
   .dbw-hero-full h1 {
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-size: clamp(2.6rem, 6vw, 3rem);
+    margin-bottom: 16.6666666667px;
   }
 }
 
@@ -4667,6 +4724,44 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 
 /* ----------------------------------------------------------
+   Grid System für gleiche Höhen
+---------------------------------------------------------- */
+.gb-element-85f47459.grid.auto.grid-auto-6 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 50px;
+}
+@media (min-width: 768px) {
+  .gb-element-85f47459.grid.auto.grid-auto-6 {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 100px;
+  }
+}
+@media (max-width: 576px) {
+  .gb-element-85f47459.grid.auto.grid-auto-6 {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+.gb-element-85f47459.grid.auto.grid-auto-6:not(.grid--natural-height) {
+  align-items: stretch;
+}
+.gb-element-85f47459.grid.auto.grid-auto-6:not(.grid--natural-height) > div {
+  display: flex;
+  height: 100%;
+}
+.gb-element-85f47459.grid.auto.grid-auto-6.grid--natural-height {
+  align-items: start;
+}
+.gb-element-85f47459.grid.auto.grid-auto-6.grid--natural-height > div {
+  display: block;
+  height: auto;
+}
+.gb-element-85f47459.grid.auto.grid-auto-6.grid--natural-height .card {
+  height: auto !important;
+}
+
+/* ----------------------------------------------------------
    Basic Card Styles
 ---------------------------------------------------------- */
 .card {
@@ -4680,12 +4775,27 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.card:not(.card--natural-height) {
+  height: 100%;
+  width: 100%;
+}
+.card.card--natural-height {
+  height: auto !important;
+  width: auto;
+}
+.card.card--natural-height .card__body {
+  flex-grow: 0 !important;
+}
+.card.card--natural-height .card__footer {
+  margin-top: 25px !important;
+}
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 4px 16px rgba(26, 26, 26, 0.15);
 }
 .card__header {
   margin-bottom: 25px;
+  flex-shrink: 0;
 }
 .card__header .card__title {
   font-size: 28.008px;
@@ -4701,6 +4811,10 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 .card__body {
   margin-bottom: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .card__body p {
   font-size: 18px;
@@ -4713,6 +4827,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 .card__footer {
   margin-top: auto;
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -4725,6 +4840,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
      object-fit: cover;
   border-radius: 12px;
   margin-bottom: 25px;
+  flex-shrink: 0;
 }
 .card--compact {
   padding: 25px;
@@ -4815,6 +4931,48 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 
 /* ----------------------------------------------------------
+   Utility Classes für selektive Kontrolle
+---------------------------------------------------------- */
+.grid--natural-height .card {
+  height: auto !important;
+}
+.grid--natural-height .card .card__body {
+  flex-grow: 0 !important;
+}
+.grid--natural-height .card .card__footer {
+  margin-top: 25px !important;
+}
+
+.card--natural-height {
+  height: auto !important;
+}
+.card--natural-height .card__body {
+  flex-grow: 0 !important;
+}
+.card--natural-height .card__footer {
+  margin-top: 25px !important;
+}
+.card--natural-height.card--hero .card__content {
+  height: auto !important;
+}
+
+/* ----------------------------------------------------------
+   Debugging Helper (optional)
+---------------------------------------------------------- */
+.debug-equal-height .card {
+  border: 2px dashed red !important;
+}
+.debug-equal-height .card .card__header {
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+.debug-equal-height .card .card__body {
+  background: rgba(0, 255, 0, 0.1) !important;
+}
+.debug-equal-height .card .card__footer {
+  background: rgba(0, 0, 255, 0.1) !important;
+}
+
+/* ----------------------------------------------------------
    Brand Style - Edge-to-Edge Image Cards
 ---------------------------------------------------------- */
 .card--brand {
@@ -4829,6 +4987,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   margin-bottom: 0;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+  flex-shrink: 0;
 }
 .card--brand .card__image img {
   width: 100%;
@@ -4845,6 +5004,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 .card--brand .card__header {
   padding-top: 50px;
   margin-bottom: 25px;
+  flex-shrink: 0;
 }
 .card--brand .card__body {
   margin-bottom: 25px;
@@ -4853,6 +5013,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 .card--brand .card__footer {
   padding-bottom: 50px;
   margin-top: auto;
+  flex-shrink: 0;
 }
 .card--brand.card--compact .card__image {
   border-top-right-radius: 24px;
@@ -4954,6 +5115,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
      object-fit: cover;
   border-radius: 12px;
   margin-bottom: 25px;
+  flex-shrink: 0;
 }
 .card.contact.card--compact .card__image {
   border-radius: 10px 10px 0 0;
@@ -4968,7 +5130,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 
 /* ----------------------------------------------------------
-   Card Hero - Edge-to-Edge Image Card
+   Card Hero - Edge-to-Edge Image Card (Optimiert für gleiche Höhen)
 ---------------------------------------------------------- */
 .card--hero {
   background: #ffffff;
@@ -4980,6 +5142,23 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   display: flex;
   flex-direction: column;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card--hero:not(.card--natural-height) {
+  height: 100%;
+  width: 100%;
+}
+.card--hero.card--natural-height {
+  height: auto !important;
+  width: auto;
+}
+.card--hero.card--natural-height .card__content {
+  height: auto !important;
+}
+.card--hero.card--natural-height .card__body {
+  flex-grow: 0 !important;
+}
+.card--hero.card--natural-height .card__footer {
+  margin-top: 25px !important;
 }
 .card--hero:hover {
   transform: translateY(-4px);
@@ -4994,15 +5173,18 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   margin-bottom: 0;
   border-top-right-radius: 12px;
   border-top-left-radius: 12px;
+  flex-shrink: 0;
 }
 .card--hero .card__content {
   padding: 25px;
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  height: 100%;
 }
 .card--hero .card__header {
   margin-bottom: 25px;
+  flex-shrink: 0;
 }
 .card--hero .card__header .card__title {
   font-size: 28.008px;
@@ -5019,6 +5201,9 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 .card--hero .card__body {
   margin-bottom: 25px;
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 .card--hero .card__body p {
   font-size: 18px;
@@ -5031,6 +5216,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
 }
 .card--hero .card__footer {
   margin-top: auto;
+  flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -5181,6 +5367,8 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   width: 100%;
   height: 100%;
   background: rgba(26, 26, 26, 0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 1;
 }
 .dbw-parallax__content {

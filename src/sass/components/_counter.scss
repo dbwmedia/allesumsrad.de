@@ -35,18 +35,25 @@
 		width: $containerWidth;
 		margin: 0 auto;
 		padding: 0 $gap-s;
-		gap: $gap-xl !important;
+		gap: $gap-xl;
 		position: relative;
 		z-index: 1;
 
 		@media (max-width: $phablet) {
-			gap: $gap !important;
-			grid-template-columns: repeat(2, 1fr) !important;
+			gap: $gap;
+			// grid-template-columns: repeat(3, 1fr) !important;
 		}
 
 		@media (max-width: $mobile) {
-			grid-template-columns: 1fr !important;
-			gap: $s-sm !important;
+			// grid-template-columns: 1fr;
+			gap: 0;
+			.dbw-counter-item {
+				padding: 0 !important;
+
+				.ib-counter {
+					font-size: 22px !important;
+				}
+			}
 		}
 
 		.dbw-counter-item {

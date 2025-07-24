@@ -45,3 +45,13 @@ add_filter('wpcf7_validate_text*', 'custom_math_captcha_validation', 20, 2);
 
 
 
+add_filter('nav_menu_link_attributes', function($atts, $item, $args) {
+    if (isset($atts['href']) && strpos($atts['href'], '/#') === 0) {
+        if (isset($atts['class'])) {
+            $atts['class'] .= ' smooth-scroll';
+        } else {
+            $atts['class'] = 'smooth-scroll';
+        }
+    }
+    return $atts;
+}, 10, 3);
