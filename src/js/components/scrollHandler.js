@@ -6,20 +6,25 @@ const Component_ScrollHandler = () => {
 		return null;
 	}
 
-	// Funktion um Header-Klasse basierend auf Scroll-Position zu setzen
-	const updateHeaderClass = () => {
-		if (window.scrollY > 0) {
-			header.classList.add("scroll");
-		} else {
-			header.classList.remove("scroll");
-		}
-	};
+	const isHome =
+		typeof window !== "undefined" && window.location.pathname === "/";
 
-	// Initial beim Laden ausführen (löst dein Ankerlink-Problem)
-	updateHeaderClass();
+	if (isHome) {
+		// Scroll-abhängige Klasse auf Startseite
+		const updateHeaderClass = () => {
+			if (window.scrollY > 0) {
+				header.classList.add("scroll");
+			} else {
+				header.classList.remove("scroll");
+			}
+		};
 
-	// Scroll-Event-Listener hinzufügen
-	window.addEventListener("scroll", updateHeaderClass, { passive: true });
+		updateHeaderClass(); // Direkt beim Laden
+		window.addEventListener("scroll", updateHeaderClass, { passive: true });
+	} else {
+		// Auf allen anderen Seiten direkt Klasse setzen
+		header.classList.add("scroll");
+	}
 
 	return null;
 };

@@ -13,7 +13,7 @@
 
 		// Responsive: Stack on phablet and below
 		@include mq($until: $phablet) {
-			grid-template-columns: 1fr !important;
+			grid-template-columns: 1fr;
 			gap: $gap;
 			// text-align: center;
 

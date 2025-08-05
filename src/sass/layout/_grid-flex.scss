@@ -42,7 +42,7 @@ div.grid {
 	grid-template-columns: repeat(3, 1fr);
 	gap: $gap;
 
-	@include mq($until: $laptop) {
+	@include mq($until: $phablet) {
 		grid-template-columns: repeat(2, 1fr);
 	}
 

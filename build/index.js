@@ -518,23 +518,24 @@ const Component_ScrollHandler = () => {
     console.warn("Header element not found");
     return null;
   }
-
-  // Funktion um Header-Klasse basierend auf Scroll-Position zu setzen
-  const updateHeaderClass = () => {
-    if (window.scrollY > 0) {
-      header.classList.add("scroll");
-    } else {
-      header.classList.remove("scroll");
-    }
-  };
-
-  // Initial beim Laden ausführen (löst dein Ankerlink-Problem)
-  updateHeaderClass();
-
-  // Scroll-Event-Listener hinzufügen
-  window.addEventListener("scroll", updateHeaderClass, {
-    passive: true
-  });
+  const isHome = typeof window !== "undefined" && window.location.pathname === "/";
+  if (isHome) {
+    // Scroll-abhängige Klasse auf Startseite
+    const updateHeaderClass = () => {
+      if (window.scrollY > 0) {
+        header.classList.add("scroll");
+      } else {
+        header.classList.remove("scroll");
+      }
+    };
+    updateHeaderClass(); // Direkt beim Laden
+    window.addEventListener("scroll", updateHeaderClass, {
+      passive: true
+    });
+  } else {
+    // Auf allen anderen Seiten direkt Klasse setzen
+    header.classList.add("scroll");
+  }
   return null;
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Component_ScrollHandler);
