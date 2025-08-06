@@ -22,6 +22,10 @@ require_once get_stylesheet_directory() . '/includes/fontawesome-enqueue.php';
 // SVG Support
 require_once get_stylesheet_directory() . '/includes/svg-support.php';
 
+
+// KFZ Angebote
+require_once get_stylesheet_directory() . '/includes/kfz-angebote.php';
+
 //------------------------------------------------
 // # CF7 
 // ------------------------------------------------

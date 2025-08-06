@@ -1,0 +1,348 @@
+@use "../global" as *;
+
+// ===================================================================
+// KFZ ANGEBOTE SYSTEM - SCSS STYLES
+// ===================================================================
+// Dieses SCSS-Gerüst ergänzt nur die Styles, die nicht vom Theme kommen
+// Ihr Theme stellt bereits zur Verfügung:
+// - .section--fullwidth, .dbw-parallax, .dbw-text-medien etc.
+// - .grid, .text, .medien
+// - .button--primary, .highlight-label
+// - .card, .card--hero, .card--compact System (NEU!)
+// - Responsive Breakpoints und AOS Animationen
+// ===================================================================
+
+// VARIABLEN (anpassen an Ihr Theme)
+// ===================================================================
+
+$card-bg: rgba(255, 255, 255, 0.95);
+$shadow-light: 0 10px 30px rgba(0, 0, 0, 0.1);
+$shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+$border-radius: 12px;
+$transition: all 0.3s ease;
+
+// GLOBALE BUTTON KONTROLLE
+// ===================================================================
+// Automatische Ausblendung aller .angebot-button wenn keine Angebote aktiv
+// Body-Klassen werden automatisch vom System gesetzt:
+// - .angebote-verfügbar = Angebote vorhanden
+// - .keine-angebote-aktiv = Keine aktiven Angebote
+// - .angebote-deaktiviert = Sektion komplett deaktiviert
+
+.angebot-button {
+	transition:
+		opacity 0.3s ease,
+		transform 0.3s ease;
+
+	// Ausblenden wenn keine Angebote oder Sektion deaktiviert
+	body.keine-angebote-aktiv &,
+	body.angebote-deaktiviert & {
+		display: none !important;
+	}
+
+	// Sichtbar wenn Angebote verfügbar
+	body.angebote-verfügbar & {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+// VERWENDUNG IN IHREM THEME:
+// <a href="#angebote" class="button angebot-button">Zu den Angeboten</a>
+// <button class="angebot-button">Angebot anfragen</button>
+
+// PLATZHALTER SEKTION
+// ===================================================================
+// Wird nur angezeigt wenn keine aktiven Angebote vorhanden sind
+.gb-element-angebote-placeholder {
+	background: #f8f9fa;
+	padding: 60px 20px;
+	margin: 40px 0;
+	text-align: center;
+
+	.angebote-placeholder-content {
+		max-width: 600px;
+		margin: 0 auto;
+
+		p {
+			font-size: 1.2rem;
+			color: #6c757d;
+			margin: 0;
+			padding: 20px;
+			border: 2px dashed #dee2e6;
+			border-radius: 8px;
+			background: white;
+		}
+	}
+
+	// Responsive
+	@media (max-width: 768px) {
+		padding: 40px 15px;
+		margin: 20px 0;
+
+		.angebote-placeholder-content p {
+			font-size: 1rem;
+			padding: 15px;
+		}
+	}
+}
+
+// SINGLE ANGEBOT LAYOUT (Original Design)
+// ===================================================================
+.gb-element-angebote {
+	.gb-element-angebote-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+		gap: 30px;
+		margin-top: 30px;
+
+		.medien {
+			img {
+				width: 100%;
+				aspect-ratio: 1.2 / 1;
+				-o-object-fit: cover;
+				object-fit: cover;
+				-o-object-position: center;
+				object-position: center;
+				border-radius: 12px;
+				box-shadow: 0 2px 8px rgba(26, 26, 26, 0.1);
+				transition: 0.3s ease all;
+			}
+		}
+
+		@media (max-width: 768px) {
+			grid-template-columns: 1fr;
+			gap: 20px;
+		}
+
+		@media (max-width: 480px) {
+			// TODO: Weitere mobile Anpassungen falls nötig
+		}
+	}
+}
+
+// MULTIPLE ANGEBOTE LAYOUT - THEME CARDS
+// ===================================================================
+// Aktiviert sich automatisch bei 2+ Angeboten
+// Verwendet Ihr bestehendes Card-System mit .card, .card--hero, .card--compact
+
+.angebote-multiple-wrapper {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+
+	.grid::before {
+		display: none;
+	}
+
+	.angebote-header {
+		text-align: center;
+		margin-bottom: 40px;
+
+		.highlight-label {
+			margin-bottom: 8px;
+			// Erbt Styles vom Theme
+		}
+
+		h3 {
+			margin: 0 0 20px 0;
+			color: $c-white;
+		}
+
+		@media (max-width: 768px) {
+			margin-bottom: 30px;
+		}
+	}
+}
+
+// THEME CARD GRID SYSTEM
+// ===================================================================
+// Nutzt Ihr bestehendes Grid-System mit automatischen Klassen
+
+.gb-element-angebote-cards {
+	// Erbt alle Grid-Styles vom Theme (.grid.auto)
+	// .grid-auto-2 und .grid-auto-3 werden automatisch gesetzt
+
+	.card.angebot {
+		// Spezielle Anpassungen für Angebot-Karten
+
+		// Bild-Styles (nutzt Theme card__image)
+		img {
+			// Erbt von Ihrem Theme (.card img)
+			// Eventuell kleine Anpassungen:
+			aspect-ratio: 1.2 / 1;
+			object-fit: cover;
+			object-position: center;
+		}
+
+		// Preis hervorheben
+		.angebot-preis {
+			color: $c-primary;
+			font-weight: bold;
+		}
+
+		// Gültigkeitsdatum
+		.angebot-gueltig {
+			color: #888;
+			font-size: 0.9rem;
+			margin-top: 10px;
+
+			small {
+				opacity: 0.8;
+			}
+		}
+
+		// Button Container (erbt .btn-container styles)
+		.btn-container {
+			// Nutzt Ihre Theme Button-Styles
+		}
+	}
+}
+
+// FALLBACK: ALTE ANGEBOT KARTEN (falls Theme Cards nicht funktionieren)
+// ===================================================================
+// Diese Styles bleiben als Backup, falls das Theme-Card-System Probleme macht
+.angebot-card {
+	background: $card-bg;
+	border-radius: $border-radius;
+	overflow: hidden;
+	box-shadow: $shadow-light;
+	transition: $transition;
+	backdrop-filter: blur(10px);
+
+	&:hover {
+		transform: translateY(-5px);
+		box-shadow: $shadow-hover;
+
+		.angebot-card-image img {
+			transform: scale(1.05);
+		}
+	}
+
+	// Karten Content
+	&-content {
+		padding: 0;
+	}
+
+	// Karten Bild
+	&-image {
+		position: relative;
+		height: 200px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transition: $transition;
+		}
+
+		@media (max-width: 768px) {
+			height: 180px;
+		}
+	}
+
+	// Karten Text
+	&-text {
+		padding: 25px;
+		color: #333;
+
+		@media (max-width: 768px) {
+			padding: 20px;
+		}
+
+		@media (max-width: 480px) {
+			padding: 15px;
+		}
+	}
+
+	// Titel
+	&-title {
+		font-size: 1.4rem;
+		font-weight: bold;
+		margin: 0 0 15px 0;
+		color: #1a1a1a;
+		line-height: 1.3;
+
+		@media (max-width: 768px) {
+			font-size: 1.2rem;
+		}
+	}
+
+	// Beschreibung
+	&-description {
+		font-size: 1rem;
+		line-height: 1.5;
+		margin: 0 0 15px 0;
+		color: #666;
+	}
+
+	// Preis
+	&-preis {
+		font-size: 1.3rem;
+		font-weight: bold;
+		color: $c-primary;
+		margin: 15px 0;
+	}
+
+	// Gültigkeitsdatum
+	&-gueltig {
+		font-size: 0.9rem;
+		color: #888;
+		margin: 10px 0 20px 0;
+	}
+
+	// Button
+	&-button {
+		display: inline-block;
+		background: $c-primary;
+		color: white;
+		padding: 12px 20px;
+		text-decoration: none;
+		border-radius: 6px;
+		font-weight: bold;
+		font-size: 0.95rem;
+		transition: $transition;
+		text-align: center;
+
+		&:hover {
+			background: $c-primary-hover;
+			color: white;
+			text-decoration: none;
+			transform: translateY(-1px);
+		}
+	}
+}
+
+// RESPONSIVE WRAPPER ANPASSUNGEN
+// ===================================================================
+@media (max-width: 480px) {
+	.angebote-multiple-wrapper {
+		padding: 0 10px;
+	}
+}
+
+// THEME-SPEZIFISCHE ANPASSUNGEN
+// ===================================================================
+// TODO: Hier können Sie theme-spezifische Überschreibungen hinzufügen
+
+// Falls das Theme andere Grid-Klassen verwendet:
+// .your-theme-grid-class {
+//     // Anpassungen
+// }
+
+// Falls andere Button-Styles nötig sind:
+// .angebot-card-button {
+//     // Überschreibt die Standard-Button-Styles des Themes
+// }
+
+// UTILITY KLASSEN
+// ===================================================================
+.angebote-hidden {
+	display: none !important;
+}
+
+.angebote-loading {
+	opacity: 0.5;
+	pointer-events: none;
+}

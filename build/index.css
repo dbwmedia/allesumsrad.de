@@ -838,7 +838,6 @@ mark,
   }
 }
 .dsgvo-text {
-  margin: 150px 0;
   font-family: var(--gp-font--inter), Helvetica, Arial, sans-serif;
   color: #363636;
   line-height: 1.75;
@@ -4617,6 +4616,226 @@ section--content__centered *,
   }
 }
 
+.angebot-button {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+body.keine-angebote-aktiv .angebot-button, body.angebote-deaktiviert .angebot-button {
+  display: none !important;
+}
+body.angebote-verfügbar .angebot-button {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gb-element-angebote-placeholder {
+  background: #f8f9fa;
+  padding: 60px 20px;
+  margin: 40px 0;
+  text-align: center;
+}
+.gb-element-angebote-placeholder .angebote-placeholder-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+.gb-element-angebote-placeholder .angebote-placeholder-content p {
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin: 0;
+  padding: 20px;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  background: white;
+}
+@media (max-width: 768px) {
+  .gb-element-angebote-placeholder {
+    padding: 40px 15px;
+    margin: 20px 0;
+  }
+  .gb-element-angebote-placeholder .angebote-placeholder-content p {
+    font-size: 1rem;
+    padding: 15px;
+  }
+}
+
+.gb-element-angebote .gb-element-angebote-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+.gb-element-angebote .gb-element-angebote-grid .medien img {
+  width: 100%;
+  aspect-ratio: 1.2/1;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(26, 26, 26, 0.1);
+  transition: 0.3s ease all;
+}
+@media (max-width: 768px) {
+  .gb-element-angebote .gb-element-angebote-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+.angebote-multiple-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.angebote-multiple-wrapper .grid::before {
+  display: none;
+}
+.angebote-multiple-wrapper .angebote-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.angebote-multiple-wrapper .angebote-header .highlight-label {
+  margin-bottom: 8px;
+}
+.angebote-multiple-wrapper .angebote-header h3 {
+  margin: 0 0 20px 0;
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .angebote-multiple-wrapper .angebote-header {
+    margin-bottom: 30px;
+  }
+}
+
+.gb-element-angebote-cards .card.angebot img {
+  aspect-ratio: 1.2/1;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+.gb-element-angebote-cards .card.angebot .angebot-preis {
+  color: #c41e3a;
+  font-weight: bold;
+}
+.gb-element-angebote-cards .card.angebot .angebot-gueltig {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+.gb-element-angebote-cards .card.angebot .angebot-gueltig small {
+  opacity: 0.8;
+}
+.angebot-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+}
+.angebot-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+.angebot-card:hover .angebot-card-image img {
+  transform: scale(1.05);
+}
+.angebot-card-content {
+  padding: 0;
+}
+.angebot-card-image {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+.angebot-card-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  transition: all 0.3s ease;
+}
+@media (max-width: 768px) {
+  .angebot-card-image {
+    height: 180px;
+  }
+}
+.angebot-card-text {
+  padding: 25px;
+  color: #333;
+}
+@media (max-width: 768px) {
+  .angebot-card-text {
+    padding: 20px;
+  }
+}
+@media (max-width: 480px) {
+  .angebot-card-text {
+    padding: 15px;
+  }
+}
+.angebot-card-title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin: 0 0 15px 0;
+  color: #1a1a1a;
+  line-height: 1.3;
+}
+@media (max-width: 768px) {
+  .angebot-card-title {
+    font-size: 1.2rem;
+  }
+}
+.angebot-card-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  color: #666;
+}
+.angebot-card-preis {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #c41e3a;
+  margin: 15px 0;
+}
+.angebot-card-gueltig {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 10px 0 20px 0;
+}
+.angebot-card-button {
+  display: inline-block;
+  background: #c41e3a;
+  color: white;
+  padding: 12px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.angebot-card-button:hover {
+  background: #a01729;
+  color: white;
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .angebote-multiple-wrapper {
+    padding: 0 10px;
+  }
+}
+.angebote-hidden {
+  display: none !important;
+}
+
+.angebote-loading {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
 .dbw-hero-compact, .dbw-hero-half, .dbw-hero-full {
   position: relative;
   display: flex;
@@ -4904,7 +5123,7 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 25px;
+  gap: 10px;
 }
 .card__image {
   width: 100%;
@@ -5293,7 +5512,6 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact):not([sty
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 25px;
 }
 .card--hero.card--compact .card__image {
   border-top-left-radius: 6px;
