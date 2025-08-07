@@ -34,100 +34,57 @@ __webpack_require__.r(__webpack_exports__);
  * Optimiert für Performance und Web Standards 2025
  */
 const Component_ButtonRipple = () => {
-  // Performance flag für reduced motion
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Cache für bessere Performance
   const buttonCache = new WeakMap();
   let rafId = null;
-
-  /**
-   * Hauptfunktion zum Initialisieren der Button Ripple Effekte
-   */
   const initButtonRipples = () => {
-    // Prüfe reduced motion preference
-    if (prefersReducedMotion) {
-      console.log("🎯 Button Ripple: Disabled due to reduced motion preference");
-      return;
-    }
-
-    // Optimierter Selector für bessere Performance
+    if (prefersReducedMotion) return;
     const buttons = document.querySelectorAll("a.button--primary, a.button--black, a.button--outline, a.button--glass, a.button--accent, a.button--success, a.button--warning, a.button--dbw");
-    if (buttons.length === 0) {
-      console.log("🎯 Button Ripple: No buttons found");
-      return;
-    }
-    buttons.forEach((button, index) => {
-      // Skip excluded buttons
+    if (buttons.length === 0) return;
+    buttons.forEach(button => {
       if (button.matches(".our-work, .button-icon, .gb-accordion__toggle")) {
         return;
       }
-      setupButtonRipple(button, index);
+      setupButtonRipple(button);
     });
-    console.log(`🎯 Button Ripple: Applied ripple effect to ${buttons.length} buttons`);
   };
-
-  /**
-   * Setup ripple effect für einzelnen Button
-   * @param {Element} button - Das Button Element
-   * @param {number} index - Button Index für Debugging
-   */
-  const setupButtonRipple = (button, index) => {
-    // Cache button data für bessere Performance
+  const setupButtonRipple = button => {
     const buttonData = {
       lastX: 0,
       lastY: 0,
       lastTime: 0
     };
     buttonCache.set(button, buttonData);
-
-    // Event Handler mit optimierter Performance
     const handleMouseEnter = e => {
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-
-      // Berechne maximale Distanz
       const maxDistance = calculateMaxDistance(x, y, rect.width, rect.height);
       const rippleSize = Math.ceil(maxDistance * 2.2);
-
-      // Update cache
       buttonData.lastX = x;
       buttonData.lastY = y;
       buttonData.lastTime = Date.now();
-
-      // Batch DOM updates
       requestAnimationFrame(() => {
         button.style.setProperty("--ripple-x", x + "px");
         button.style.setProperty("--ripple-y", y + "px");
         button.style.setProperty("--ripple-size", rippleSize + "px");
       });
     };
-
-    // Throttled mousemove handler
     const handleMouseMove = e => {
       const data = buttonCache.get(button);
       if (!data) return;
-
-      // Throttle mit 16ms (60fps)
       const now = Date.now();
       if (now - data.lastTime < 16) return;
       const rect = button.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-
-      // Nur updaten wenn signifikante Bewegung
       const distance = Math.sqrt(Math.pow(x - data.lastX, 2) + Math.pow(y - data.lastY, 2));
       if (distance < 5) return;
       const maxDistance = calculateMaxDistance(x, y, rect.width, rect.height);
       const rippleSize = Math.ceil(maxDistance * 2.2);
-
-      // Update cache
       data.lastX = x;
       data.lastY = y;
       data.lastTime = now;
-
-      // Batch DOM updates
       if (rafId) cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         button.style.setProperty("--ripple-x", x + "px");
@@ -135,88 +92,50 @@ const Component_ButtonRipple = () => {
         button.style.setProperty("--ripple-size", rippleSize + "px");
       });
     };
-
-    // Add event listeners mit passive flag für bessere Performance
     button.addEventListener("mouseenter", handleMouseEnter, {
       passive: true
     });
     button.addEventListener("mousemove", handleMouseMove, {
       passive: true
     });
-
-    // Optional: Touch support
     if ("ontouchstart" in window) {
       button.addEventListener("touchstart", handleMouseEnter, {
         passive: true
       });
     }
   };
-
-  /**
-   * Berechne maximale Distanz (optimiert mit Math.hypot)
-   */
   const calculateMaxDistance = (x, y, width, height) => {
     return Math.max(Math.hypot(x, y), Math.hypot(width - x, y), Math.hypot(x, height - y), Math.hypot(width - x, height - y));
   };
-
-  /**
-   * Überprüfe ob Debug aktiv sein soll
-   */
-  const shouldDebug = () => {
-    return window.location.hostname === "localhost" || window.location.hostname.includes("dev") || window.location.search.includes("debug=true");
-  };
-
-  /**
-   * Reinitialisiere Ripple Effekte
-   */
   const reinitialize = () => {
-    console.log("🔄 Button Ripple: Reinitializing...");
     destroy();
     initButtonRipples();
   };
-
-  /**
-   * Entferne Ripple Effekte von allen Buttons
-   */
   const destroy = () => {
     const buttons = document.querySelectorAll('a[class*="button"]');
     buttons.forEach(button => {
-      // CSS Properties zurücksetzen
       button.style.removeProperty("--ripple-x");
       button.style.removeProperty("--ripple-y");
       button.style.removeProperty("--ripple-size");
-
-      // Clear cache
       buttonCache.delete(button);
     });
-
-    // Cancel any pending animations
     if (rafId) {
       cancelAnimationFrame(rafId);
       rafId = null;
     }
-    console.log("🗑️ Button Ripple: Effects removed");
   };
-
-  /**
-   * Initialisiere bei DOM ready
-   */
   const init = () => {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initButtonRipples);
     } else {
       initButtonRipples();
     }
-
-    // Mache Funktionen global verfügbar
     window.ButtonRipple = {
       reinitialize: reinitialize,
       destroy: destroy,
       setupButtonRipple: setupButtonRipple
     };
   };
-
-  // Auto-initialisiere
   init();
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Component_ButtonRipple);
@@ -238,54 +157,28 @@ __webpack_require__.r(__webpack_exports__);
  * Separater Transform für Background und Content mit antizyklischer Bewegung
  */
 const Component_Parallax = () => {
-  // Konfiguration für dramatischen, modernen Effekt
   const CONFIG = {
-    // Background: Starke Y-Bewegung + Zoom
     bgSpeed: 0.8,
-    // 80% der Scroll-Geschwindigkeit
     bgMaxMove: 400,
-    // Starke Y-Bewegung nach unten
     bgMaxScale: 0.3,
-    // 30% Zoom beim Scrollen!
-
-    // Content: Gegenläufig + Fade + Scale
     contentSpeed: 0.6,
-    // 60% der Scroll-Geschwindigkeit
     contentMaxMove: 250,
-    // Starke Bewegung nach oben
     contentMaxScale: 0.15,
-    // 15% Scale down (kleiner werden)
     contentOpacity: true,
-    // Fade-out Effekt
     contentOpacityMin: 0.2,
-    // Fast komplett ausblenden
-
-    // Performance
     throttleDelay: 0,
-    // RAF übernimmt Throttling
-    smoothness: 0.15 // Smooth aber responsive
+    smoothness: 0.15
   };
-
-  // Suche nach allen dbw-hero-* Elementen
   const heroElements = document.querySelectorAll('[class*="dbw-hero-"]');
   if (heroElements.length === 0) return;
-
-  // Performance checks
   const isMobile = () => window.innerWidth <= 768;
   const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-  // Smooth Lerp Funktion für butterweiche Animation
   const lerp = (start, end, factor) => start + (end - start) * factor;
-
-  // Easing Functions für organischere Bewegung
   const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
   const easeOutQuad = t => t * (2 - t);
   heroElements.forEach(hero => {
-    // Background Element suchen
     const bgElement = hero.querySelector(".dbw-hero-background");
     const heroContent = hero.querySelector(".dbw-hero-content");
-
-    // Check ob Background vorhanden (img oder background-image)
     if (bgElement) {
       const hasImg = bgElement.querySelector("img");
       const hasBgImage = window.getComputedStyle(bgElement).backgroundImage !== "none";
@@ -293,19 +186,13 @@ const Component_Parallax = () => {
         hero.classList.add("has-bg-image");
       }
     }
-
-    // Falls alte inline background-image vorhanden, in Background Element verschieben
     const inlineBgImage = hero.style.backgroundImage;
     if (inlineBgImage && bgElement) {
       bgElement.style.backgroundImage = inlineBgImage;
-      hero.style.backgroundImage = ""; // Original entfernen
+      hero.style.backgroundImage = "";
       hero.classList.add("has-bg-image");
     }
-
-    // Skip wenn kein Background oder Mobile/Reduced Motion
     if (!bgElement || isMobile() || prefersReducedMotion()) return;
-
-    // State für smooth animations
     let currentBgY = 0;
     let currentBgScale = 1;
     let currentContentY = 0;
@@ -321,61 +208,38 @@ const Component_Parallax = () => {
       const rect = hero.getBoundingClientRect();
       const heroHeight = hero.offsetHeight;
       const windowHeight = window.innerHeight;
-
-      // Berechne Sichtbarkeit und Progress
       const heroTop = rect.top;
       const heroBottom = rect.bottom;
-
-      // Hero ist nur relevant wenn sichtbar oder angeschnitten
       if (heroBottom < 0 || heroTop > windowHeight) {
         ticking = false;
         return;
       }
-
-      // Progress: 0 = Hero top am viewport top, 1 = Hero komplett durchgescrollt
       let scrollProgress = 0;
       if (heroTop <= 0) {
-        // Hero ist angeschnitten oder höher
         scrollProgress = Math.min(1, Math.abs(heroTop) / heroHeight);
       }
-
-      // Dramatischer Effekt mit Easing
       const easedProgress = easeOutQuad(scrollProgress);
-
-      // BACKGROUND: Starke Y-Bewegung + ZOOM EFFEKT
       targetBgY = easedProgress * CONFIG.bgMaxMove * CONFIG.bgSpeed;
-      targetBgScale = 1 + easedProgress * CONFIG.bgMaxScale; // Zoom in!
-
-      // CONTENT: Gegenläufige Bewegung + Scale Down + Fade
+      targetBgScale = 1 + easedProgress * CONFIG.bgMaxScale;
       targetContentY = easedProgress * CONFIG.contentMaxMove * CONFIG.contentSpeed * -1;
-      targetContentScale = 1 - easedProgress * CONFIG.contentMaxScale; // Scale down!
-
-      // Opacity für dramatischen Fade
+      targetContentScale = 1 - easedProgress * CONFIG.contentMaxScale;
       if (CONFIG.contentOpacity) {
         targetContentOpacity = 1 - easedProgress * (1 - CONFIG.contentOpacityMin);
       }
-
-      // Smooth interpolation für butterweiche Animation
       currentBgY = lerp(currentBgY, targetBgY, CONFIG.smoothness);
       currentBgScale = lerp(currentBgScale, targetBgScale, CONFIG.smoothness);
       currentContentY = lerp(currentContentY, targetContentY, CONFIG.smoothness);
       currentContentScale = lerp(currentContentScale, targetContentScale, CONFIG.smoothness);
       currentContentOpacity = lerp(currentContentOpacity, targetContentOpacity, CONFIG.smoothness);
-
-      // Apply Transforms mit GPU Acceleration
       if (bgElement) {
-        // Background mit Y-Movement UND Scale (Zoom)
         bgElement.style.transform = `translate3d(0, ${currentBgY}px, 0) scale(${currentBgScale})`;
       }
       if (heroContent) {
-        // Content mit gegenläufiger Bewegung
         heroContent.style.transform = `translate3d(0, ${currentContentY}px, 0) scale(${currentContentScale})`;
         if (CONFIG.contentOpacity) {
           heroContent.style.opacity = currentContentOpacity;
         }
       }
-
-      // Continue animation wenn Differenz vorhanden
       const bgDiff = Math.abs(targetBgY - currentBgY);
       const bgScaleDiff = Math.abs(targetBgScale - currentBgScale);
       const contentDiff = Math.abs(targetContentY - currentContentY);
@@ -392,15 +256,13 @@ const Component_Parallax = () => {
         ticking = true;
       }
     };
-
-    // Intersection Observer für Performance
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           window.addEventListener("scroll", onScroll, {
             passive: true
           });
-          onScroll(); // Initial update
+          onScroll();
         } else {
           window.removeEventListener("scroll", onScroll);
           ticking = false;
@@ -408,14 +270,10 @@ const Component_Parallax = () => {
       });
     }, {
       rootMargin: "10% 0px"
-    } // Etwas früher aktivieren für smoothen Start
-    );
+    });
     observer.observe(hero);
-
-    // Resize Handler
     const handleResize = () => {
       if (isMobile()) {
-        // Reset transforms
         if (bgElement) bgElement.style.transform = "";
         if (heroContent) heroContent.style.transform = "";
         window.removeEventListener("scroll", onScroll);
@@ -423,12 +281,8 @@ const Component_Parallax = () => {
       }
     };
     window.addEventListener("resize", handleResize);
-
-    // Initial Setup
     if (bgElement) {
       bgElement.style.transformOrigin = "center center";
-
-      // Falls img Element vorhanden, auch darauf transform-origin setzen
       const bgImg = bgElement.querySelector("img");
       if (bgImg) {
         bgImg.style.transformOrigin = "center center";
@@ -436,9 +290,8 @@ const Component_Parallax = () => {
       }
     }
     if (heroContent) {
-      heroContent.style.transformOrigin = "center bottom"; // Bottom für natürlichere Scale
+      heroContent.style.transformOrigin = "center bottom";
     }
-    console.log("DBW Apple-Style Parallax: Aktiviert für", hero.className);
   });
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Component_Parallax);
@@ -456,44 +309,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 const Component_OffsetScroll = () => {
-  console.log("OffsetScroll component initialized");
   const smoothScrollLinks = document.querySelectorAll("a.smooth-scroll");
-  console.log(`Found ${smoothScrollLinks.length} smooth-scroll links`);
   smoothScrollLinks.forEach(link => {
     link.addEventListener("click", function (e) {
-      e.preventDefault(); // Verhindert das Standardverhalten von href
-      e.stopPropagation(); // Stoppt andere Event-Listener
-
-      console.log("Link clicked:", this);
-
-      // Extrahiere die Ziel-ID (Teil nach dem #)
+      e.preventDefault();
+      e.stopPropagation();
       const targetID = this.getAttribute("href").split("#")[1];
-      console.log("Target ID:", targetID);
-
-      // Suche das Ziel-Element basierend auf der ID
       const targetElement = document.getElementById(targetID);
       if (targetElement) {
-        console.log("Target element found:", targetElement);
-
-        // Prüfe und parse den Offset-Wert aus data-offset
         const hasOffset = this.hasAttribute("data-offset");
         const offset = hasOffset ? parseInt(this.dataset.offset, 10) : 0;
-        console.log("Offset value (in px):", offset);
-
-        // Berechne die Zielposition
         const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
         const offsetPosition = elementPosition - offset;
-        console.log("Element position:", elementPosition);
-        console.log("Offset position:", offsetPosition);
-
-        // Scrolle zur berechneten Position
         window.scrollTo({
           top: offsetPosition,
           behavior: "smooth"
         });
-        console.log("Scroll triggered to:", offsetPosition);
-      } else {
-        console.warn(`Target element not found for ID: ${targetID}`);
       }
     });
   });
@@ -558,124 +389,63 @@ __webpack_require__.r(__webpack_exports__);
  * + Handles spacing between consecutive grids
  */
 const Component_SmartGrid = () => {
-  /**
-   * Main function to initialize smart grids
-   */
   const initSmartGrids = () => {
-    // Only target grids with .auto class for automatic behavior
     const autoGrids = document.querySelectorAll(".grid.auto");
-    if (autoGrids.length === 0) {
-      console.log("🎯 Smart Grid: No .grid.auto elements found");
-      return;
-    }
+    if (autoGrids.length === 0) return;
     autoGrids.forEach((grid, index) => {
       processGrid(grid, index);
     });
-
-    // Handle spacing between consecutive grids
     handleConsecutiveGridSpacing(autoGrids);
-    console.log(`🎯 Smart Grid: Processed ${autoGrids.length} grids`);
   };
-
-  /**
-   * Add spacing between consecutive grid elements
-   * @param {NodeList} grids - All grid elements
-   */
   const handleConsecutiveGridSpacing = grids => {
-    grids.forEach((grid, index) => {
-      // Check if this grid has a previous sibling that's also a grid
+    grids.forEach(grid => {
       const prevSibling = grid.previousElementSibling;
       if (prevSibling && prevSibling.classList.contains("grid")) {
-        // Add a class to indicate this grid follows another grid
         grid.classList.add("grid-follows-grid");
       } else {
-        // Remove the class if it exists but shouldn't
         grid.classList.remove("grid-follows-grid");
       }
     });
   };
-
-  /**
-   * Process individual grid
-   * @param {Element} grid - The grid element
-   * @param {number} index - Grid index for debugging
-   */
   const processGrid = (grid, index) => {
-    // Count direct children (only divs)
     const children = Array.from(grid.children).filter(child => child.tagName.toLowerCase() === "div");
     const childCount = children.length;
-
-    // Remove any existing auto-grid classes
     removeExistingAutoClasses(grid);
-
-    // Add appropriate class based on child count
     const gridClass = getGridClass(childCount);
     grid.classList.add(gridClass);
-
-    // Add data attribute for debugging
     grid.setAttribute("data-smart-grid-children", childCount);
     grid.setAttribute("data-smart-grid-class", gridClass);
-
-    // Optional: Log for debugging (remove in production)
-    if (window.location.hostname === "localhost" || window.location.hostname.includes("dev")) {
-      console.log(`🎯 Grid ${index + 1}: ${childCount} children → ${gridClass}`);
-    }
   };
-
-  /**
-   * Remove existing auto-grid classes
-   * @param {Element} grid - The grid element
-   */
   const removeExistingAutoClasses = grid => {
     const autoClasses = ["grid-auto-1", "grid-auto-2", "grid-auto-3", "grid-auto-4", "grid-auto-5", "grid-auto-6", "grid-auto-many"];
     autoClasses.forEach(className => {
       grid.classList.remove(className);
     });
   };
-
-  /**
-   * Determine grid class based on child count
-   * @param {number} count - Number of children
-   * @returns {string} - Grid class name
-   */
   const getGridClass = count => {
-    if (count === 0) return "grid-auto-1"; // Fallback for empty grids
+    if (count === 0) return "grid-auto-1";
     if (count === 1) return "grid-auto-1";
     if (count === 2) return "grid-auto-2";
     if (count === 3) return "grid-auto-3";
     if (count === 4) return "grid-auto-4";
     if (count === 5) return "grid-auto-5";
     if (count === 6) return "grid-auto-6";
-    // 7+ children
     return "grid-auto-many";
   };
-
-  /**
-   * Reinitialize grids (useful for dynamic content)
-   */
   const reinitialize = () => {
-    console.log("🔄 Smart Grid: Reinitializing...");
     initSmartGrids();
   };
-
-  /**
-   * Initialize on DOM ready
-   */
   const init = () => {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", initSmartGrids);
     } else {
       initSmartGrids();
     }
-
-    // Make reinitialize function globally available for dynamic content
     window.SmartGrid = {
       reinitialize: reinitialize,
       processGrid: processGrid
     };
   };
-
-  // Auto-initialize
   init();
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Component_SmartGrid);
@@ -767,7 +537,7 @@ class ComponentLoader {
     this.initialized = false;
 
     // 🔧 DEBUG SCHALTER: true = Logs AN, false = Logs AUS
-    this.debug = true;
+    this.debug = false;
   }
 
   /**

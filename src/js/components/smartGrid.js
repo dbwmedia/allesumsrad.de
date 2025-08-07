@@ -4,84 +4,43 @@
  * + Handles spacing between consecutive grids
  */
 const Component_SmartGrid = () => {
-	/**
-	 * Main function to initialize smart grids
-	 */
 	const initSmartGrids = () => {
-		// Only target grids with .auto class for automatic behavior
 		const autoGrids = document.querySelectorAll(".grid.auto");
-		if (autoGrids.length === 0) {
-			console.log("🎯 Smart Grid: No .grid.auto elements found");
-			return;
-		}
+		if (autoGrids.length === 0) return;
 
 		autoGrids.forEach((grid, index) => {
 			processGrid(grid, index);
 		});
 
-		// Handle spacing between consecutive grids
 		handleConsecutiveGridSpacing(autoGrids);
-
-		console.log(`🎯 Smart Grid: Processed ${autoGrids.length} grids`);
 	};
 
-	/**
-	 * Add spacing between consecutive grid elements
-	 * @param {NodeList} grids - All grid elements
-	 */
 	const handleConsecutiveGridSpacing = (grids) => {
-		grids.forEach((grid, index) => {
-			// Check if this grid has a previous sibling that's also a grid
+		grids.forEach((grid) => {
 			const prevSibling = grid.previousElementSibling;
 
 			if (prevSibling && prevSibling.classList.contains("grid")) {
-				// Add a class to indicate this grid follows another grid
 				grid.classList.add("grid-follows-grid");
 			} else {
-				// Remove the class if it exists but shouldn't
 				grid.classList.remove("grid-follows-grid");
 			}
 		});
 	};
 
-	/**
-	 * Process individual grid
-	 * @param {Element} grid - The grid element
-	 * @param {number} index - Grid index for debugging
-	 */
 	const processGrid = (grid, index) => {
-		// Count direct children (only divs)
 		const children = Array.from(grid.children).filter(
 			(child) => child.tagName.toLowerCase() === "div"
 		);
 		const childCount = children.length;
 
-		// Remove any existing auto-grid classes
 		removeExistingAutoClasses(grid);
-
-		// Add appropriate class based on child count
 		const gridClass = getGridClass(childCount);
 		grid.classList.add(gridClass);
 
-		// Add data attribute for debugging
 		grid.setAttribute("data-smart-grid-children", childCount);
 		grid.setAttribute("data-smart-grid-class", gridClass);
-
-		// Optional: Log for debugging (remove in production)
-		if (
-			window.location.hostname === "localhost" ||
-			window.location.hostname.includes("dev")
-		) {
-			console.log(
-				`🎯 Grid ${index + 1}: ${childCount} children → ${gridClass}`
-			);
-		}
 	};
 
-	/**
-	 * Remove existing auto-grid classes
-	 * @param {Element} grid - The grid element
-	 */
 	const removeExistingAutoClasses = (grid) => {
 		const autoClasses = [
 			"grid-auto-1",
@@ -97,34 +56,21 @@ const Component_SmartGrid = () => {
 		});
 	};
 
-	/**
-	 * Determine grid class based on child count
-	 * @param {number} count - Number of children
-	 * @returns {string} - Grid class name
-	 */
 	const getGridClass = (count) => {
-		if (count === 0) return "grid-auto-1"; // Fallback for empty grids
+		if (count === 0) return "grid-auto-1";
 		if (count === 1) return "grid-auto-1";
 		if (count === 2) return "grid-auto-2";
 		if (count === 3) return "grid-auto-3";
 		if (count === 4) return "grid-auto-4";
 		if (count === 5) return "grid-auto-5";
 		if (count === 6) return "grid-auto-6";
-		// 7+ children
 		return "grid-auto-many";
 	};
 
-	/**
-	 * Reinitialize grids (useful for dynamic content)
-	 */
 	const reinitialize = () => {
-		console.log("🔄 Smart Grid: Reinitializing...");
 		initSmartGrids();
 	};
 
-	/**
-	 * Initialize on DOM ready
-	 */
 	const init = () => {
 		if (document.readyState === "loading") {
 			document.addEventListener("DOMContentLoaded", initSmartGrids);
@@ -132,14 +78,12 @@ const Component_SmartGrid = () => {
 			initSmartGrids();
 		}
 
-		// Make reinitialize function globally available for dynamic content
 		window.SmartGrid = {
 			reinitialize: reinitialize,
 			processGrid: processGrid,
 		};
 	};
 
-	// Auto-initialize
 	init();
 };
 

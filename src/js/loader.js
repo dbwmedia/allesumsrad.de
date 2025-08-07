@@ -8,7 +8,7 @@ class ComponentLoader {
 		this.initialized = false;
 
 		// 🔧 DEBUG SCHALTER: true = Logs AN, false = Logs AUS
-		this.debug = true;
+		this.debug = false;
 	}
 
 	/**
