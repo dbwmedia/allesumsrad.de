@@ -39,3 +39,64 @@
 		}
 	}
 }
+
+//--------------------------------------------------------------
+// # Final CTA: dark closing band with a red glow
+//--------------------------------------------------------------
+.dbw-cta .card--primary {
+	background:
+		radial-gradient(120% 140% at 100% 0%, rgba($c-primary, 0.45) 0%, rgba($c-primary, 0) 55%),
+		$c-black;
+	box-shadow: none;
+	padding: clamp(32px, 4vw, 64px);
+	border-radius: $radius-enhanced;
+
+	&:hover {
+		transform: none;
+		filter: none;
+	}
+
+	.grid {
+		align-items: center;
+
+		// Text takes the room, actions keep their natural width (no wrapping).
+		@include mq($from: $phablet) {
+			grid-template-columns: minmax(0, 1fr) auto !important;
+		}
+	}
+
+	.grid > div:last-child {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 14px;
+	}
+
+	a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).button--black {
+		background: $c-primary;
+		color: $c-white;
+
+		&:hover {
+			background: $c-primary-hover;
+		}
+	}
+
+	.cta-phone {
+		color: rgba($c-white, 0.8);
+		font-size: 16px;
+		white-space: nowrap;
+		text-decoration: none;
+
+		&:hover {
+			color: $c-white;
+		}
+	}
+}
+
+//--------------------------------------------------------------
+// # Anfahrt: left aligned like every other text section
+//--------------------------------------------------------------
+#anfahrt :is(h2, p, .highlight-label) {
+	text-align: left;
+	margin-inline: 0;
+}

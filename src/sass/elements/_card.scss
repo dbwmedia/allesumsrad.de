@@ -821,3 +821,55 @@
 		}
 	}
 }
+
+//--------------------------------------------------------------
+// # Team cards (.card.contact)
+//--------------------------------------------------------------
+.card--hero.contact {
+	.card__image {
+		aspect-ratio: 4 / 3.4;
+		object-position: center 25%;
+	}
+
+	.card__header {
+		min-height: 0;
+	}
+
+	.card__title {
+		font-size: 22px;
+	}
+
+	.card__body p {
+		font-size: 15px;
+		color: $c-gray;
+	}
+
+	.card__footer {
+		justify-content: flex-start;
+		gap: 16px;
+	}
+
+	// Secondary contact as a text link, so both cards share one clear action.
+	a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).button--outline {
+		padding: 0;
+		border: 0;
+		background: none;
+		box-shadow: none;
+		color: $f-colorHeading;
+		font-size: 16px;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+		text-decoration-color: rgba($c-black, 0.25);
+
+		&:hover {
+			background: none;
+			color: $c-primary;
+		}
+	}
+}
+
+// Stock photos and real photos side by side: a slight, shared grade
+// pulls the loud stock colours (blue calipers) towards the real shots.
+.card--hero:not(.contact) .card__image {
+	filter: saturate(0.82) contrast(1.03);
+}

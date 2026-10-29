@@ -39,7 +39,12 @@ section,
 }
 
 #main .bg-gray-light {
-	background-color: $c-grayBg;
+	background-color: #f4f4f5;
+}
+
+// Two gray sections in a row read as one chapter: no double gap.
+.entry-content > .bg-gray-light + .bg-gray-light {
+	padding-top: 0;
 }
 
 // Two plain (white) sections in a row would add up to a double gap

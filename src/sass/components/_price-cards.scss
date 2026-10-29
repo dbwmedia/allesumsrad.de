@@ -1,0 +1,87 @@
+@use "../global" as *;
+
+//--------------------------------------------------------------
+// # Price cards (Reifeneinlagerung)
+//--------------------------------------------------------------
+.price-cards {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 12px;
+	margin: 24px 0 10px;
+}
+
+.price-card {
+	padding: 18px 20px;
+	background: $c-white;
+	border: $hairline;
+	border-radius: $radius-standard;
+	box-shadow: $b-shadow;
+
+	&.is-featured {
+		border-color: rgba($c-primary, 0.35);
+		box-shadow:
+			0 0 0 1px rgba($c-primary, 0.15),
+			$b-shadow;
+	}
+
+	p.price-card__label {
+		margin: 0 0 4px;
+		font-size: 14px;
+		font-weight: $f-weightSemibold;
+		color: $c-gray;
+	}
+
+	p.price-card__price {
+		margin: 0;
+		font-family: $f-font-headline;
+		font-size: 44px;
+		font-weight: $f-weightBold;
+		line-height: 1;
+		color: $f-colorHeading;
+
+		span {
+			font-family: $f-font;
+			font-size: 14px;
+			font-weight: $f-weightMedium;
+			color: $c-gray;
+		}
+	}
+}
+
+p.price-note {
+	margin-bottom: 24px;
+	font-size: 15px;
+	color: $c-gray;
+}
+
+//--------------------------------------------------------------
+// # Fact list (Über uns): scannable proof points
+//--------------------------------------------------------------
+ul.fact-list {
+	display: grid;
+	gap: 10px;
+	margin: 20px 0 28px;
+	padding: 0;
+	list-style: none;
+
+	li {
+		position: relative;
+		margin: 0;
+		padding-left: 30px;
+		font-weight: $f-weightMedium;
+		color: $f-colorHeading;
+
+		&::before {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0.2em;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background: $c-primary
+				url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-width='3' stroke-linecap='round' stroke-linejoin='round' d='M6 12.5l4 4 8-9'/%3E%3C/svg%3E")
+				center / 14px no-repeat;
+		}
+	}
+}

@@ -1,14 +1,19 @@
 @use "../global" as *;
 
+// Dark footer: a clear end of the page instead of fading out in light grey.
 .site-footer {
+	background: #141414;
+	color: rgba($c-white, 0.72);
+
 	.footer-wrapper {
-		border-top: $hairline;
+		border-top: 0;
+		background: transparent;
 		h5 {
 			font-family: $f-font;
 			font-size: 13px;
 			font-weight: $f-weightSemibold;
 			letter-spacing: 0.08em;
-			color: $f-colorHeading;
+			color: $c-white;
 			margin-bottom: 14px;
 		}
 
@@ -18,16 +23,32 @@
 			line-height: 1.6;
 		}
 
+		p,
+		strong {
+			color: rgba($c-white, 0.72);
+		}
+
 		p {
 			margin-bottom: 10px;
 		}
 
 		a:not([class*="button"]) {
-			color: $f-colorText;
+			color: rgba($c-white, 0.72);
 			transition: color 0.2s ease;
 
 			&:hover {
-				color: $c-primary;
+				color: $c-white;
+			}
+		}
+
+		a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle).button--outline {
+			color: $c-white;
+			border-color: rgba($c-white, 0.4);
+
+			&:hover {
+				background: $c-white;
+				color: $c-black;
+				border-color: $c-white;
 			}
 		}
 
@@ -63,7 +84,13 @@
 	}
 }
 
+div.custom-site-footer {
+	background: #141414;
+}
+
 div.custom-site-footer footer.site-info {
+	background: #141414;
+	border-top: 1px solid rgba($c-white, 0.08);
 	font-size: 13px !important;
 	margin-bottom: 0;
 	padding-bottom: calc(40px + var(--dbw-callbar-h, 0px));
@@ -71,6 +98,6 @@ div.custom-site-footer footer.site-info {
 	a,
 	p {
 		font-size: 13px !important;
-		color: $c-gray;
+		color: rgba($c-white, 0.5);
 	}
 }
