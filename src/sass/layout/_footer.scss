@@ -90,7 +90,6 @@ div.custom-site-footer {
 
 div.custom-site-footer footer.site-info {
 	background: #141414;
-	border-top: 1px solid rgba($c-white, 0.08);
 	font-size: 13px !important;
 	color: rgba($c-white, 0.55);
 	margin-bottom: 0;
@@ -98,10 +97,10 @@ div.custom-site-footer footer.site-info {
 
 	* {
 		font-size: 13px !important;
-		color: inherit;
+		color: inherit !important;
 	}
 
 	a:hover {
-		color: $c-white;
+		color: $c-white !important;
 	}
 }
