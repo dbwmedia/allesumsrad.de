@@ -32,6 +32,9 @@ require_once get_stylesheet_directory() . '/includes/seo.php';
 // Mobile call bar + scroll reveal without plugin assets
 require_once get_stylesheet_directory() . '/includes/callbar.php';
 
+// Front-end loading tweaks (logo, jQuery in footer)
+require_once get_stylesheet_directory() . '/includes/performance.php';
+
 // KFZ Angebote
 require_once get_stylesheet_directory() . '/includes/kfz-angebote.php';
 

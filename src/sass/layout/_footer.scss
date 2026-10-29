@@ -8,7 +8,10 @@
 	.footer-wrapper {
 		border-top: 0;
 		background: transparent;
-		h5 {
+		// Column titles (h2 for a clean heading order, styled small)
+		:is(h2, h5) {
+			text-transform: none;
+			line-height: 1.4;
 			font-family: $f-font;
 			font-size: 13px;
 			font-weight: $f-weightSemibold;

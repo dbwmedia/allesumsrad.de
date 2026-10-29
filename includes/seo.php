@@ -126,3 +126,6 @@ add_filter('rank_math/json_ld', function ($data) {
     }
     return $data;
 }, 99);
+
+// The RSD link points to xmlrpc.php, which is blocked (403) on this site.
+remove_action('wp_head', 'rsd_link');
