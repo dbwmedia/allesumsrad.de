@@ -2,21 +2,40 @@
 
 .site-footer {
 	.footer-wrapper {
-		border-top: 1px solid rgb(0, 0, 0, 0.1);
+		border-top: $hairline;
 		h5 {
-			font-size: 14px;
+			font-family: $f-font;
+			font-size: 13px;
+			font-weight: $f-weightSemibold;
+			letter-spacing: 0.08em;
+			color: $f-colorHeading;
+			margin-bottom: 14px;
 		}
 
 		a,
 		p {
-			font-size: 12px;
+			font-size: 15px;
+			line-height: 1.6;
+		}
+
+		p {
+			margin-bottom: 10px;
+		}
+
+		a:not([class*="button"]) {
+			color: $f-colorText;
+			transition: color 0.2s ease;
+
+			&:hover {
+				color: $c-primary;
+			}
 		}
 
 		.box {
 			margin-top: 20px;
 			a[class*="button"] {
-				font-size: 12px;
-				padding: 8px 16px;
+				font-size: 14px;
+				padding: 10px 18px;
 			}
 		}
 
@@ -44,11 +63,12 @@
 }
 
 div.custom-site-footer footer.site-info {
-	font-size: 10px !important;
+	font-size: 13px !important;
 	margin-bottom: 150px;
 
 	a,
 	p {
-		font-size: 10px !important;
+		font-size: 13px !important;
+		color: $c-gray;
 	}
 }

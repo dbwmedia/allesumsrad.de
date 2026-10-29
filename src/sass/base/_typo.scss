@@ -145,10 +145,10 @@ h6,
 // h1
 h1,
 %h1 {
-	font-size: clamp($f-sizeH1Min, 8vmin, $f-sizeH1Max);
+	font-size: clamp(44px, 4.4vw + 24px, $f-sizeH1Max);
 	font-weight: $f-weightH1;
-	letter-spacing: $f-letterSpacingTight;
-	line-height: $f-lineHeightTight;
+	letter-spacing: -0.01em;
+	line-height: 0.98; // Teko uppercase has no descenders worth spacing for
 	margin-bottom: $f-marginHLarge;
 	text-align: left;
 	text-wrap: balance;
@@ -172,11 +172,11 @@ h1,
 h2,
 %h2,
 .h2 {
-	font-size: clamp($f-sizeH2, 5vmin, calc($f-sizeH2 * 1.2));
+	font-size: clamp(34px, 1.4vw + 28px, 52px);
 	font-weight: $f-weightH2;
-	letter-spacing: $f-letterSpacingTight;
-	line-height: $f-lineHeightSnug;
-	margin-bottom: $f-marginHSmall;
+	letter-spacing: -0.005em;
+	line-height: 1.02;
+	margin-bottom: 0.4em;
 	text-wrap: balance;
 	color: $f-colorHeading;
 	font-family: $f-font-headline;
@@ -239,7 +239,7 @@ h2 + p,
 	}
 
 	&__primary mark.gb-highlight::after {
-		background: linear-gradient(90deg, $c-primary, lighten($c-primary, 15%));
+		background: linear-gradient(90deg, $c-primary, $c-primaryLight);
 	}
 
 	&__white mark.gb-highlight::after {
@@ -264,11 +264,11 @@ h2 + p,
 // h3
 h3,
 %h3 {
-	font-size: clamp($f-sizeH3, 5vmin, calc($f-sizeH3 * 1.1));
-	line-height: $f-lineHeightSnug;
+	font-size: clamp(26px, 0.6vw + 22px, 32px);
+	line-height: 1.05;
 	font-weight: $f-weightH3;
-	letter-spacing: $f-letterSpacingTight;
-	margin-bottom: $f-marginHMedium;
+	letter-spacing: 0;
+	margin-bottom: 0.5em;
 	text-wrap: balance;
 	&.no-margin-bottom {
 		margin-bottom: 0;
@@ -407,17 +407,11 @@ mark,
 		margin-bottom: calc($f-marginHLarge * 0.8);
 	}
 
-	h2,
-	%h2,
-	.h2 {
-		margin-bottom: calc($f-marginHMedium * 0.8);
-	}
 }
 
 @media (max-width: $mobile) {
 	body {
-		font-size: calc($f-sizeBody * 0.89);
-		line-height: $f-lineHeightRelaxed;
+		font-size: 16px;
 	}
 
 	p {

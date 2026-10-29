@@ -508,6 +508,7 @@
 .card--hero {
 	background: $c-white;
 	border-radius: $borderRadiusS;
+	border: $hairline;
 	box-shadow: $b-shadow;
 	padding: 0;
 	position: relative;
@@ -557,7 +558,7 @@
 	}
 
 	.card__content {
-		padding: $s-xs;
+		padding: $card-pad;
 		display: flex;
 		flex-direction: column;
 		flex-grow: 1;
@@ -565,14 +566,14 @@
 	}
 
 	.card__header {
-		margin-bottom: $s-xs;
+		margin-bottom: 10px; // title belongs to its text, not to the gap above
 		flex-shrink: 0; // Header behält seine Größe
 
 		.card__title {
 			font-size: $f-sizeH4;
 			font-weight: $f-weightBold;
 			color: $f-colorHeading;
-			margin-bottom: calc($s-xs / 2);
+			margin-bottom: 0;
 			line-height: $f-lineHeightTight;
 		}
 
@@ -584,7 +585,7 @@
 	}
 
 	.card__body {
-		margin-bottom: $s-xs;
+		margin-bottom: 24px;
 		flex-grow: 1; // Nimmt verfügbaren Platz ein
 		display: flex;
 		flex-direction: column;

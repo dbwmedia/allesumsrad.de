@@ -4,14 +4,14 @@
 // # DBW Counter Banner - Subtle & Compact
 //--------------------------------------------------------------
 .dbw-counter-section {
-	padding: calc($s-xs / 2) 0; // Kompakter - nur 12.5px
+	padding: clamp(20px, 2vw, 32px) 0;
 	background: linear-gradient(
 		135deg,
 		rgba($c-primary, 0.02) 0%,
 		rgba($c-grayBg, 0.8) 50%,
 		rgba($c-accent, 0.01) 100%
 	);
-	border-bottom: 1px solid rgba($c-gray, 0.05);
+	border-bottom: $hairline;
 	position: relative;
 
 	// Subtileres Overlay
@@ -75,26 +75,27 @@
 
 				.ib-counter-number,
 				.ib-counter-number-suffix {
-					font-family: $f-font !important;
-					font-size: clamp(1.4rem, 3vw, 1.8rem) !important; // Kleiner!
-					font-weight: $f-weightBold !important; // 700 statt 800
+					// Brand display face so the stats read as one system with the headlines
+					font-family: $f-font-headline !important;
+					font-size: clamp(2.25rem, 2vw + 1.5rem, 3rem) !important;
+					font-weight: $f-weightBold !important;
 					color: $f-colorHeading !important;
-					line-height: 1.1 !important;
+					line-height: 1 !important;
 					transition: all 0.3s ease;
 				}
 
 				// Suffix noch dezenter
 				.ib-counter-number-suffix {
-					font-size: clamp(1.2rem, 2.5vw, 1.5rem) !important; // Kleiner
+					font-size: clamp(1.5rem, 1.2vw + 1rem, 2rem) !important;
 					font-weight: $f-weightMedium !important; // 500
-					color: $c-gray !important;
+					color: $c-primary !important;
 					margin-left: 0.1em;
 				}
 			}
 
 			.ib-counter-title {
 				font-family: $f-font !important;
-				font-size: 11px !important; // Sehr klein
+				font-size: 13px !important;
 				font-weight: $f-weightMedium !important;
 				color: $c-gray !important;
 				text-transform: uppercase;
@@ -113,7 +114,7 @@
 				top: 50%;
 				transform: translateY(-50%);
 				width: 1px;
-				height: 30px; // Kürzer
+				height: 40px;
 				background: linear-gradient(
 					to bottom,
 					transparent 0%,
@@ -131,16 +132,6 @@
 				padding: calc($s-xs / 2) 0;
 			}
 
-			.wp-block-ideabox-counter .ib-counter {
-				.ib-counter-number,
-				.ib-counter-number-suffix {
-					font-size: clamp(1.2rem, 5vw, 1.6rem) !important;
-				}
-
-				.ib-counter-number-suffix {
-					font-size: clamp(1rem, 4vw, 1.3rem) !important;
-				}
-			}
 		}
 
 		@media (max-width: $mobile) {
@@ -151,7 +142,7 @@
 			}
 
 			.wp-block-ideabox-counter .ib-counter-title {
-				font-size: 10px !important;
+				font-size: 12px !important;
 			}
 		}
 	}

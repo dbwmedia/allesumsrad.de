@@ -59,6 +59,15 @@ $gap-s: 16px;
 $gap: 32px;
 $gap-xl: 48px;
 
+// Section rhythm (fluid): vertical space between sections and side gutters.
+// One source of truth for all .section--fullwidth* variants.
+$section-space: clamp(64px, 4.5vw + 36px, 120px); // 64px mobile → 120px wide
+$section-space-compact: clamp(24px, 1.5vw + 16px, 40px);
+$section-gutter: clamp(20px, 5vw, 10%); // never tighter than 20px on phones
+
+// Card inner spacing
+$card-pad: clamp(20px, 1vw + 16px, 32px);
+
 // Padding System (keeping your existing)
 $padding-large-default: 2em;
 $padding-medium-default: 1.75em;
@@ -133,8 +142,14 @@ $b-accent-gradient: linear-gradient(
 );
 
 // Effects
-$b-shadow: 0 2px 8px rgba($c-black, 0.1);
-$b-shadow-hover: 0 4px 16px rgba($c-black, 0.15);
+// Layered soft shadows: a tight contact shadow plus a wide, offset ambient one
+$b-shadow:
+	0 1px 2px rgba($c-black, 0.06),
+	0 6px 20px -6px rgba($c-black, 0.12);
+$b-shadow-hover:
+	0 2px 4px rgba($c-black, 0.06),
+	0 18px 36px -12px rgba($c-black, 0.22);
+$hairline: 1px solid rgba($c-black, 0.06);
 $b-focus-ring: 0 0 0 3px rgba($c-primary, 0.2);
 $b-glass-bg: rgba($c-white, 0.1);
 $b-glass-border: rgba($c-white, 0.2);
@@ -225,7 +240,7 @@ $t-transition: 0.3s ease all;
 // # Path Variables
 //--------------------------------------------------------------
 $themeName: "dbw-base";
-$themePath: "https://allesumsrad.de//wp-content/themes/#{$themeName}/";
+$themePath: "https://allesumsrad.de/wp-content/themes/#{$themeName}/";
 
 $assetsPath: "#{$themePath}assets/";
 $fontsPath: "#{$assetsPath}fonts/";

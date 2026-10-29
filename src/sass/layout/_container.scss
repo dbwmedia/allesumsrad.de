@@ -4,51 +4,29 @@ section,
 	&--content__regular {
 		@include containerWrap;
 	}
-	&--fullwidth {
+	// All full-width sections share one fluid rhythm ($section-space) and
+	// gutter ($section-gutter), so spacing scales smoothly instead of jumping
+	// at 1200px.
+	&--fullwidth,
+	&--fullwidth-compact,
+	&--fullwidth-compact-top,
+	&--fullwidth-compact-bottom {
 		width: 100%;
-		padding: $s-md 10%;
-		@media (max-width: 1200px) {
-			padding: $s-sm 3%;
-		}
-		@media (max-width: 500px) {
-		}
+		padding: $section-space $section-gutter;
+
 		& > * {
 			@include containerWrap();
 			width: 100%;
 		}
 	}
 	&--fullwidth-compact {
-		width: 100%;
-		padding: $s-sm 10%;
-		@media (max-width: 1200px) {
-			padding: $s-xs 3%;
-		}
-		& > * {
-			@include containerWrap();
-			width: 100%;
-		}
+		padding-block: calc($section-space / 2);
 	}
 	&--fullwidth-compact-top {
-		width: 100%;
-		padding: $s-xs 10% $s-md 10%;
-		@media (max-width: 1200px) {
-			padding: $s-xs 3% $s-sm 3%;
-		}
-		& > * {
-			@include containerWrap();
-			width: 100%;
-		}
+		padding-top: $section-space-compact;
 	}
 	&--fullwidth-compact-bottom {
-		width: 100%;
-		padding: $s-md 10% $s-xs 10%;
-		@media (max-width: 1200px) {
-			padding: $s-sm 3% $s-xs 3%;
-		}
-		& > * {
-			@include containerWrap();
-			width: 100%;
-		}
+		padding-bottom: $section-space-compact;
 	}
 	&--content__fullwidthmax {
 		min-width: 100%;
@@ -62,4 +40,14 @@ section,
 
 #main .bg-gray-light {
 	background-color: $c-grayBg;
+}
+
+// Two plain (white) sections in a row would add up to a double gap
+// (bottom + top padding). Collapse the top padding so the rhythm stays even.
+// Sections with their own background keep both paddings.
+$plain-section: ":not(.bg-gray-light, .dbw-parallax, .has-bg-image, .dbw-hero-full, .dbw-counter-section, .pre-golive-hidden, .section--fullwidth-compact-top)";
+.entry-content
+	> [class*="section--fullwidth"]#{$plain-section}
+	+ [class*="section--fullwidth"]#{$plain-section} {
+	padding-top: 0;
 }
