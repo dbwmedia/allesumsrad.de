@@ -40,7 +40,7 @@ a[class*="button"]:not(.our-work):not(.button-icon):not(.gb-accordion__toggle) {
 	position: relative;
 	overflow: hidden;
 	cursor: pointer;
-	border: none;
+	border: 2px solid transparent; // filled and outline buttons share one height
 	outline: none;
 	white-space: nowrap;
 

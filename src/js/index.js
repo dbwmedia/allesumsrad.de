@@ -10,7 +10,6 @@ import Component_UpdateDynamicAnchors from "./components/updateDynamicAnchors";
 import Component_SmoothScroll from "./components/smoothScroll";
 import Component_Parallax from "./components/heroParallax";
 import Component_SmartGrid from "./components/smartGrid";
-import Component_ButtonRipple from "./components/buttonRipple";
 
 /**
  * Component Registry
@@ -24,7 +23,6 @@ const components = [
 		priority: "critical",
 	},
 	{ name: "SmoothScroll", init: Component_SmoothScroll, priority: "critical" },
-	{ name: "ButtonRipple", init: Component_ButtonRipple, priority: "critical" },
 
 	// Normal - Nach Page Load
 	{ name: "OffsetScroll", init: Component_OffsetScroll, priority: "normal" },

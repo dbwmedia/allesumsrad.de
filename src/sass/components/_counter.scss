@@ -5,30 +5,10 @@
 //--------------------------------------------------------------
 .dbw-counter-section {
 	padding: clamp(20px, 2vw, 32px) 0;
-	background: linear-gradient(
-		135deg,
-		rgba($c-primary, 0.02) 0%,
-		rgba($c-grayBg, 0.8) 50%,
-		rgba($c-accent, 0.01) 100%
-	);
+	background: $c-white;
 	border-bottom: $hairline;
 	position: relative;
 
-	// Subtileres Overlay
-	&::before {
-		content: "";
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		background: radial-gradient(
-			circle at 30% 50%,
-			rgba($c-primary, 0.02) 0%,
-			transparent 60%
-		);
-		pointer-events: none;
-	}
 
 	.grid {
 		max-width: $containerMaxWidth;

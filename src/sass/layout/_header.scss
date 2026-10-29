@@ -185,7 +185,6 @@
 
 					&:hover {
 						color: $c-white;
-						transform: translateY(-1px);
 					}
 
 					.dropdown-menu-toggle {
@@ -215,7 +214,7 @@
 			).button--black {
 			background: transparent;
 			color: $c-white;
-			border: $b-borderWidth solid rgba($c-white, 0.5);
+			border: 2px solid rgba($c-white, 0.5);
 			box-shadow: none;
 
 			&:hover {
@@ -251,7 +250,6 @@
 			letter-spacing: $b-letter-spacing;
 
 			&:hover {
-				transform: translateY(-1px);
 				box-shadow: $b-shadow-hover;
 			}
 

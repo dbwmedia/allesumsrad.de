@@ -1,0 +1,29 @@
+@use "../global" as *;
+
+//--------------------------------------------------------------
+// # Scroll reveal (replaces the "Animate on Scroll" plugin)
+//--------------------------------------------------------------
+// Blocks keep their data-aos="fade-up" markup from the editor. Instead of
+// the plugin's JS + CSS we use a scroll-driven animation: runs on the
+// compositor, needs no script, and never hides content when unsupported.
+@media (prefers-reduced-motion: no-preference) {
+	@supports (animation-timeline: view()) {
+		[data-aos] {
+			animation: dbw-reveal cubic-bezier(0.2, 0.7, 0.2, 1) both;
+			animation-timeline: view();
+			animation-range: entry 0% entry 35%;
+		}
+	}
+}
+
+@keyframes dbw-reveal {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 16px, 0);
+	}
+}
+
+// Anchor targets land below the fixed header instead of behind it.
+[id] {
+	scroll-margin-top: 96px;
+}

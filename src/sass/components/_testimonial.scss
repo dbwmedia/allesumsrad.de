@@ -8,3 +8,24 @@
 		}
 	}
 }
+
+//--------------------------------------------------------------
+// # Google reviews widget (Trustindex)
+//--------------------------------------------------------------
+// The widget ships its own Poppins from a third-party CDN and its own card
+// look. Align it with the site: Inter, our radii and soft shadows. Using
+// Inter also means the Poppins files are never downloaded.
+.ti-widget.ti-goog {
+	&,
+	* {
+		font-family: $f-font !important;
+	}
+
+	.ti-review-item > .ti-inner,
+	.ti-review-item .ti-inner {
+		border-radius: $radius-standard !important;
+		border: $hairline !important;
+		box-shadow: $b-shadow !important;
+		background: $c-white !important;
+	}
+}

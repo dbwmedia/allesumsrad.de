@@ -66,7 +66,7 @@ p {
 a {
 	color: $c-primary;
 	text-decoration: none;
-	font-size: $f-sizeBody;
+	font-size: inherit; // a link never changes the size of its sentence
 	cursor: pointer;
 
 	&:hover {
@@ -80,43 +80,21 @@ a {
 	}
 }
 
-// Besondere Animationen nur für Links in .entry-content
-.entry-content {
-	a {
-		position: relative;
-		display: inline-block;
-		transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+// Text links in content: classic underline that strengthens on hover.
+// Stays inline (no inline-block), so links wrap and keep the size of the
+// surrounding text, e.g. in the consent line of the form.
+.entry-content a:not([class*="button"]):not(.gb-accordion__toggle):not(.gb-media) {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+	text-decoration-color: rgba($c-primary, 0.35);
+	transition:
+		color 0.2s ease,
+		text-decoration-color 0.2s ease;
 
-		// Animated underline
-		&::after {
-			content: "";
-			position: absolute;
-			bottom: -2px;
-			left: 0;
-			width: 0;
-			height: 2px;
-			background: linear-gradient(90deg, $c-primary, $c-secondary);
-			transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-			border-radius: 1px;
-		}
-
-		&:hover {
-			transform: translateY(-1px);
-			&::after {
-				width: 100%;
-			}
-		}
-
-		&:active {
-			transform: translateY(0);
-			transition: transform 0.1s ease;
-		}
-
-		&:focus-visible {
-			&::after {
-				width: 100%;
-			}
-		}
+	&:hover,
+	&:focus-visible {
+		text-decoration-color: currentColor;
 	}
 }
 //--------------------------------------------------------------

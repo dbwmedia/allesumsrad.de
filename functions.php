@@ -29,6 +29,9 @@ require_once get_stylesheet_directory() . '/includes/svg-support.php';
 // SEO output tweaks (Rank Math)
 require_once get_stylesheet_directory() . '/includes/seo.php';
 
+// Mobile call bar + scroll reveal without plugin assets
+require_once get_stylesheet_directory() . '/includes/callbar.php';
+
 // KFZ Angebote
 require_once get_stylesheet_directory() . '/includes/kfz-angebote.php';
 

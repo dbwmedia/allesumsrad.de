@@ -1,0 +1,71 @@
+@use "../global" as *;
+
+//--------------------------------------------------------------
+// # Mobile call bar
+//--------------------------------------------------------------
+// Below 867px the header hides both CTAs, so phones get a fixed bar with
+// the two actions a workshop visitor actually wants.
+.dbw-callbar {
+	display: none;
+}
+
+@media (max-width: 866px) {
+	:root {
+		--dbw-callbar-h: 72px;
+	}
+
+	.dbw-callbar {
+		position: fixed;
+		inset: auto 0 0;
+		z-index: 998;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 8px;
+		padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+		background: rgba($c-white, 0.94);
+		backdrop-filter: saturate(1.4) blur(12px);
+		-webkit-backdrop-filter: saturate(1.4) blur(12px);
+		border-top: $hairline;
+	}
+
+	.dbw-callbar__btn {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		min-height: 50px;
+		border-radius: $radius-standard;
+		font-size: 16px;
+		font-weight: $f-weightSemibold;
+		text-decoration: none;
+
+		svg {
+			width: 18px;
+			height: 18px;
+			flex: none;
+		}
+
+		&--call {
+			background: $c-primary;
+			color: $c-white;
+
+			&:hover {
+				color: $c-white;
+			}
+		}
+
+		&--form {
+			background: $c-white;
+			color: $f-colorHeading;
+			border: 2px solid rgba($c-black, 0.15);
+
+			&:hover {
+				color: $f-colorHeading;
+			}
+		}
+	}
+
+	body {
+		padding-bottom: var(--dbw-callbar-h);
+	}
+}
