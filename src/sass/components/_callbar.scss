@@ -68,4 +68,15 @@
 	body {
 		padding-bottom: var(--dbw-callbar-h);
 	}
+
+	// Cookie settings icon sits above the bar instead of on the call button.
+	.brlbs-cmpnt-widget {
+		bottom: var(--dbw-callbar-h) !important;
+	}
+
+	// The bar brings its own blur; the stacked backdrop-filter layers of the
+	// progressive blur would only cost scroll performance on phones.
+	.dbw-progressive-blur {
+		display: none !important;
+	}
 }

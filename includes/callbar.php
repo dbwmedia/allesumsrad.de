@@ -27,7 +27,12 @@ add_action('wp_footer', function () {
 
 // The "Animate on Scroll" plugin is replaced by CSS scroll-driven animations
 // (src/sass/components/_reveal.scss); its JS and CSS are no longer needed.
-add_action('wp_enqueue_scripts', function () {
+$dbw_drop_aos = function () {
     wp_dequeue_script('aoswp-script');
     wp_dequeue_style('aoswp-style');
-}, 100);
+};
+// The plugin enqueues late, so remove it right before the tags are printed.
+add_action('wp_enqueue_scripts', $dbw_drop_aos, PHP_INT_MAX);
+add_action('wp_print_styles', $dbw_drop_aos, 0);
+add_action('wp_print_scripts', $dbw_drop_aos, 0);
+add_action('wp_print_footer_scripts', $dbw_drop_aos, 0);
