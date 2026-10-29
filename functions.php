@@ -35,6 +35,9 @@ require_once get_stylesheet_directory() . '/includes/callbar.php';
 // Front-end loading tweaks (logo, jQuery in footer)
 require_once get_stylesheet_directory() . '/includes/performance.php';
 
+// Consent fixes (Trustindex loader only after Borlabs consent)
+require_once get_stylesheet_directory() . '/includes/privacy.php';
+
 // KFZ Angebote
 require_once get_stylesheet_directory() . '/includes/kfz-angebote.php';
 
