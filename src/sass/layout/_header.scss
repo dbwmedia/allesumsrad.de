@@ -136,7 +136,7 @@
 		position: relative;
 
 		img {
-			max-height: 40px; // Consistent logo size
+			max-height: 44px; // Consistent logo size
 			width: auto;
 			transition: $t-transition;
 		}
@@ -149,7 +149,7 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			background: url("#{$imagesPath}Reifenservice-Schedler-Logo-Weiss.png")
+			background: url("#{$imagesPath}Reifenservice-Schedler-Logo-Weiss.webp")
 				no-repeat;
 			background-size: contain;
 			background-position: left center;
@@ -207,6 +207,23 @@
 	//--------------------------------------------------------------
 	.menu-buttons {
 		padding-left: $gap;
+
+		// Only one filled CTA in the header (call). "Kontakt" is secondary:
+		// outline that follows the header state (light on hero, dark when scrolled).
+		a[class*="button"]:not(.our-work):not(.button-icon):not(
+				.gb-accordion__toggle
+			).button--black {
+			background: transparent;
+			color: $c-white;
+			border: $b-borderWidth solid rgba($c-white, 0.5);
+			box-shadow: none;
+
+			&:hover {
+				background: rgba($c-white, 0.12);
+				border-color: $c-white;
+				box-shadow: none;
+			}
+		}
 		@include mq($until: $phablet) {
 			a:first-child {
 				display: none !important;
@@ -276,7 +293,7 @@
 			}
 
 			img {
-				max-height: 35px; // Optional: Smaller logo when scrolled
+				max-height: 38px; // Smaller logo when scrolled
 			}
 		}
 
@@ -295,7 +312,7 @@
 					background: linear-gradient(
 						90deg,
 						$c-primary,
-						lighten($c-primary, 15%),
+						$c-primaryLight,
 						$c-primary
 					);
 				}
@@ -305,6 +322,20 @@
 		.menu-buttons .gb-button {
 			// Maintain button contrast in scrolled state
 			background: $b-primary-gradient;
+		}
+
+		.menu-buttons
+			a[class*="button"]:not(.our-work):not(.button-icon):not(
+				.gb-accordion__toggle
+			).button--black {
+			color: $f-colorHeading;
+			border-color: rgba($c-black, 0.18);
+
+			&:hover {
+				background: rgba($c-black, 0.04);
+				border-color: $c-black;
+				color: $f-colorHeading;
+			}
 		}
 	}
 

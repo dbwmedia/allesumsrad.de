@@ -9,5 +9,4 @@ Template:       generatepress
 Text Domain:    dbw-base
 */
 
-/* CSS-Import */
-@import "build/index.css";
+/* Styles are enqueued from build/index.css (see includes/directories.php). */

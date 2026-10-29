@@ -609,6 +609,53 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		// Card actions are secondary: a text link with arrow keeps the red
+		// CTAs as the only filled buttons on the page. The link stretches over
+		// the whole card, so the card is clickable as its hover lift suggests.
+		a[class*="button"]:not(.our-work):not(.button-icon):not(
+				.gb-accordion__toggle
+			).button--black {
+			position: static;
+			padding: 0;
+			background: none;
+			box-shadow: none;
+			border: 0;
+			color: $f-colorHeading;
+			font-size: 16px;
+			font-weight: $f-weightSemibold;
+			transform: none;
+
+			&::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+			}
+
+			&::after {
+				content: "→";
+				position: static;
+				display: inline-block;
+				width: auto;
+				height: auto;
+				margin-left: 0.4em;
+				background: none;
+				color: $c-primary;
+				transition: transform 0.25s ease;
+			}
+
+			&:hover,
+			&:focus-visible {
+				background: none;
+				box-shadow: none;
+				color: $c-primary;
+			}
+		}
+	}
+
+	&:hover .card__footer a[class*="button"].button--black::after {
+		transform: translateX(4px);
 	}
 
 	&.card--compact {

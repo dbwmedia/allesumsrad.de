@@ -16,8 +16,11 @@ require_once get_stylesheet_directory() . '/includes/dbw/dbw-login-style.php';
 require_once get_stylesheet_directory() . '/includes/dbw/dbw-footer.php';
 require_once get_stylesheet_directory() . '/includes/dbw/dbw-head.php';
 
-// Font Awesome
-require_once get_stylesheet_directory() . '/includes/fontawesome-enqueue.php';
+// Fonts (self-hosted WOFF2 subsets instead of the GeneratePress TTFs)
+require_once get_stylesheet_directory() . '/includes/fonts.php';
+
+// Font Awesome: not used on any page (102 KB render-blocking CSS), disabled.
+// require_once get_stylesheet_directory() . '/includes/fontawesome-enqueue.php';
  
 // SVG Support
 require_once get_stylesheet_directory() . '/includes/svg-support.php';

@@ -8,17 +8,21 @@ define('GENESIS-BLOCKS_DIR', get_stylesheet_directory() . '/includes/genesis-cus
  * mit Optimierungen für Safari und Instagram Browser
  */
 function enqueue_webpack_scripts(): void {
-    // Basis-Skript-URL
-    $script_url = get_stylesheet_directory_uri() . '/build/index.js';
-    
-    // Version für Cache-Kontrolle
-    $version = (defined('WP_DEBUG') && WP_DEBUG) ? time() : '1.0.1';
-    
-    // Hauptscript einbinden mit jQuery als Abhängigkeit
+    $build_uri = get_stylesheet_directory_uri() . '/build/';
+    $asset     = include get_stylesheet_directory() . '/build/index.asset.php';
+
+    // Build hash as version: every build busts browser and CDN caches.
+    $version = $asset['version'] ?? '1.0.1';
+
+    // Theme styles directly (previously an @import inside style.css, which
+    // chained a second render-blocking request behind the first).
+    wp_enqueue_style('dbw-theme', $build_uri . 'index.css', array('generate-child'), $version);
+
+    // Main bundle is vanilla JS, no jQuery needed.
     wp_enqueue_script(
         'child-theme-scripts',
-        $script_url,
-        array('jquery'),
+        $build_uri . 'index.js',
+        $asset['dependencies'] ?? array(),
         $version,
         true // Im Footer laden für bessere Performance
     );

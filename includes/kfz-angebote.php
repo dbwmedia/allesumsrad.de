@@ -402,22 +402,24 @@ class KFZ_Angebote_System {
         }
         ?>
         
+        <?php
+        $full_image = get_the_post_thumbnail_url($angebot->ID, 'full');
+        $details = array_filter(array(
+            $angebot->post_content ? wp_strip_all_tags($angebot->post_content) : '',
+            $preis,
+            $gueltig_bis_formatted ? 'Gültig bis ' . $gueltig_bis_formatted : '',
+        ));
+        ?>
         <div class="gb-element-angebote-grid grid">
             <div class="text">
                 <p class="gb-text highlight-label"><strong>Jetzt sparen</strong></p>
-                <h3 class="gb-text">Unsere aktuellen Angebote</h3>
-                <p class="gb-text text-large">
-                    <?php echo esc_html($angebot->post_title); ?><br>
-                    <?php if ($angebot->post_content): ?>
-                        <?php echo wp_strip_all_tags($angebot->post_content); ?><br>
-                    <?php endif; ?>
-                    <?php if ($preis): ?>
-                        <?php echo esc_html($preis); ?><br>
-                    <?php endif; ?>
-                    <?php if ($gueltig_bis_formatted): ?>
-                        Jetzt Termin sichern. Gültig bis <?php echo esc_html($gueltig_bis_formatted); ?>
-                    <?php endif; ?>
-                </p>
+                <h2 class="gb-text">Unsere aktuellen Angebote</h2>
+                <?php if ($angebot->post_title): ?>
+                    <p class="gb-text text-large"><?php echo esc_html($angebot->post_title); ?></p>
+                <?php endif; ?>
+                <?php if ($details): ?>
+                    <p class="gb-text"><?php echo implode('<br>', array_map('esc_html', $details)); ?></p>
+                <?php endif; ?>
                 <?php if ($button_url): ?>
                 <div>
                     <a class="gb-text button--primary smooth-scroll" href="<?php echo esc_url($button_url); ?>">
@@ -428,7 +430,10 @@ class KFZ_Angebote_System {
             </div>
             <div class="medien">
                 <?php if ($thumbnail): ?>
-                    <?php echo $thumbnail; ?>
+                    <?php // Flyers carry small print: open the full-size file on tap. ?>
+                    <a class="angebot-flyer" href="<?php echo esc_url($full_image); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr('Angebot in voller Größe öffnen: ' . $angebot->post_title); ?>">
+                        <?php echo get_the_post_thumbnail($angebot->ID, 'large', array('loading' => 'lazy', 'decoding' => 'async', 'alt' => $angebot->post_title)); ?>
+                    </a>
                 <?php endif; ?>
             </div>
         </div>
