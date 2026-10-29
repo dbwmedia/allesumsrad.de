@@ -26,14 +26,26 @@
 		line-height: $f-lineHeightRelaxed;
 	}
 
-	// Overlay für bessere Lesbarkeit
+	// Readability overlay: dark where the text sits (left/bottom), the photo
+	// stays visible on the right instead of under a flat grey veil.
 	&::before {
 		content: "";
 		position: absolute;
 		inset: 0;
-		background: rgba($c-black, 0.5);
+		background:
+			linear-gradient(
+				90deg,
+				rgba($c-black, 0.82) 0%,
+				rgba($c-black, 0.55) 45%,
+				rgba($c-black, 0.15) 100%
+			),
+			linear-gradient(0deg, rgba($c-black, 0.55) 0%, rgba($c-black, 0) 45%);
 		z-index: 2;
 		pointer-events: none;
+
+		@media (max-width: $tablet) {
+			background: rgba($c-black, 0.6);
+		}
 	}
 
 	// DBW Background Container - NEU für Parallax
@@ -85,14 +97,8 @@
 		}
 	}
 
-	// Background Image Support - ANGEPASST
-	&.has-bg-image {
-		&::before {
-			background: rgba($c-black, 0.6); // Stärkeres Overlay bei Bildern
-			backdrop-filter: blur(2px);
-			-webkit-backdrop-filter: blur(2px);
-		}
-	}
+	// No backdrop-filter here: a blur over a moving full-screen image has to be
+	// recomputed every frame and was the main scroll cost of the hero.
 }
 
 //--------------------------------------------------------------
@@ -100,15 +106,48 @@
 //--------------------------------------------------------------
 .dbw-hero-full {
 	@extend %dbw-hero-base;
-	min-height: 100vh;
-	min-height: 100dvh;
+	// Full screen on laptops, capped on tall monitors so the next section peeks in.
+	min-height: min(100vh, 1040px);
+	min-height: min(100svh, 1040px);
 
 	h1 {
-		font-size: clamp($f-sizeH1Min, 8vw, $f-sizeH1Max);
+		font-size: clamp($f-sizeH1Min, 4.6vw + 20px, $f-sizeH1Max);
 		font-weight: $f-weightH1;
-		letter-spacing: $f-letterSpacingTight;
-		line-height: $f-lineHeightTight;
-		margin-bottom: $s-sm;
+		letter-spacing: -0.005em;
+		line-height: 0.96;
+		margin-bottom: 24px;
+	}
+
+	.hero-lead {
+		max-width: 36ch;
+		margin-bottom: 36px;
+		font-size: clamp(18px, 0.5vw + 16px, 22px);
+		line-height: 1.5;
+		color: rgba($c-white, 0.85);
+	}
+
+	// The animated mouse GIF is dated; the capped height already shows there is more.
+	.dbw-scroll-indicator {
+		display: none;
+	}
+
+	// Parallax on the compositor via scroll-driven animations: no scroll
+	// listener, no per-frame layout reads. Browsers without support get a
+	// static hero, which is fine.
+	@supports (animation-timeline: scroll()) {
+		@media (prefers-reduced-motion: no-preference) and (min-width: $tablet) {
+			.dbw-hero-background {
+				animation: dbw-hero-bg linear both;
+				animation-timeline: scroll(root);
+				animation-range: 0 100vh;
+			}
+
+			.dbw-hero-content {
+				animation: dbw-hero-content linear both;
+				animation-timeline: scroll(root);
+				animation-range: 0 70vh;
+			}
+		}
 	}
 
 	// Mobile Optimierungen
@@ -121,7 +160,11 @@
 
 		h1 {
 			font-size: clamp(2.6rem, 6vw, 3rem);
-			margin-bottom: $s-xxs;
+			margin-bottom: 16px;
+		}
+
+		.hero-lead {
+			margin-bottom: 28px;
 		}
 	}
 }
@@ -219,5 +262,18 @@ main > *:not(.dbw-hero-full):not(.dbw-hero-half):not(.dbw-hero-compact) {
 .dbw-hero-compact + * {
 	&.dbw-overlap {
 		margin-top: -5vh; // Overlap nur wenn explizit gewünscht
+	}
+}
+
+@keyframes dbw-hero-bg {
+	to {
+		transform: translate3d(0, 18%, 0) scale(1.06);
+	}
+}
+
+@keyframes dbw-hero-content {
+	to {
+		transform: translate3d(0, -48px, 0);
+		opacity: 0;
 	}
 }
