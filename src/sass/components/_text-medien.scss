@@ -64,6 +64,13 @@
 			border-radius: $radius-subtle;
 		}
 	}
+
+	&.no-aspect-ratio {
+		.medien [class*="gb-media"] {
+			aspect-ratio: unset;
+			height: auto;
+		}
+	}
 }
 
 //--------------------------------------------------------------
