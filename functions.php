@@ -26,6 +26,9 @@ require_once get_stylesheet_directory() . '/includes/fonts.php';
 require_once get_stylesheet_directory() . '/includes/svg-support.php';
 
 
+// SEO output tweaks (Rank Math)
+require_once get_stylesheet_directory() . '/includes/seo.php';
+
 // KFZ Angebote
 require_once get_stylesheet_directory() . '/includes/kfz-angebote.php';
 
