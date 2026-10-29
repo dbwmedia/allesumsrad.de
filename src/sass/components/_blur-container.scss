@@ -3,7 +3,10 @@
 //--------------------------------------------------------------
 // # DBW Progressive Blur - Exakt wie Framer
 //--------------------------------------------------------------
+// Disabled: eight stacked backdrop-filter layers fixed over the viewport
+// cost scroll performance and blurred the copyright line at the page end.
 .dbw-progressive-blur {
+	display: none !important;
 	position: fixed !important;
 	background-color: transparent !important;
 	bottom: 0;

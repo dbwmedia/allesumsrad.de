@@ -64,25 +64,80 @@
 }
 
 //--------------------------------------------------------------
-// # Offer flyer: framed like a printed sheet, opens full size on click
+// # Offer card: the current package prices as real content
 //--------------------------------------------------------------
-.dbw-parallax .medien {
-	display: flex;
-	justify-content: center;
+.offer-card {
+	width: 100%;
+	max-width: 440px;
+	margin-inline: auto;
+	padding: clamp(24px, 2.5vw, 36px);
+	background: $c-white;
+	border-radius: $radius-enhanced;
+	box-shadow: 0 24px 48px -16px rgba($c-black, 0.55);
 
-	img {
-		max-width: min(100%, 380px);
-		height: auto;
-		border-radius: $radius-subtle;
-		box-shadow:
-			0 2px 6px rgba($c-black, 0.25),
-			0 24px 48px -16px rgba($c-black, 0.6);
-		transform: rotate(-1.5deg);
-		transition: transform 0.3s ease;
-		cursor: zoom-in;
+	p.offer-card__badge {
+		display: inline-block;
+		margin: 0 0 14px;
+		padding: 4px 10px;
+		border-radius: $radius-pill;
+		background: rgba($c-primary, 0.1);
+		color: $c-primary;
+		font-size: 13px;
+		font-weight: $f-weightBold;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	p.offer-card__title {
+		margin: 0;
+		font-size: 22px;
+		font-weight: $f-weightBold;
+		line-height: 1.25;
+		color: $f-colorHeading;
+	}
+
+	p.offer-card__note {
+		margin: 4px 0 18px;
+		font-size: 15px;
+		color: $c-gray;
+	}
+
+	ul.offer-list {
+		margin: 0 0 18px;
+		padding: 0;
+		list-style: none;
+	}
+
+	li.offer-list__row {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 16px;
+		margin: 0;
+		padding: 12px 0;
+		border-top: $hairline;
+		color: $f-colorText;
+		font-size: 16px;
+		font-variant-numeric: tabular-nums;
+
+		strong {
+			font-family: $f-font-headline;
+			font-size: 30px;
+			font-weight: $f-weightBold;
+			line-height: 1;
+			color: $f-colorHeading;
+			white-space: nowrap;
+		}
+	}
+
+	a.offer-card__flyer {
+		font-size: 15px;
+		color: $c-gray;
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
 
 		&:hover {
-			transform: rotate(0deg) scale(1.02);
+			color: $c-primary;
 		}
 	}
 }

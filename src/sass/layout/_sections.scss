@@ -48,6 +48,7 @@
 		radial-gradient(120% 140% at 100% 0%, rgba($c-primary, 0.45) 0%, rgba($c-primary, 0) 55%),
 		$c-black;
 	box-shadow: none;
+	height: auto !important;
 	padding: clamp(32px, 4vw, 64px);
 	border-radius: $radius-enhanced;
 
@@ -58,6 +59,7 @@
 
 	.grid {
 		align-items: center;
+		margin-bottom: 0;
 
 		// Text takes the room, actions keep their natural width (no wrapping).
 		@include mq($from: $phablet) {

@@ -92,12 +92,16 @@ div.custom-site-footer footer.site-info {
 	background: #141414;
 	border-top: 1px solid rgba($c-white, 0.08);
 	font-size: 13px !important;
+	color: rgba($c-white, 0.55);
 	margin-bottom: 0;
 	padding-bottom: calc(40px + var(--dbw-callbar-h, 0px));
 
-	a,
-	p {
+	* {
 		font-size: 13px !important;
-		color: rgba($c-white, 0.5);
+		color: inherit;
+	}
+
+	a:hover {
+		color: $c-white;
 	}
 }

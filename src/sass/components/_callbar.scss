@@ -74,9 +74,4 @@
 		bottom: var(--dbw-callbar-h) !important;
 	}
 
-	// The bar brings its own blur; the stacked backdrop-filter layers of the
-	// progressive blur would only cost scroll performance on phones.
-	.dbw-progressive-blur {
-		display: none !important;
-	}
 }
